@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+<title>Beer Price</title>
+
+<style>
+table#rancking {
+	margin-top: 20px;
+}
+td, th {
+	text-align: right;
+}
+td:nth-child(1), th:nth-child(1) {
+	text-align: left;
+}
+</style>
+</head>
+<body>
+<div class="container" style="padding-top: 15px;">
+	<div class="input-group mb-3">
+		<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
+		<div class="input-group-append">
+			<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
+		</div>
+	</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" href="#add-price" data-toggle="tab">Adicionar</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#price-list" data-toggle="tab">Minha lista</a>
+		</li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div class="tab-pane active" id="add-price">
+			<div>
+				<ul id="beer-list" class="list-group list-group-flush">
+					<li class="list-group-item">Antarctica Original</li>
+					<li class="list-group-item">Amstel</li>
+					<li class="list-group-item">BellaVista</li>
+					<li class="list-group-item">Brahma Extra Lager</li>
+					<li class="list-group-item">Budweiser</li>
+					<li class="list-group-item">Colorado</li>
+					<li class="list-group-item">Dado Bier</li>
+					<li class="list-group-item">Devassa Puro Malte</li>
+					<li class="list-group-item">Eisenbahn</li>
+					<li class="list-group-item">Heilige</li>
+					<li class="list-group-item">Heineken</li>
+					<li class="list-group-item">Kirin Ichiban</li>
+					<li class="list-group-item">Patagonia</li>
+					<li class="list-group-item">Proibida Puro Malte</li>
+					<li class="list-group-item">Serra Malte</li>
+					<li class="list-group-item">Skol Hops</li>
+					<li class="list-group-item">Skol Puro Malte</li>
+					<li class="list-group-item">Stella Artois</li>
+					<li class="list-group-item">Therezópolis</li>
+				</ul>
+			</div>
+			<div>
+				<ul id="packing-list" class="list-group list-group-flush">
+					<li class="list-group-item" data-ml="269">269ml</li>
+					<li class="list-group-item" data-ml="355">355ml</li>
+					<li class="list-group-item" data-ml="473">473ml</li>
+					<li class="list-group-item" data-ml="500">500ml</li>
+					<li class="list-group-item" data-ml="600">600ml</li>
+					<li class="list-group-item" data-ml="1000">1L</li>
+				</ul>
+			</div>
+			<div id="conversion" style="display: none;">
+				<h1 class="display-4" id="brand"></h1>
+				<h1><small class="text-muted" id="packing" data-ml=""></small> <button type="button" class="btn btn-outline-dark btn-sm" id="btn-change">alterar</button></h1>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">R$</span>
+					</div>
+					<input type="text" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
+				</div>
+				<p class="lead">Preço de 1L = <mark id="price-1l" data-price="">0.00</mark></p>
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block" id="btn-add">Feito</button>
+			</div>
+		</div>
+		<div class="tab-pane" id="price-list">
+			<table id="rancking" class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Beer</th>
+						<th scope="col">Vol.</th>
+						<th scope="col">R$</th>
+						<th scope="col">R$/1L</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script>
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(9(){$("#l").p(9(){e q=7.u.z();$("#r-4>J>o").I(9(Q){N($(7).6().z().L(q)==-1)$(7).b();K $(7).k()})});$("#R").i(9(){$("#l").j("");$("#l").p();$("#f-5").k();$("#8-5").b();$("#n").b();$("#4").j("");$("#4-h").6("0.G")});$("#f-5>o").i(9(){$("#l").j($(7).6());$("#x").6($(7).6());$("#f-5").b();$("#8-5").k()});$("#8-5>o").i(9(){$("#f-5").b();$("#8-5").b();$("#8").6($(7).6());$("#8").c("d",$(7).c("d"));$("#n").k();$("#n M").O()});$("#t-P").i(9(){$("#f-5").b();$("#n").b();$("#4").j("");$("#4-h").6("0.G");$("#8-5").k()});$("#t-r").i(9(){e s=$(\'<13>\').12(\'<a>\'+$(\'#x\').6()+\'</a><a>\'+$(\'#8\').c(\'d\')+\'</a><a>\'+$(\'#4\').j()+\'</a><a>\'+$(\'#4-h\').c(\'4\')+\'</a>\');v.s.r(s).11([[3,\'14\']]).S()});$("#4").p(9(){e F=B(7.u.y(/\\./g,\'\').y(/\\,/g,\'.\'));e d=B($(\'#8\').c(\'d\'));e m=(F/d)*Z;$(\'#4-h\').c(\'4\',D(m.C(2)).E(\'H-w\'));$(\'#4-h\').6(10(m)?\'\':D(m.C(2)).E(\'H-w\',{U:\'A\',A:\'T\'}))});e v=$(\'#V\').W({"Y":\'<"X">15\'})});',62,68,'||||price|list|text|this|packing|function|td|hide|data|ml|var|beer||1l|click|val|show|filter|preco_1l|conversion|li|keyup||add|row|btn|value|table|BR|brand|replace|toUpperCase|currency|parseFloat|toFixed|Number|toLocaleString|preco|00|pt|each|ul|else|search|input|if|focus|change|index|clear|draw|BRL|style|rancking|DataTable|top|dom|1000|isNaN|order|append|tr|asc|rt'.split('|'),0,{}))
+</script>
+
+</body>
+</html>
