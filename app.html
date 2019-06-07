@@ -41,8 +41,8 @@ td:nth-child(1), th:nth-child(1) {
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div class="tab-pane active" id="add-price">
-			<div>
-				<ul id="beer-list" class="list-group list-group-flush">
+			<div id="beer-list">
+				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Antarctica Original</li>
 					<li class="list-group-item">Amstel</li>
 					<li class="list-group-item">BellaVista</li>
@@ -64,8 +64,8 @@ td:nth-child(1), th:nth-child(1) {
 					<li class="list-group-item">Therezópolis</li>
 				</ul>
 			</div>
-			<div>
-				<ul id="packing-list" class="list-group list-group-flush">
+			<div id="packing-list" style="display: none;">
+				<ul class="list-group list-group-flush">
 					<li class="list-group-item" data-ml="269">269ml</li>
 					<li class="list-group-item" data-ml="355">355ml</li>
 					<li class="list-group-item" data-ml="473">473ml</li>
@@ -104,13 +104,11 @@ td:nth-child(1), th:nth-child(1) {
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
 <script>
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(9(){$("#l").p(9(){e q=7.u.z();$("#r-4>J>o").I(9(Q){N($(7).6().z().L(q)==-1)$(7).b();K $(7).k()})});$("#R").i(9(){$("#l").j("");$("#l").p();$("#f-5").k();$("#8-5").b();$("#n").b();$("#4").j("");$("#4-h").6("0.G")});$("#f-5>o").i(9(){$("#l").j($(7).6());$("#x").6($(7).6());$("#f-5").b();$("#8-5").k()});$("#8-5>o").i(9(){$("#f-5").b();$("#8-5").b();$("#8").6($(7).6());$("#8").c("d",$(7).c("d"));$("#n").k();$("#n M").O()});$("#t-P").i(9(){$("#f-5").b();$("#n").b();$("#4").j("");$("#4-h").6("0.G");$("#8-5").k()});$("#t-r").i(9(){e s=$(\'<13>\').12(\'<a>\'+$(\'#x\').6()+\'</a><a>\'+$(\'#8\').c(\'d\')+\'</a><a>\'+$(\'#4\').j()+\'</a><a>\'+$(\'#4-h\').c(\'4\')+\'</a>\');v.s.r(s).11([[3,\'14\']]).S()});$("#4").p(9(){e F=B(7.u.y(/\\./g,\'\').y(/\\,/g,\'.\'));e d=B($(\'#8\').c(\'d\'));e m=(F/d)*Z;$(\'#4-h\').c(\'4\',D(m.C(2)).E(\'H-w\'));$(\'#4-h\').6(10(m)?\'\':D(m.C(2)).E(\'H-w\',{U:\'A\',A:\'T\'}))});e v=$(\'#V\').W({"Y":\'<"X">15\'})});',62,68,'||||price|list|text|this|packing|function|td|hide|data|ml|var|beer||1l|click|val|show|filter|preco_1l|conversion|li|keyup||add|row|btn|value|table|BR|brand|replace|toUpperCase|currency|parseFloat|toFixed|Number|toLocaleString|preco|00|pt|each|ul|else|search|input|if|focus|change|index|clear|draw|BRL|style|rancking|DataTable|top|dom|1000|isNaN|order|append|tr|asc|rt'.split('|'),0,{}))
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(8(){$("#m").o(8(){d q=7.E.C();$("#p-4>t>u").F(8(H){G($(7).5().C().N(q)==-1)$(7).b();I $(7).k()})});$("#L").i(8(){$("#m").j("");$("#m").o();$("#f-6").k();$("#9-6").b();$("#l").b();$("#4").j("");$("#4-h").5("0.x")});$("#f-6>t>u").i(8(){$("#m").j($(7).5());$("#v").5($(7).5());$("#f-6").b();$("#9-6").k()});$("#9-6>t>u").i(8(){$("#f-6").b();$("#9-6").b();$("#9").5($(7).5());$("#9").c("e",$(7).c("e"));$("#l").k();$("#l K").J()});$("#A-M").i(8(){$("#f-6").b();$("#l").b();$("#4").j("");$("#4-h").5("0.x");$("#9-6").k()});$("#A-p").i(8(){d r=$(\'<Q>\').10(\'<a>\'+$(\'#v\').5()+\'</a><a>\'+$(\'#9\').c(\'e\')+\'</a><a>\'+$(\'#4\').j()+\'</a><a>\'+$(\'#4-h\').c(\'4\')+\'</a>\');y.r.p(r).Z([[3,\'12\']]).O()});$("#4").o(8(){d z=B(7.E.s(/\\./g,\'\').s(/\\,/g,\'.\'));d e=B($(\'#9\').c(\'e\'));d n=(z/e)*X;$(\'#4-h\').c(\'4\',n.D(2).s(\'.\',\',\'));$(\'#4-h\').5(W(n)?\'\':R(n.D(2)).P(\'S-T\',{V:\'w\',w:\'15\'}))});d y=$(\'#U\').13({"11":\'<"Y">14\'})});',62,68,'||||price|text|list|this|function|packing|td|hide|data|var|ml|beer||1l|click|val|show|conversion|filter|preco_1l|keyup|add||row|replace|ul|li|brand|currency|00|table|preco|btn|parseFloat|toUpperCase|toFixed|value|each|if|index|else|focus|input|clear|change|search|draw|toLocaleString|tr|Number|pt|BR|rancking|style|isNaN|1000|top|order|append|dom|asc|DataTable|rt|BRL'.split('|'),0,{}))
 </script>
 
 </body>
