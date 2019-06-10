@@ -37,13 +37,14 @@ td:nth-child(2), th:nth-child(2) {
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="add-price">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
-				<div class="input-group-append">
-					<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
-				</div>
-			</div>
+			<h1 id="brand" class="display-4" style="display: none;"><small></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-brand">alterar</button></h1>
 			<div id="beer-list">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
+					<div class="input-group-append">
+						<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
+					</div>
+				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Antarctica Original</li>
 					<li class="list-group-item">Amstel</li>
@@ -80,13 +81,12 @@ td:nth-child(2), th:nth-child(2) {
 				</ul>
 			</div>
 			<div id="conversion" style="display: none;">
-				<h1 class="display-4"><small id="brand"></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-brand">alterar</button></h1>
-				<h1><small class="text-muted" id="volume" data-ml=""></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-volume">alterar</button></h1>
+				<h2><small class="text-muted" id="volume" data-ml=""></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-volume">alterar</button></h2>
 				<div class="input-group input-group-lg mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">R$</span>
 					</div>
-					<input type="tel" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
+					<input type="text" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
 					<div class="input-group-append">
 						<button class="btn btn-outline-secondary" id="btn-add">Feito</button>
 					</div>
@@ -116,7 +116,7 @@ td:nth-child(2), th:nth-child(2) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(5(){$("#p").s(5(){e q=7.A.F();$("#k-6>x>v").O(5(Y){($(7).a().F().X(q)==-1)?$(7).c():$(7).f()})});$("#10").d(5(){$("#p").j("");$("#p").s();$("#k-6").f();$("#9-6").c();$("#l").c();$("#3").j("");$("#3-m").a("0.G")});$("#k-6>x>v").d(5(){$("#p").j($(7).a());$("#w").a($(7).a());$("#k-6").c();$("#9-6").f()});$("#9-6>x>v").d(5(){$("#k-6").c();$("#9-6").c();$("#9").a($(7).a());$("#9").h("i",$(7).h("i"));$("#3").j("");$("#3-m").a("0.G");$("#l").f();$("#l Z").U()});$("#b-H-9").d(5(){$("#l").c();$("#9-6").f()});$("#b-H-w").d(5(){$("#l").c();$("#k-6").f()});$("#3").11(5(o){e I=(o.D?o.D:o.1e);1d(I==\'13\')$("#b-y").d()});$("#b-y").d(5(){e n=$(\'<M>\').1f(\'<8><B 1h="b b-1c b-1a-15 b-u">-</B></8><8>\'+$(\'#w\').a()+\'</8><8>\'+$(\'#9\').h(\'i\')+\'</8><8>\'+$(\'#3\').j()+\'</8><8>\'+$(\'#3-m\').h(\'3\')+\'</8>\');t.n.y(n).17([[4,\'19\']]).J();$(\'.b-u\').d(5(){t.n($(7).1b(\'M\')).u().J()});$(\'#3\').j(\'\')});$("#3").s(5(){e K=L(7.A.z(/\\./g,\'\').z(/\\,/g,\'.\'));e i=L($(\'#9\').h(\'i\'));e r=(K/i)*1g;$(\'#3-m\').h(\'3\',r.E(2).z(\'.\',\',\'));$(\'#3-m\').a(S(r)?\'\':P(r.E(2)).V(\'W-16\',{14:\'C\',C:\'T\'}))});e t=$(\'#18\').12({"Q":\'<"N">R\'})});',62,80,'|||price||function|list|this|td|volume|text|btn|hide|click|var|show||data|ml|val|beer|conversion|1l|row|event|filter||preco_1l|keyup|table|remove|li|brand|ul|add|replace|value|button|currency|keyCode|toFixed|toUpperCase|00|chg|keycode|draw|preco|parseFloat|tr|top|each|Number|dom|rt|isNaN|BRL|focus|toLocaleString|pt|search|index|input|clear|keypress|DataTable||style|danger|BR|order|rancking|asc|outline|parents|sm|if|which|append|1000|class'.split('|'),0,{}))
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(6(){$("#w").y(6(){i q=c.R.E();$("#h-5>t>s").1b(6(18){($(c).a().E().1k(q)==-1)?$(c).8():$(c).f()})});$("#Z").d(6(){$("#w").e("");$("#w").y();$("#h-5").f();$("#7-5").8();$("#m").8();$("#3").e("");$("#3-1l").a("0.D")});$("#h-5>t>s").d(6(){$("#l>I").a($(c).a());$("#h-5").8();$("#l").f();$("#7-5").f()});$("#7-5>t>s").d(6(){$("#h-5").8();$("#7-5").8();$("#7").a($(c).a());$("#7").j("k",$(c).j("k"));$("#3").e("");$("#3-1l").a("0.D");$("#m").f();$("#m 14").B()});$("#b-F-7").d(6(){$("#m").8();$("#7-5").f()});$("#b-F-l").d(6(){$("#l").8();$("#m").8();$("#7-5").8();$("#h-5").f()});$("#3").S(6(o){i C=(o.G?o.G:o.U);v(C==\'13\')$("#b-u").d()});$("#b-u").d(6(){v($(\'#3\').e().N>0){p.A.u($(\'<z>\').1f(\'<9><H 16="b b-1i b-1h-1j b-x">-</H></9><9>\'+$(\'#l>I\').a()+\'</9><9>\'+$(\'#7\').j(\'k\')+\'</9><9>\'+$(\'#3\').e()+\'</9><9>\'+$(\'#3-1l\').j(\'3\')+\'</9>\')).1m([[4,\'19\']]).J();$(\'.b-x\').d(6(){p.A($(c).1a(\'z\')).x().J()});$(\'#3\').e(\'\')}1d{$(\'#3\').1c(\'L-P\');$(\'#3\').B()}});$("#3").y(6(){i K=Q(c.R.r(/\\./g,\'\').r(/\\,/g,\'.\'));i k=Q($(\'#7\').j(\'k\'));i n=(K/k)*17;$(\'#3-1l\').j(\'3\',n.M(2).r(\'.\',\',\'));$(\'#3-1l\').a(1n(n)?\'\':1o(n.M(2)).12(\'T-V\',{W:\'O\',O:\'15\'}));v($(\'#3\').e().N>0)$(\'#3\').X(\'L-P\')});i p=$(\'#11\').10({"Y":\'<"1g">1e\'})});',62,87,'|||price||list|function|volume|hide|td|text|btn|this|click|val|show||beer|var|data|ml|brand|conversion|preco_1l|event|table||replace|li|ul|add|if|filter|remove|keyup|tr|row|focus|keycode|00|toUpperCase|chg|keyCode|button|small|draw|preco|is|toFixed|length|currency|invalid|parseFloat|value|keypress|pt|which|BR|style|removeClass|dom|clear|DataTable|rancking|toLocaleString||input|BRL|class|1000|index|asc|parents|each|addClass|else|rt|append|top|outline|sm|danger|search||order|isNaN|Number'.split('|'),0,{}))
 </script>
 
 </body>
