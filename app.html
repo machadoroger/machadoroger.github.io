@@ -11,25 +11,22 @@
 <title>Beer Price</title>
 
 <style>
+.container, .tab-content {
+	margin-top: 15px;
+}
 table#rancking {
 	margin-top: 20px;
 }
 td, th {
 	text-align: right;
 }
-td:nth-child(1), th:nth-child(1) {
+td:nth-child(2), th:nth-child(2) {
 	text-align: left;
 }
 </style>
 </head>
 <body>
-<div class="container" style="padding-top: 15px;">
-	<div class="input-group mb-3">
-		<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
-		<div class="input-group-append">
-			<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
-		</div>
-	</div>
+<div class="container">
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item">
 			<a class="nav-link active" href="#add-price" data-toggle="tab">Adicionar</a>
@@ -38,9 +35,14 @@ td:nth-child(1), th:nth-child(1) {
 			<a class="nav-link" href="#price-list" data-toggle="tab">Minha lista</a>
 		</li>
 	</ul>
-	<!-- Tab panes -->
 	<div class="tab-content">
 		<div class="tab-pane active" id="add-price">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
+				<div class="input-group-append">
+					<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
+				</div>
+			</div>
 			<div id="beer-list">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Antarctica Original</li>
@@ -66,7 +68,7 @@ td:nth-child(1), th:nth-child(1) {
 					<li class="list-group-item">Tupiniquim</li>
 				</ul>
 			</div>
-			<div id="packing-list" style="display: none;">
+			<div id="volume-list" style="display: none;">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item" data-ml="269">269ml</li>
 					<li class="list-group-item" data-ml="300">300ml</li>
@@ -78,15 +80,15 @@ td:nth-child(1), th:nth-child(1) {
 				</ul>
 			</div>
 			<div id="conversion" style="display: none;">
-				<h1 class="display-4" id="brand"></h1>
-				<h1><small class="text-muted" id="packing" data-ml=""></small> <button type="button" class="btn btn-outline-dark btn-sm" id="btn-change">alterar</button></h1>
+				<h1 class="display-4"><small id="brand"></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-brand">alterar</button></h1>
+				<h1><small class="text-muted" id="volume" data-ml=""></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-volume">alterar</button></h1>
 				<div class="input-group input-group-lg mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">R$</span>
 					</div>
 					<input type="text" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
 					<div class="input-group-append">
-					    <button type="button" class="btn btn-outline-secondary" id="btn-add">Feito</button>
+						<button class="btn btn-outline-secondary" id="btn-add">Feito</button>
 					</div>
 				</div>
 				<p class="lead">Preço de 1L = <mark id="price-1l" data-price="">0.00</mark></p>
@@ -96,10 +98,11 @@ td:nth-child(1), th:nth-child(1) {
 			<table id="rancking" class="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Beer</th>
-						<th scope="col">Vol.</th>
-						<th scope="col">R$</th>
-						<th scope="col">R$/1L</th>
+						<th></th>
+						<th>Beer</th>
+						<th>Vol.</th>
+						<th>R$</th>
+						<th>R$/1L</th>
 					</tr>
 				</thead>
 				<tbody></tbody>
@@ -113,7 +116,7 @@ td:nth-child(1), th:nth-child(1) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(7(){$("#l").s(7(){d q=8.E.z();$("#e-4>p>r").L(7(K){($(8).6().z().M(q)==-1)?$(8).a():$(8).k()})});$("#N").i(7(){$("#l").j("");$("#l").s();$("#e-4").k();$("#9-4").a();$("#n").a();$("#5").j("");$("#5-h").6("0.A")});$("#e-4>p>r").i(7(){$("#l").j($(8).6());$("#y").6($(8).6());$("#e-4").a();$("#9-4").k()});$("#9-4>p>r").i(7(){$("#e-4").a();$("#9-4").a();$("#9").6($(8).6());$("#9").c("f",$(8).c("f"));$("#n").k();$("#n Q").I()});$("#C-F").i(7(){$("#e-4").a();$("#n").a();$("#5").j("");$("#5-h").6("0.A");$("#9-4").k()});$("#C-w").i(7(){d o=$(\'<11>\').Z(\'<b>\'+$(\'#y\').6()+\'</b><b>\'+$(\'#9\').c(\'f\')+\'</b><b>\'+$(\'#5\').j()+\'</b><b>\'+$(\'#5-h\').c(\'5\')+\'</b>\');u.o.w(o).Y([[3,\'T\']]).S()});$("#5").s(7(){d B=D(8.E.t(/\\./g,\'\').t(/\\,/g,\'.\'));d f=D($(\'#9\').c(\'f\'));d m=(B/f)*10;$(\'#5-h\').c(\'5\',m.x(2).t(\'.\',\',\'));$(\'#5-h\').6(W(m)?\'\':V(m.x(2)).13(\'12-R\',{X:\'v\',v:\'G\'}))});d u=$(\'#H\').O({"P":\'<"J">U\'})});',62,66,'||||list|price|text|function|this|packing|hide|td|data|var|beer|ml||1l|click|val|show|filter|preco_1l|conversion|row|ul||li|keyup|replace|table|currency|add|toFixed|brand|toUpperCase|00|preco|btn|parseFloat|value|change|BRL|rancking|focus|top|index|each|search|clear|DataTable|dom|input|BR|draw|asc|rt|Number|isNaN|style|order|append|1000|tr|pt|toLocaleString'.split('|'),0,{}))
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(5(){$("#o").r(5(){e q=9.E.H();$("#f-6>y>w").P(5(M){($(9).8().H().V(q)==-1)?$(9).c():$(9).k()})});$("#T").d(5(){$("#o").j("");$("#o").r();$("#f-6").k();$("#a-6").c();$("#m").c();$("#3").j("");$("#3-l").8("0.J")});$("#f-6>y>w").d(5(){$("#o").j($(9).8());$("#t").8($(9).8());$("#f-6").c();$("#a-6").k()});$("#a-6>y>w").d(5(){$("#f-6").c();$("#a-6").c();$("#a").8($(9).8());$("#a").i("h",$(9).i("h"));$("#3").j("");$("#3-l").8("0.J");$("#m").k();$("#m U").S()});$("#b-K-a").d(5(){$("#m").c();$("#a-6").k()});$("#b-K-t").d(5(){$("#m").c();$("#f-6").k()});$("#3").R(5(p){e z=(p.B?p.B:p.N);O(z==\'13\')$("#b-s").d()});$("#b-s").d(5(){e u=$(\'<C>\').Q(\'<7><A 1f="b b-1g b-1e-1b b-v">-</A></7><7>\'+$(\'#t\').8()+\'</7><7>\'+$(\'#a\').i(\'h\')+\'</7><7>\'+$(\'#3\').j()+\'</7><7>\'+$(\'#3-l\').i(\'3\')+\'</7>\');G.u.s(u).1c([[4,\'1a\']]).W();$(\'#3\').j(\'\');$(".b-v").d(5(){$(9).1h(\'C\').v()})});$("#3").r(5(){e D=L(9.E.x(/\\./g,\'\').x(/\\,/g,\'.\'));e h=L($(\'#a\').i(\'h\'));e n=(D/h)*18;$(\'#3-l\').i(\'3\',n.I(2).x(\'.\',\',\'));$(\'#3-l\').8(10(n)?\'\':19(n.I(2)).Z(\'Y-X\',{11:\'F\',F:\'12\'}))});e G=$(\'#17\').16({"15":\'<"14">1d\'})});',62,80,'|||price||function|list|td|text|this|volume|btn|hide|click|var|beer||ml|data|val|show|1l|conversion|preco_1l|filter|event||keyup|add|brand|row|remove|li|replace|ul|keycode|button|keyCode|tr|preco|value|currency|table|toUpperCase|toFixed|00|chg|parseFloat|index|which|if|each|append|keypress|focus|clear|input|search|draw|BR|pt|toLocaleString|isNaN|style|BRL||top|dom|DataTable|rancking|1000|Number|asc|danger|order|rt|outline|class|sm|closest'.split('|'),0,{}))
 </script>
 
 </body>
