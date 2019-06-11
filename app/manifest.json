@@ -1,0 +1,22 @@
+{
+    "name": "Calculabira",
+    "short_name": "Calculabira",
+    "scope" : "/app",
+    "theme_color": "#ffffff",
+    "display": "standalone",
+    "start_url" : "https://machadoroger.github.io/app",
+    "orientation" : "portrait",
+    "background_color" : "#ffff80",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
