@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/avicon-16x16.png">
+<link rel="manifest" href="./assets/manifest.json">
+<link rel="mask-icon" href="./assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+<title>Beer Price</title>
+
+<style>
+.container, .tab-content {
+	margin-top: 15px;
+}
+table#rancking {
+	margin-top: 20px;
+}
+td, th {
+	text-align: right;
+}
+td:nth-child(2), th:nth-child(2) {
+	text-align: left;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" href="#add-price" data-toggle="tab">Adicionar</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#price-list" data-toggle="tab">Minha lista</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="add-price">
+			<h1 id="brand" class="display-4" style="display: none;"><small></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-brand">alterar</button></h1>
+			<div id="beer-list">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="filter" placeholder="Pesquise aqui...">
+					<div class="input-group-append">
+						<button type="button" class="btn btn-outline-secondary" id="clear">limpar</button>
+					</div>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Antarctica Original</li>
+					<li class="list-group-item">Amstel</li>
+					<li class="list-group-item">BellaVista</li>
+					<li class="list-group-item">Bohemia Puro Malte</li>
+					<li class="list-group-item">Brahma Extra Lager</li>
+					<li class="list-group-item">Budweiser</li>
+					<li class="list-group-item">Colorado</li>
+					<li class="list-group-item">Dado Bier</li>
+					<li class="list-group-item">Devassa Puro Malte</li>
+					<li class="list-group-item">Eisenbahn</li>
+					<li class="list-group-item">Heilige</li>
+					<li class="list-group-item">Heineken</li>
+					<li class="list-group-item">Kirin Ichiban</li>
+					<li class="list-group-item">Patagonia</li>
+					<li class="list-group-item">Proibida Puro Malte</li>
+					<li class="list-group-item">Serra Malte</li>
+					<li class="list-group-item">Skol Hops</li>
+					<li class="list-group-item">Skol Puro Malte</li>
+					<li class="list-group-item">Stella Artois</li>
+					<li class="list-group-item">Therezópolis</li>
+					<li class="list-group-item">Tupiniquim</li>
+				</ul>
+			</div>
+			<div id="volume-list" style="display: none;">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" data-ml="269">269ml</li>
+					<li class="list-group-item" data-ml="300">300ml</li>
+					<li class="list-group-item" data-ml="355">355ml</li>
+					<li class="list-group-item" data-ml="473">473ml</li>
+					<li class="list-group-item" data-ml="500">500ml</li>
+					<li class="list-group-item" data-ml="600">600ml</li>
+					<li class="list-group-item" data-ml="1000">1L</li>
+				</ul>
+			</div>
+			<div id="conversion" style="display: none;">
+				<h2><small class="text-muted" id="volume" data-ml=""></small> <button class="btn btn-outline-dark btn-sm" id="btn-chg-volume">alterar</button></h2>
+				<div class="input-group input-group-lg mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">R$</span>
+					</div>
+					<input type="tel" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" id="btn-add">Feito</button>
+					</div>
+				</div>
+				<p class="lead">Preço de 1L = <mark id="price-1l" data-price="">0.00</mark></p>
+			</div>
+		</div>
+		<div class="tab-pane" id="price-list">
+			<table id="rancking" class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Beer</th>
+						<th>Vol.</th>
+						<th>R$</th>
+						<th>R$/1L</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+
+$(function() {
+
+$("#filter").keyup(function() {
+	var q = this.value.toUpperCase();
+	$("#beer-list>ul>li").each(function(index) {
+		($(this).text().toUpperCase().search(q) == -1) ? $(this).hide() : $(this).show();
+	});
+});
+
+$("#clear").click(function() {
+	$("#filter").val("");
+	$("#filter").keyup();
+	$("#beer-list").show();
+	$("#volume-list").hide();
+	$("#conversion").hide();
+	$("#price").val("");
+	$("#price-1l").text("0.00");
+});
+
+$("#beer-list>ul>li").click(function() {
+	$("#brand>small").text($(this).text());
+	$("#beer-list").hide();
+	$("#brand").show();
+	$("#volume-list").show();
+});
+
+$("#volume-list>ul>li").click(function() {
+	$("#beer-list").hide();
+	$("#volume-list").hide();
+	$("#volume").text($(this).text());
+	$("#volume").data("ml", $(this).data("ml"));
+	$("#price").val("");
+	$("#price-1l").text("0.00");
+	$("#conversion").show();
+	$("#conversion input").focus();
+});
+
+$("#btn-chg-volume").click(function() {
+	$("#conversion").hide();
+	$("#volume-list").show();
+});
+
+$("#btn-chg-brand").click(function() {
+	$("#brand").hide();
+	$("#conversion").hide();
+	$("#volume-list").hide();
+	$("#beer-list").show();
+});
+
+$("#price").keypress(function(event){
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if (keycode == '13')
+		$("#btn-add").click();
+});
+
+$("#btn-add").click(function() {
+	if ($('#price').val().length > 0) {
+		table.row
+			.add($('<tr>').append('<td><button class="btn btn-sm btn-outline-danger btn-remove">-</button></td><td>'+$('#brand>small').text()+'</td><td>'+$('#volume').data('ml')+'</td><td>'+$('#price').val()+'</td><td>'+$('#price-1l').data('price')+'</td>'))
+			.order([[4, 'asc']]).draw();
+
+		$('.btn-remove').click(function() {
+			table.row($(this).parents('tr')).remove().draw();
+		});
+		$('#price').val('');
+	}
+	else {
+		$('#price').addClass('is-invalid');
+		$('#price').focus();
+	}
+});
+
+$("#price").keyup(function() {
+	var preco = parseFloat(this.value.replace(/\./g,'').replace(/\,/g,'.'));
+	var ml =  parseFloat($('#volume').data('ml'));
+	var preco_1l = (preco / ml) * 1000;
+	$('#price-1l').data('price', preco_1l.toFixed(2).replace('.',','));
+	$('#price-1l').text(isNaN(preco_1l) ? '' : Number(preco_1l.toFixed(2)).toLocaleString('pt-BR', { style: 'currency' , currency:'BRL'}));
+	if ($('#price').val().length > 0)
+		$('#price').removeClass('is-invalid');
+});
+
+var table = $('#rancking').DataTable({"dom": '<"top">rt'});
+
+});
+</script>
+
+</body>
+</html>
