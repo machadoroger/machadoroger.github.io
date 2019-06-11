@@ -2,7 +2,6 @@
 
 const CACHE = "pwabuilder-precache";
 const precacheFiles = [
-	'dist/app.js',
 	'./',
 	'index.html',
 	'assets/js/jquery-3.3.1.slim.min.js',
