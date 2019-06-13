@@ -69,8 +69,8 @@ workbox.routing.registerRoute(
 );
 
 workbox.precaching.precacheAndRoute([
-	{ url: '/pwa/index.html', revision: '1' },
-	{ url: '/pwa/manifest.json', revision: '1' },
+	{ url: '/calculabira/index.html', revision: '1' },
+	{ url: '/calculabira/manifest.json', revision: '1' },
 ]);
 
 workbox.googleAnalytics.initialize();
