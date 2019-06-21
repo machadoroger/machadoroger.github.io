@@ -2,7 +2,7 @@ $(function () {
 
 	$("#filter").keyup(function () {
 		var q = this.value.toUpperCase();
-		$("#beer-list>ul>li").each(function (index) {
+		$("#beer-list ul>li").each(function (index) {
 			($(this).text().toUpperCase().search(q) == -1) ? $(this).hide() : $(this).show();
 		});
 	});
