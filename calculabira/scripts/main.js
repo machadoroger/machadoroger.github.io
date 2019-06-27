@@ -103,6 +103,8 @@ $(function () {
 			$('#btn-add-vol').click();
 	});
 
+	if (!localStorage.getItem('volumeList')) localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
+
 	refreshVolumeList();
 	refreshTable();
 });
@@ -150,12 +152,9 @@ function refreshTable() {
 
 function refreshVolumeList() {
 
-	var defaultVolumeList = [300, 330, 355, 473, 500, 600, 1000];
-	var volumeList = JSON.parse(localStorage.getItem('volumeList') || JSON.stringify(defaultVolumeList));
-
 	$('#volume-list ul').empty();
 
-	volumeList.forEach(volume => {
+	JSON.parse(localStorage.getItem('volumeList')).forEach(volume => {
 		$('#volume-list ul').append($('<li>').addClass('list-group-item').data('ml', volume).text(volume + 'ml').prepend('<a class="btn-floating btn-sm btn-danger btn-del-vol"><i class="fas fa-trash"></i></a>'));
 	});
 
