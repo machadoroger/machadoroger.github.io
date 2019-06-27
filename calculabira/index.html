@@ -55,8 +55,9 @@
 					<div class="md-form input-group mb-3">
 						<input type="text" class="form-control my-0 py-1" id="filter" placeholder="Pesquise aqui...">
 						<div class="input-group-append">
-							<span class="input-group-text md-addon" id="material-addon1"><i
-									class="fas fa-search grey-text"></i></span>
+							<span class="input-group-text md-addon">
+								<i class="fas fa-search grey-text"></i>
+							</span>
 						</div>
 					</div>
 					<div>
@@ -86,31 +87,21 @@
 					</div>
 				</div>
 				<div id="volume-list" style="display: none;">
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item" data-ml="269">269ml</li>
-						<li class="list-group-item" data-ml="300">300ml</li>
-						<li class="list-group-item" data-ml="310">310ml</li>
-						<li class="list-group-item" data-ml="330">330ml</li>
-						<li class="list-group-item" data-ml="355">355ml</li>
-						<li class="list-group-item" data-ml="473">473ml</li>
-						<li class="list-group-item" data-ml="500">500ml</li>
-						<li class="list-group-item" data-ml="600">600ml</li>
-						<li class="list-group-item" data-ml="740">740ml</li>
-						<li class="list-group-item" data-ml="1000">1L</li>
-					</ul>
+					<ul class="list-group list-group-flush"></ul>
+					<a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></a>
 				</div>
 				<div id="conversion" style="display: none;">
-					<h2><small class="text-muted" id="volume" data-ml=""></small> <button
-							class="btn btn-blue-grey btn-sm" id="btn-chg-volume"><i class="fas fa-edit mr-1"></i>
-							alterar</button></h2>
+					<h2>
+						<small class="text-muted mr-1" id="volume" data-ml=""></small>
+						<button class="btn btn-blue-grey btn-sm" id="btn-chg-volume"><i class="fas fa-edit mr-1"></i>alterar</button>
+					</h2>
 					<div class="md-form input-group input-group-lg mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text md-addon">R$</span>
 						</div>
-						<input type="tel" class="form-control" id="price" data-mask="#.##0,00" data-mask-reverse="true">
+						<input type="tel" class="form-control" id="input-price" data-mask="#.##0,00" data-mask-reverse="true">
 						<div class="input-group-append">
-							<button class="btn btn-md btn-primary m-0 px-3" type="button"
-								id="btn-add">Adicionar</button>
+							<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-price">Adicionar</button>
 						</div>
 					</div>
 					<p class="lead">Preço de 1L = <mark id="price-1l" data-price="">0.00</mark></p>
@@ -132,6 +123,36 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Full Height Modal Right -->
+<div class="modal fade top" id="myModal" tabindex="-1" role="dialog">
+
+<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+<div class="modal-dialog modal-full-height modal-top" role="document">
+
+
+  <div class="modal-content">
+	<div class="modal-header">
+	  <h4 class="modal-title w-100" id="myModalLabel">Novo volume</h4>
+	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+		<div class="md-form input-group input-group-lg mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text md-addon">ml</span>
+			</div>
+			<input type="number" class="form-control" id="input-vol">
+			<div class="input-group-append">
+				<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-vol">Adicionar</button>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+</div>
+<!-- Full Height Modal Right -->
 
 	<!-- JQuery -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
