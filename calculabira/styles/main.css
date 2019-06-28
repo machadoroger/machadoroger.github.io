@@ -8,8 +8,8 @@ td, th {
 	text-align: right;
 	line-height: 37px;
 }
-td:nth-child(2),
-th:nth-child(2) {
+td:nth-child(1),
+th:nth-child(1) {
 	text-align: left;
 }
 h1 {
@@ -83,11 +83,15 @@ h1 {
 	-webkit-transition: all .2s ease-in-out;
 	-o-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
-	margin-right: 20px;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 	padding: 0;
 	cursor: pointer;
+}
+#volume-list .btn-floating {
+	position: absolute;
+	right: 20px;
+	top: 5px;
 }
 .input-group-lg>.input-group-prepend, .input-group-lg>.input-group-prepend>.input-group-text {
 	padding-left: 0;
