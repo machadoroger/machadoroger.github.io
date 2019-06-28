@@ -52,7 +52,7 @@ $(function () {
 		$('#price-1l').text(isNaN(preco_1l) ? '' : Number(preco_1l.toFixed(2)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 
 		if ($('#input-price').val().length > 0)
-			$('#input-price').removeClass('is-invalid');
+			$('#input-price').closest('.input-group').removeClass('has-danger');
 	});
 
 	$('#btn-add-price').click(function () {
@@ -69,7 +69,7 @@ $(function () {
 			refreshPriceList();
 		}
 		else {
-			$('#input-price').addClass('is-invalid');
+			$('#input-price').closest('.input-group').addClass('has-danger');
 			$('#input-price').focus();
 		}
 	});
@@ -84,7 +84,7 @@ $(function () {
 			$('#myModal').modal('hide');
 		}
 		else {
-			$('#input-vol').addClass('is-invalid');
+			$('#input-vol').closest('.input-group').addClass('has-danger');
 			$('#input-vol').focus();
 		}
 	});
@@ -101,6 +101,11 @@ $(function () {
 		var keycode = (event.keyCode ? event.keyCode : event.which);
 		if (keycode == '13')
 			$('#btn-add-vol').click();
+	});
+
+	$('#input-vol').keyup(function () {
+		if ($('#input-vol').val().length > 0)
+			$('#input-vol').closest('.input-group').removeClass('has-danger');
 	});
 
 	if (!localStorage.getItem('volumeList')) localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
