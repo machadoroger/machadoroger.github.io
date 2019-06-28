@@ -39,22 +39,19 @@
 </head>
 
 <body>
-	<nav class="card card-nav-tabs card-plain">
-		<div class="card-header card-header-warning">
-		<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#add-price" role="tab">
-						<i class="fas fa-plus pr-2"></i>Adicionar
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#price-list" role="tab">
-						<i class="fas fa-list pr-2"></i>Minha lista
-					</a>
-				</li>
-			</ul>
-		</div>
+	<nav class="navbar fixed-top navbar-light bg-warning">
+		<ul class="nav nav-tabs nav-justified" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#add-price" role="tab">
+					<i class="fas fa-plus pr-2"></i>Adicionar
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#price-list" role="tab">
+					<i class="fas fa-list pr-2"></i>Minha lista
+				</a>
+			</li>
+		</ul>
 	</nav>
 	<div class="container">
 		<div class="tab-content">
@@ -112,7 +109,7 @@
 							<i class="material-icons mr-1">edit</i>alterar
 						</button>
 					</h2>
-					<div class="md-form input-group input-group-lg mb-3">
+					<div class="md-form input-group input-group-lg mt-5 mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text md-addon">R$</span>
 						</div>

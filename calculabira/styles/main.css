@@ -1,3 +1,6 @@
+body {
+	padding-top: 65px;
+}
 .tab-content {
 	margin-top: 19px;
 }
@@ -98,4 +101,7 @@ h1, h2 {
 }
 .input-group-lg .form-control {
 	height: 50px;
+}
+.nav {
+	width: 100%;
 }
