@@ -117,13 +117,13 @@ function refreshVolumeList() {
 	$('#volume-list ul').empty();
 
 	JSON.parse(localStorage.getItem('volumeList')).forEach(volume => {
-		$('#volume-list ul').append($('<li>').addClass('list-group-item').data('ml', volume).text(volume + 'ml').prepend('<a class="btn-floating btn-sm btn-danger btn-del-vol"><i class="fas fa-trash"></i></a>'));
+		$('#volume-list ul').append($('<li>').addClass('list-group-item').data('ml', volume).text(volume + 'ml').prepend('<button class="btn btn-danger btn-fab btn-fab-mini btn-round btn-del-vol"><i class="material-icons">delete</i></button>'));
 	});
 
 	$('#volume-list ul>li').click(function () {
 		$('#beer-list').hide();
 		$('#volume-list').hide();
-		$('#volume').text($(this).text());
+		$('#volume').text($(this).data('ml') + 'ml');
 		$('#volume').data('ml', $(this).data('ml'));
 		$('#input-price').val('');
 		$('#price-1l').text('0.00');
@@ -152,7 +152,7 @@ function refreshPriceList() {
 			<td class="volume">' + beer.volume + '</td>\
 			<td class="price" >' + beer.price  + '</td>\
 			<td class="priceL">' + beer.priceL + '</td>\
-			<td><a class="btn-floating btn-sm btn-danger btn-del-price"><i class="fas fa-trash"></i></a></td>\
+			<td><button class="btn btn-danger btn-fab btn-fab-mini btn-round btn-del-price"><i class="material-icons">delete</i></button></td>\
 		'));
 	});
 
