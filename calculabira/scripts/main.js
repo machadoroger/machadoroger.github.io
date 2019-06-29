@@ -163,7 +163,7 @@ function refreshPriceList() {
 		'));
 	});
 
-	table.order([[4, 'asc']]).draw();
+	table.order([[3, 'asc']]).draw();
 
 	$('.btn-del-price').click(function () {
 
