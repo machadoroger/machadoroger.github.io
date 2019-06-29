@@ -149,6 +149,8 @@ function refreshVolumeList() {
 
 function refreshPriceList() {
 
+	table.clear();
+
 	var priceList = JSON.parse(localStorage.getItem('priceList') || '[]');
 
 	priceList.forEach(beer => {
