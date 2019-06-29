@@ -108,14 +108,42 @@ $(function () {
 			$('#input-vol').closest('.input-group').removeClass('has-danger');
 	});
 
+	if (!localStorage.getItem('beerList')) localStorage.setItem('beerList', JSON.stringify(['Bohemia','Original','Skol']));
 	if (!localStorage.getItem('volumeList')) localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
 	if (!localStorage.getItem('priceList')) localStorage.setItem('priceList', JSON.stringify([]));
 
+	refreshBeerList();
 	refreshVolumeList();
 	refreshPriceList();
 });
 
 var table = $('#rancking').DataTable({ "dom": '<"top">rt', "oLanguage": { "sZeroRecords": "", "sEmptyTable": "" } });
+
+function refreshBeerList() {
+
+	$('#beer-list ul').empty();
+
+	JSON.parse(localStorage.getItem('beerList')).forEach(beer => {
+		$('#beer-list ul').append($('<li>').addClass('list-group-item').data('name', beer).text(beer).prepend('<button class="btn btn-danger btn-fab btn-fab-mini btn-round btn-del-beer"><i class="material-icons">delete</i></button>'));
+	});
+
+	$('#beer-list ul>li').click(function () {
+		$('#brand>small').text($(this).text());
+		$('#beer-list').hide();
+		$('#brand').show();
+		$('#volume-list').show();
+	});
+
+	$('.btn-del-beer').click(function () {
+		var btn = $(this);
+		var beerList = JSON.parse(localStorage.getItem('beerList'));
+		var newBeerList = beerList.filter(function(value, index, arr){ return value != btn.closest('li').data('name'); });
+
+		localStorage.setItem('beerList', JSON.stringify(newBeerList));
+
+		refreshBeerList();
+	});
+}
 
 function refreshVolumeList() {
 
