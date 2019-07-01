@@ -7,23 +7,6 @@ $(function () {
 		});
 	});
 
-	$('#clear').click(function () {
-		$('#filter').val('');
-		$('#filter').keyup();
-		$('#beer-list').show();
-		$('#volume-list').hide();
-		$('#conversion').hide();
-		$('#input-price').val('');
-		$('#price-1l').text('0.00');
-	});
-
-	$('#beer-list ul>li').click(function () {
-		$('#brand>small').text($(this).text());
-		$('#beer-list').hide();
-		$('#brand').show();
-		$('#volume-list').show();
-	});
-
 	$('#btn-chg-volume').click(function () {
 		$('#conversion').hide();
 		$('#volume-list').show();
@@ -34,6 +17,59 @@ $(function () {
 		$('#conversion').hide();
 		$('#volume-list').hide();
 		$('#beer-list').show();
+	});
+
+	$('#input-beer, #input-volume').keypress(function (event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if (keycode == '13')
+			$(this).closest('.input-group').find('button').click();
+	});
+
+	$('#input-beer, #input-volume').keyup(function () {
+		if ($(this).val().length > 0)
+			$(this).closest('.input-group').removeClass('has-danger');
+	});
+
+	$('#btn-add-beer').click(function () {
+		if ($('#input-beer').val().length > 0) {
+			var beerList = JSON.parse(localStorage.getItem('beerList'));
+			beerList.push($('#input-beer').val());
+			beerList.sort(function (a, b) {
+				return a.toLowerCase().localeCompare(b.toLowerCase());
+			});
+			localStorage.setItem('beerList', JSON.stringify(beerList));
+			refreshBeerList();
+			$('#beerModal').modal('hide');
+		}
+		else {
+			$('#input-beer').closest('.input-group').addClass('has-danger');
+			$('#input-beer').focus();
+		}
+	});
+
+	$('#btn-add-vol').click(function () {
+		if ($('#input-volume').val().length > 0) {
+			var volumeList = JSON.parse(localStorage.getItem('volumeList'));
+			volumeList.push(parseInt($('#input-volume').val()));
+			volumeList.sort(function(a, b){
+				return a - b;
+			});
+			localStorage.setItem('volumeList', JSON.stringify(volumeList));
+			refreshVolumeList();
+			$('#volumeModal').modal('hide');
+		}
+		else {
+			$('#input-volume').closest('.input-group').addClass('has-danger');
+			$('#input-volume').focus();
+		}
+	});
+
+	$('#volumeModal, #beerModal').on('shown.bs.modal', function (e) {
+		$(this).find('input').focus();
+	});
+
+	$('#volumeModal, #beerModal').on('hidden.bs.modal', function (e) {
+		$(this).find('input').val('');
 	});
 
 	$('#input-price').keypress(function (event) {
@@ -74,58 +110,12 @@ $(function () {
 		}
 	});
 
-	$('#btn-add-vol').click(function () {
-		if ($('#input-vol').val().length > 0) {
-			var volumeList = JSON.parse(localStorage.getItem('volumeList'));
-			volumeList.push(parseInt($('#input-vol').val()));
-			volumeList.sort(function(a, b){return a - b});
-			localStorage.setItem('volumeList', JSON.stringify(volumeList));
-			refreshVolumeList();
-			$('#myModal').modal('hide');
-		}
-		else {
-			$('#input-vol').closest('.input-group').addClass('has-danger');
-			$('#input-vol').focus();
-		}
-	});
-
-	$('#btn-add-beer').click(function () {
-		if ($('#input-beer').val().length > 0) {
-			var beerList = JSON.parse(localStorage.getItem('beerList'));
-			beerList.push($('#input-beer').val());
-			beerList.sort();
-			localStorage.setItem('beerList', JSON.stringify(beerList));
-			refreshBeerList();
-			$('#beerModal').modal('hide');
-		}
-		else {
-			$('#input-beer').closest('.input-group').addClass('has-danger');
-			$('#input-beer').focus();
-		}
-	});
-
-	$('#myModal, #beerModal').on('shown.bs.modal', function (e) {
-		$(this).find('input').focus();
-	});
-
-	$('#myModal, #beerModal').on('hidden.bs.modal', function (e) {
-		$(this).find('input').val('');
-	});
-
-	$('#input-vol').keypress(function (event) {
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if (keycode == '13')
-			$('#btn-add-vol').click();
-	});
-
-	$('#input-vol').keyup(function () {
-		if ($('#input-vol').val().length > 0)
-			$('#input-vol').closest('.input-group').removeClass('has-danger');
-	});
-
-	if (!localStorage.getItem('beerList')) localStorage.setItem('beerList', JSON.stringify(['Amstel','BellaVista','Bohemia Puro Malte','Brahma Extra Lager','Devassa Puro Malte','Eisenbahn','Heineken','Kirin Ichiban','Patagonia','Proibida Puro Malte','Serra Malte','Skol Hops','Skol Puro Malte','Stella Artois','Therezópolis','Tupiniquim']));
-	if (!localStorage.getItem('volumeList')) localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
-	if (!localStorage.getItem('priceList')) localStorage.setItem('priceList', JSON.stringify([]));
+	if (!localStorage.getItem('beerList'))
+		localStorage.setItem('beerList', JSON.stringify(['Amstel','Bohemia Puro Malte','Brahma Extra Lager','Devassa Puro Malte','Eisenbahn','Heineken','Proibida Puro Malte','Serra Malte','Skol Puro Malte','Stella Artois']));
+	if (!localStorage.getItem('volumeList'))
+		localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
+	if (!localStorage.getItem('priceList'))
+		localStorage.setItem('priceList', JSON.stringify([]));
 
 	refreshBeerList();
 	refreshVolumeList();
@@ -143,7 +133,7 @@ function refreshBeerList() {
 	});
 
 	$('#beer-list ul>li').click(function () {
-		$('#brand>small').text($(this).text());
+		$('#brand>small').text($(this).data('name'));
 		$('#beer-list').hide();
 		$('#brand').show();
 		$('#volume-list').show();

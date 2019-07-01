@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -22,18 +21,9 @@
 
 <!-- Fonts and icons -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">-->
 <!-- Material Kit CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/css/material-kit.min.css" />
-
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<!-- Bootstrap core CSS 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">-->
-<!-- Material Design Bootstrap 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css">-->
 <!-- Your styles -->
 <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -75,28 +65,6 @@
 						<button class="btn btn-primary btn-round btn-block btn-warning" data-toggle="modal" data-target="#beerModal">
 							<i class="material-icons">add</i>
 						</button>
-							<!--<li class="list-group-item">Antarctica Original</li>
-							<li class="list-group-item">Amstel</li>
-							<li class="list-group-item">BellaVista</li>
-							<li class="list-group-item">Bohemia Puro Malte</li>
-							<li class="list-group-item">Brahma Extra Lager</li>
-							<li class="list-group-item">Budweiser</li>
-							<li class="list-group-item">Colorado</li>
-							<li class="list-group-item">Dado Bier</li>
-							<li class="list-group-item">Devassa Puro Malte</li>
-							<li class="list-group-item">Eisenbahn</li>
-							<li class="list-group-item">Heilige</li>
-							<li class="list-group-item">Heineken</li>
-							<li class="list-group-item">Kirin Ichiban</li>
-							<li class="list-group-item">Patagonia</li>
-							<li class="list-group-item">Proibida Puro Malte</li>
-							<li class="list-group-item">Serra Malte</li>
-							<li class="list-group-item">Skol Hops</li>
-							<li class="list-group-item">Skol Puro Malte</li>
-							<li class="list-group-item">Stella Artois</li>
-							<li class="list-group-item">Therezópolis</li>
-							<li class="list-group-item">Tupiniquim</li>
-						-->
 					</div>
 				</div>
 				<div id="volume-list" style="display: none;">
@@ -141,8 +109,7 @@
 		</div>
 	</div>
 
-	<!-- Full Height Modal Right -->
-	<div class="modal fade top" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal fade top" id="volumeModal" tabindex="-1" role="dialog">
 		<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
 		<div class="modal-dialog modal-full-height modal-top" role="document">
 			<div class="modal-content">
@@ -157,7 +124,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text md-addon">ml</span>
 						</div>
-						<input type="number" class="form-control" id="input-vol">
+						<input type="number" class="form-control" id="input-volume">
 						<div class="input-group-append">
 							<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-vol">Adicionar</button>
 						</div>
@@ -166,7 +133,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Full Height Modal Right -->
 
 	<div class="modal fade top" id="beerModal" tabindex="-1" role="dialog">
 		<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
@@ -189,19 +155,15 @@
 			</div>
 		</div>
 	</div>
-	<!-- Full Height Modal Right -->
 
 	<!-- JQuery -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-	<!-- Bootstrap core JavaScript
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap-material-design@4.1.2/dist/js/bootstrap-material-design.min.js"></script>
-	<!-- MDB core JavaScript 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>-->
 	<!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/js/material-kit.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/js/material-kit.min.js"></script>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js" integrity="sha256-t5ZQTZsbQi8NxszC10CseKjJ5QeMw5NINtOXQrESGSU=" crossorigin="anonymous"></script>
