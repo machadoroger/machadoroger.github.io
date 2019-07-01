@@ -123,7 +123,7 @@ $(function () {
 			$('#input-vol').closest('.input-group').removeClass('has-danger');
 	});
 
-	if (!localStorage.getItem('beerList')) localStorage.setItem('beerList', JSON.stringify(['Bohemia','Original','Skol']));
+	if (!localStorage.getItem('beerList')) localStorage.setItem('beerList', JSON.stringify(['Amstel','BellaVista','Bohemia Puro Malte','Brahma Extra Lager','Devassa Puro Malte','Eisenbahn','Heineken','Kirin Ichiban','Patagonia','Proibida Puro Malte','Serra Malte','Skol Hops','Skol Puro Malte','Stella Artois','Therezópolis','Tupiniquim']));
 	if (!localStorage.getItem('volumeList')) localStorage.setItem('volumeList', JSON.stringify([300, 330, 355, 473, 500, 600, 1000]));
 	if (!localStorage.getItem('priceList')) localStorage.setItem('priceList', JSON.stringify([]));
 
