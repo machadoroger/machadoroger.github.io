@@ -39,7 +39,7 @@ $(function () {
 			});
 			localStorage.setItem('beerList', JSON.stringify(beerList));
 			refreshBeerList();
-			$('#beerModal').modal('hide');
+			$('#beer-modal').modal('hide');
 		}
 		else {
 			$('#input-beer').closest('.input-group').addClass('has-danger');
@@ -56,7 +56,7 @@ $(function () {
 			});
 			localStorage.setItem('volumeList', JSON.stringify(volumeList));
 			refreshVolumeList();
-			$('#volumeModal').modal('hide');
+			$('#volume-modal').modal('hide');
 		}
 		else {
 			$('#input-volume').closest('.input-group').addClass('has-danger');
@@ -64,11 +64,11 @@ $(function () {
 		}
 	});
 
-	$('#volumeModal, #beerModal').on('shown.bs.modal', function (e) {
+	$('#volume-modal, #beer-modal').on('shown.bs.modal', function (e) {
 		$(this).find('input').focus();
 	});
 
-	$('#volumeModal, #beerModal').on('hidden.bs.modal', function (e) {
+	$('#volume-modal, #beer-modal').on('hidden.bs.modal', function (e) {
 		$(this).find('input').val('');
 	});
 
