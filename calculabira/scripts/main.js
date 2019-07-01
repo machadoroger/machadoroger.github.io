@@ -89,12 +89,27 @@ $(function () {
 		}
 	});
 
-	$('#myModal').on('shown.bs.modal', function (e) {
-		$('#input-vol').focus();
+	$('#btn-add-beer').click(function () {
+		if ($('#input-beer').val().length > 0) {
+			var beerList = JSON.parse(localStorage.getItem('beerList'));
+			beerList.push($('#input-beer').val());
+			beerList.sort();
+			localStorage.setItem('beerList', JSON.stringify(beerList));
+			refreshBeerList();
+			$('#beerModal').modal('hide');
+		}
+		else {
+			$('#input-beer').closest('.input-group').addClass('has-danger');
+			$('#input-beer').focus();
+		}
 	});
 
-	$('#myModal').on('hidden.bs.modal', function (e) {
-		$('#input-vol').val('');
+	$('#myModal, #beerModal').on('shown.bs.modal', function (e) {
+		$(this).find('input').focus();
+	});
+
+	$('#myModal, #beerModal').on('hidden.bs.modal', function (e) {
+		$(this).find('input').val('');
 	});
 
 	$('#input-vol').keypress(function (event) {
