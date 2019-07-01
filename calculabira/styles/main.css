@@ -91,7 +91,7 @@ h1, h2 {
 	padding: 0;
 	cursor: pointer;
 }
-#volumeList .btn-del-vol, #beerList .btn-del-beer {
+#volume-list .btn-del-vol, #beer-list .btn-del-beer {
 	position: absolute;
 	right: 0;
 	top: 5px;
