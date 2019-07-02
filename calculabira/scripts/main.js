@@ -129,7 +129,7 @@ function refreshBeerList() {
 	$('#beer-list ul').empty();
 
 	JSON.parse(localStorage.getItem('beerList')).forEach(beer => {
-		$('#beer-list ul').append($('<li>').addClass('list-group-item').data('name', beer).text(beer).prepend('<button class="btn btn-danger btn-fab btn-fab-mini btn-round btn-del-beer"><i class="material-icons">delete</i></button>'));
+		$('#beer-list ul').append($('<li>').addClass('list-group-item').data('name', beer).html('<div>'+beer+'</div>').prepend('<button class="btn btn-danger btn-fab btn-fab-mini btn-round btn-del-beer"><i class="material-icons">delete</i></button>'));
 	});
 
 	$('#beer-list ul>li').click(function () {

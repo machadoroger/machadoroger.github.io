@@ -1,11 +1,11 @@
 body {
 	padding-top: 65px;
 }
-.tab-content {
-	margin-top: 19px;
+.nav {
+	width: 100%;
 }
-table#rancking {
-	margin-top: 20px;
+.container {
+	padding-top: 20px;
 }
 td, th {
 	text-align: right;
@@ -18,83 +18,9 @@ th:nth-child(1) {
 h1, h2 {
 	margin: 0;
 }
-.bmd-form-group.bmd-collapse-inline {
-	height: 40px;
-}
 .input-group-prepend,
 .input-group-apppend {
 	padding: 0 5px;
-}
-.md-tabs .nav-item.open .nav-link,
-.md-tabs .nav-link.active {
-	background-color: rgba(0, 0, 0, .2);
-	color: #fff;
-	-webkit-transition: all 1s;
-	-o-transition: all 1s;
-	transition: all 1s;
-	-webkit-border-radius: .25rem;
-	border-radius: .25rem;
-	border: 0;
-}
-.md-tabs {
-	-webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-	border: 0;
-	padding: .7rem;
-	margin-bottom: -20px;
-	background-color: #2bbbad;
-	z-index: 1;
-	position: relative;
-	-webkit-border-radius: .25rem;
-	border-radius: .25rem;
-}
-.md-tabs .nav-link {
-	-webkit-transition: all .4s;
-	-o-transition: all .4s;
-	transition: all .4s;
-	border: 0;
-	color: #fff;
-}
-.btn.btn-sm {
-	padding: .3rem 0.6rem;
-	font-size: .64rem;
-}
-.btn-floating i {
-	display: inline-block;
-	width: inherit;
-	text-align: center;
-	color: #fff;
-}
-.btn-floating.btn-sm i {
-	font-size: 1rem;
-	line-height: 37px;
-}
-.btn-floating.btn-sm {
-	width: 37px;
-	height: 37px;
-}
-.btn-floating {
-	-webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-	width: 47px;
-	height: 47px;
-	position: relative;
-	z-index: 1;
-	vertical-align: middle;
-	display: inline-block;
-	overflow: hidden;
-	-webkit-transition: all .2s ease-in-out;
-	-o-transition: all .2s ease-in-out;
-	transition: all .2s ease-in-out;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-	padding: 0;
-	cursor: pointer;
-}
-#volume-list .btn-del-vol, #beer-list .btn-del-beer {
-	position: absolute;
-	right: 0;
-	top: 5px;
 }
 .input-group-lg>.input-group-prepend, .input-group-lg>.input-group-prepend>.input-group-text {
 	padding-left: 0;
@@ -102,6 +28,17 @@ h1, h2 {
 .input-group-lg .form-control {
 	height: 50px;
 }
-.nav {
-	width: 100%;
+.btn-fab.btn-lg, .btn-fab.btn-lg:focus {
+	-webkit-box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+	box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;
+	position: absolute;
+	right: 16px;
+	bottom: 16px;
+}
+.list-group-item {
+	padding: 0;
+	height: 50px;
+}
+.list-group-item :first-child {
+	margin-right: 1rem;
 }
