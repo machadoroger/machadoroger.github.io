@@ -22,9 +22,6 @@ h1, h2 {
 .input-group-apppend {
 	padding: 0 5px;
 }
-.input-group-lg>.input-group-prepend, .input-group-lg>.input-group-prepend>.input-group-text {
-	padding-left: 0;
-}
 .input-group-lg .form-control {
 	height: 50px;
 }
