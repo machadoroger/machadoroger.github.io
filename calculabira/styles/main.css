@@ -4,6 +4,9 @@ body {
 .nav {
 	width: 100%;
 }
+nav.navbar {
+	background-color: #FFC107 !important;
+}
 .container {
 	padding-top: 20px;
 }

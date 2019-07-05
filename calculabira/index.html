@@ -17,7 +17,7 @@
 <link rel="icon" sizes="192x192" href="images/icons/icon-192x192.png">
 
 <!-- Color the status bar on mobile devices -->
-<meta name="theme-color" content="#ff6f00">
+<meta name="theme-color" content="#FFA000">
 
 <!-- Fonts and icons -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -28,7 +28,7 @@
 </head>
 
 <body>
-	<nav class="navbar fixed-top navbar-light bg-warning">
+	<nav class="navbar fixed-top navbar-light">
 		<ul class="nav nav-tabs nav-justified" role="tablist">
 			<li class="nav-item">
 				<a class="nav-link active" data-toggle="tab" href="#add-price" role="tab">
@@ -45,31 +45,33 @@
 	<div class="container">
 		<div class="tab-content">
 			<div class="tab-pane active" id="add-price">
-				<h1 id="brand" class="display-2" style="display: none;"><small></small> 
-					<button class="btn btn-default btn-round btn-sm btn-info" id="btn-chg-brand">
+				<h1 id="beer-name" class="display-2" style="display: none;"><small></small> 
+					<button class="btn btn-default btn-round btn-sm btn-info" id="btn-chg-beer">
 						<i class="material-icons mr-1">edit</i>alterar
 					</button>
 				</h1>
 				<div id="beer-list">
-					<div class="md-form input-group mb-3">
+					<div class="input-group has-success mb-4">
 						<input type="text" class="form-control my-0 py-1" id="filter" placeholder="Pesquise aqui...">
 						<div class="input-group-append">
-							<span class="input-group-text md-addon">
-								<i class="material-icons">search</i>
-							</span>
+							<i class="material-icons">search</i>
 						</div>
 					</div>
-					<div>
-						<ul class="list-group list-group-flush"></ul>
-						<button class="btn btn-warning btn-round btn-fab btn-lg" data-toggle="modal" data-target="#beer-modal">
-							<i class="material-icons">add</i>
-						</button>
-					</div>
+					<ul class="list-group list-group-flush"></ul>
+					<button class="btn btn-success btn-round btn-fab btn-lg" data-toggle="modal" data-target="#beer-modal">
+						<i class="material-icons">add</i>
+					</button>
+					<button class="btn btn-default btn-round btn-fab btn-lg has-delete" id="btn-del-beer-list" style="bottom:85px">
+						<i class="material-icons">delete</i>
+					</button>
 				</div>
 				<div id="volume-list" style="display: none;">
 					<ul class="list-group list-group-flush"></ul>
-					<button class="btn btn-warning btn-round btn-fab btn-lg" data-toggle="modal" data-target="#volume-modal">
+					<button class="btn btn-success btn-round btn-fab btn-lg" data-toggle="modal" data-target="#volume-modal">
 						<i class="material-icons">add</i>
+					</button>
+					<button class="btn btn-default btn-round btn-fab btn-lg" id="btn-del-volume-list" style="bottom:85px">
+						<i class="material-icons">delete</i>
 					</button>
 				</div>
 				<div id="conversion" style="display: none;">
@@ -79,13 +81,13 @@
 							<i class="material-icons mr-1">edit</i>alterar
 						</button>
 					</h2>
-					<div class="md-form input-group input-group-lg mt-5 mb-3">
+					<div class="md-form input-group input-group-lg has-success mt-5 mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text md-addon">R$</span>
 						</div>
 						<input type="tel" class="form-control" id="input-price" data-mask="#.##0,00" data-mask-reverse="true" placeholder="Somente números">
 						<div class="input-group-append">
-							<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-price">Adicionar</button>
+							<button class="btn btn-md btn-success m-0 px-3" type="button" id="btn-add-price">Adicionar</button>
 						</div>
 					</div>
 					<p class="lead">Preço de 1L = <mark id="price-1l" data-price="">0.00</mark></p>
@@ -108,10 +110,6 @@
 		</div>
 	</div>
 
-	<button id="btn-del-items" class="btn btn-default btn-round btn-fab btn-lg" style="bottom:85px">
-		<i class="material-icons">delete</i>
-	</button>
-
 	<div class="modal fade top" id="volume-modal" tabindex="-1" role="dialog">
 		<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
 		<div class="modal-dialog modal-full-height modal-top" role="document">
@@ -123,13 +121,13 @@
 				</button>
 				</div>
 				<div class="modal-body">
-					<div class="md-form input-group input-group-lg mb-3">
+					<div class="input-group input-group-lg has-success mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text md-addon">ml</span>
 						</div>
 						<input type="number" class="form-control" id="input-volume">
 						<div class="input-group-append">
-							<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-vol">Adicionar</button>
+							<button class="btn btn-md btn-success m-0 px-3" type="button" id="btn-add-vol">Adicionar</button>
 						</div>
 					</div>
 				</div>
@@ -148,10 +146,10 @@
 				</button>
 				</div>
 				<div class="modal-body">
-					<div class="md-form input-group input-group-lg mb-3">
+					<div class="input-group input-group-lg has-success mb-3">
 						<input type="text" class="form-control" id="input-beer">
 						<div class="input-group-append">
-							<button class="btn btn-md btn-primary m-0 px-3" type="button" id="btn-add-beer">Adicionar</button>
+							<button class="btn btn-md btn-success m-0 px-3" type="button" id="btn-add-beer">Adicionar</button>
 						</div>
 					</div>
 				</div>

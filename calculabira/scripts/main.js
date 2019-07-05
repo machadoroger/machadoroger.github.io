@@ -12,8 +12,8 @@ $(function () {
 		$('#volume-list').show();
 	});
 
-	$('#btn-chg-brand').click(function () {
-		$('#brand').hide();
+	$('#btn-chg-beer').click(function () {
+		$('#beer-name').hide();
 		$('#conversion').hide();
 		$('#volume-list').hide();
 		$('#beer-list').show();
@@ -85,7 +85,7 @@ $(function () {
 		var preco_1l = (preco / ml) * 1000;
 
 		$('#price-1l').data('price', preco_1l.toFixed(2).replace('.', ','));
-		$('#price-1l').text(isNaN(preco_1l) ? '' : Number(preco_1l.toFixed(2)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+		$('#price-1l').text(isNaN(preco_1l) ? 'R$ 0,00' : Number(preco_1l.toFixed(2)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 
 		if ($('#input-price').val().length > 0)
 			$('#input-price').closest('.input-group').removeClass('has-danger');
@@ -95,7 +95,7 @@ $(function () {
 		if ($('#input-price').val().length > 0) {
 			var priceList = JSON.parse(localStorage.getItem('priceList'));
 			priceList.push({
-				brand: $('#brand>small').text(),
+				brand: $('#beer-name>small').text(),
 				volume: $('#volume').data('ml'),
 				price: $('#input-price').val(),
 				priceL: $('#price-1l').data('price')
@@ -107,6 +107,28 @@ $(function () {
 		else {
 			$('#input-price').closest('.input-group').addClass('has-danger');
 			$('#input-price').focus();
+		}
+	});
+
+	$('#btn-del-beer-list').click(function () {
+		if ($(this).find('.material-icons').text() == 'delete') {
+			$('.btn-del-beer').show();
+			$(this).find('.material-icons').text('check');
+		}
+		else {
+			$('.btn-del-beer').hide();
+			$(this).find('.material-icons').text('delete');
+		}
+	});
+
+	$('#btn-del-volume-list').click(function () {
+		if ($(this).find('.material-icons').text() == 'delete') {
+			$('.btn-del-volume').show();
+			$(this).find('.material-icons').text('check');
+		}
+		else {
+			$('.btn-del-volume').hide();
+			$(this).find('.material-icons').text('delete');
 		}
 	});
 
@@ -133,9 +155,9 @@ function refreshBeerList() {
 	});
 
 	$('#beer-list ul>li').click(function () {
-		$('#brand>small').text($(this).data('name'));
+		$('#beer-name>small').text($(this).data('name'));
 		$('#beer-list').hide();
-		$('#brand').show();
+		$('#beer-name').show();
 		$('#volume-list').show();
 	});
 
@@ -148,6 +170,9 @@ function refreshBeerList() {
 
 		refreshBeerList();
 	});
+
+	if ($('#btn-del-beer-list').find('.material-icons').text() == 'delete')
+		$('.btn-del-beer').hide();
 }
 
 function refreshVolumeList() {
@@ -155,21 +180,20 @@ function refreshVolumeList() {
 	$('#volume-list ul').empty();
 
 	JSON.parse(localStorage.getItem('volumeList')).forEach(volume => {
-		$('#volume-list ul').append($('<li>').addClass('list-group-item').data('ml', volume).text(volume + 'ml').prepend('<button class="btn btn-just-icon btn-link btn-del-vol"><i class="material-icons">delete</i></button>'));
+		$('#volume-list ul').append($('<li>').addClass('list-group-item').data('ml', volume).text(volume + 'ml').prepend('<button class="btn btn-just-icon btn-link btn-del-volume"><i class="material-icons">delete</i></button>'));
 	});
 
 	$('#volume-list ul>li').click(function () {
-		$('#beer-list').hide();
 		$('#volume-list').hide();
 		$('#volume').text($(this).data('ml') + 'ml');
 		$('#volume').data('ml', $(this).data('ml'));
 		$('#input-price').val('');
-		$('#price-1l').text('0.00');
+		$('#price-1l').text('R$ 0,00');
 		$('#conversion').show();
 		$('#conversion input').focus();
 	});
 
-	$('.btn-del-vol').click(function () {
+	$('.btn-del-volume').click(function () {
 		var btn = $(this);
 		var volumeList = JSON.parse(localStorage.getItem('volumeList'));
 		var newVolumeList = volumeList.filter(function(value, index, arr){ return value != btn.closest('li').data('ml'); });
@@ -178,6 +202,9 @@ function refreshVolumeList() {
 
 		refreshVolumeList();
 	});
+
+	if ($('#btn-del-volume-list').find('.material-icons').text() == 'delete')
+		$('.btn-del-volume').hide();
 }
 
 function refreshPriceList() {
