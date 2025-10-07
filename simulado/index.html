@@ -1,0 +1,3166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado SAFe 6 Agilist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        ul.simulado-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul.simulado-list li {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: background-color 0.3s;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        ul.simulado-list li:hover {
+            background-color: #e9f3ff;
+        }
+        ul.simulado-list a.option-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            display: block;
+            font-size: 1em;
+        }
+        ul.simulado-list a.option-link:hover {
+            text-decoration: underline;
+        }
+        ul.simulado-list div.obs {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 4px;
+            text-align: left;
+        }
+        ul.simulado-list div.obs a {
+            color: #555;
+            text-decoration: underline;
+        }
+        ul.simulado-list div.obs a:hover {
+            color: #007bff;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+        .alternative {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .alternative:hover {
+            background-color: #eceff1;
+        }
+        /* Estilos de correção (visíveis após o clique em Finalizar) */
+        .correct {
+            background-color: #e6ffe6; /* Verde claro */
+            color: #008000; /* Texto verde */
+            font-weight: bold;
+        }
+        .incorrect-selected {
+            background-color: #ffe6e6; /* Vermelho claro */
+            color: #cc0000; /* Texto vermelho */
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid #007bff;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        #submit-btn, #back-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #submit-btn:hover {
+            background-color: #218838;
+        }
+        #back-btn {
+            background-color: #6c757d;
+        }
+        #back-btn:hover {
+            background-color: #5a6268;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    </head>
+<body>
+
+    <div class="container">
+        <h1 id="main-title"></h1>
+        <div id="selection-buttons">
+            <h2>Selecione o Simulado</h2>
+            <ul class="simulado-list">
+                <li>
+                  <a href="#" class="option-link" onclick="startQuiz(1)">Simulado 1 (45 questões | 1 a 45)</a>
+                  <a href="#" class="option-link" onclick="startQuiz(2)">Simulado 2 (45 questões | 46 a 90)</a>
+                  <a href="#" class="option-link" onclick="startQuiz(3)">Simulado 3 (45 questões | 91 a 135)</a>
+                  <a href="#" class="option-link" onclick="startQuiz(4)">Simulado 4 (26 questões | 136 a 161)</a>
+                  <a href="#" class="option-link" onclick="startQuiz(5)">Simulado aleatório (45 questões aleatórias)</a>
+                    <div class="obs">
+                        Disponível em 
+                        <a href="https://pt.scribd.com/document/666118932/Notas-sobre-a-prova-SAFE" target="_blank">
+                            Notas Sobre A Prova SAFE
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="option-link" onclick="startQuiz(6)">Free Leading SAFe Practice Exam (20 questions)</a>
+                    <div class="obs">
+                        Disponível em 
+                        <a href="https://www.thescrummaster.co.uk/quizzes/free-leading-safe-practice-exam/" target="_blank">
+                            thescrummaster.co.uk
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="option-link" onclick="startQuiz(7)">Practice Test: Português do Brasil - SAFe 6 Agilist Exam (6.0)</a>
+                    <div class="obs">
+                        Disponível em 
+                        <a href="https://community.scaledagile.com/s/learning" target="_blank">
+                            community.scaledagile.com
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="option-link" onclick="startQuiz(8)">
+                        Exame de certificação em português do Brasil - SAFe 6 Agilist Exam (6.0) (Score 87%)
+                    </a>
+                </li>
+                <li>
+                    <div class="obs">
+                        Leading SAFe Agilist SA 6.0 Exam Notes disponível em 
+                        <a href="https://codingnconcepts.com/agile/leading-safe/" target="_blank">
+                            codingnconcepts.com
+                        </a>
+                    </div>
+                </li>
+                
+                
+            </ul>
+        </div>
+    
+        <div id="quiz-area" class="hidden">
+            <form id="quiz-form"></form>
+            <button id="submit-btn" onclick="checkAnswers()">Finalizar Simulado</button>
+            <div id="results" class="results hidden"></div>
+            <button id="back-btn" onclick="resetQuiz()">Voltar à Seleção</button>
+        </div>
+    
+    </div>
+
+<script>
+    // ** Repositório Global de todas as 159 questões **
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Início Simulado 1
+    const allQuestionsData = [
+    {
+        question: "Qual sistema operacional o SAFe representa?",
+        type: "single",
+        options: [
+            { text: "A rede", isCorrect: false },
+            { text: "A hierarquia", isCorrect: false },
+            { text: "O sistema operacional dual", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é o objetivo final do SAFe?",
+        type: "single",
+        options: [
+            { text: "Entrega mais rápida", isCorrect: false },
+            { text: "Liderança servidora", isCorrect: false },
+            { text: "Entrega de valor", isCorrect: true },
+            { text: "Equipes funcionais", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são as duas áreas que fazem parte dos Core Values do Scaled Agile Framework? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Alinhamento", isCorrect: true },
+            { text: "Colaboração", isCorrect: false },
+            { text: "Descentralizar a tomada de decisões", isCorrect: false },
+            { text: "Respeito pelas pessoas", isCorrect: true },
+            { text: "Pensamento Sistêmico", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são os dois valores centrais do SAFe? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Execução do programa", isCorrect: false },
+            { text: "Transparência", isCorrect: true },
+            { text: "Fluxo", isCorrect: false },
+            { text: "Cultura", isCorrect: false },
+            { text: "Melhoria implacável", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual declaração se encaixa com o valor central SAFe de qualidade integrada?",
+        type: "single",
+        options: [
+            { text: "Você não pode escalar código ruim", isCorrect: true },
+            { text: "A qualidade depende da escala do projeto e deve ser implementada de cima para baixo", isCorrect: false },
+            { text: "A qualidade não faz parte dos valores centrais do SAFe", isCorrect: false },
+            { text: "A qualidade só deve ser trabalhada durante a Iteração de Inovação e Planejamento", isCorrect: false }
+        ]
+    },
+    {
+        question: "A principal necessidade do SAFe é dimensionar a ideia de quê?",
+        type: "single",
+        options: [
+            { text: "Entrega de Soluções Técnicas", isCorrect: false },
+            { text: "Alinhamento Organizacional e Funcional", isCorrect: false },
+            { text: "Gestão de Portfólio Lean", isCorrect: false },
+            { text: "Agilidade de Negócios", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as duas principais razões para adotar o Agile em uma organização? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Acelere a entrega do produto", isCorrect: true },
+            { text: "Reduza as mudanças", isCorrect: false },
+            { text: "Centralize a tomada de decisões", isCorrect: false },
+            { text: "Permita mudanças nas prioridades", isCorrect: true },
+            { text: "Reduza o custo do projeto", isCorrect: false }
+        ]
+    },
+    {
+        question: "De acordo com o Princípio SAFe n° 10, o que a empresa deve fazer quando os mercados e as demandas dos clientes mudam?",
+        type: "single",
+        options: [
+            { text: "Criar um Agile Release Train para focar no valor", isCorrect: false },
+            { text: "Criar uma estrutura de tomada de decisão confiável para capacitar os funcionários e garantir um fluxo rápido de valor", isCorrect: false },
+            { text: "Aplicar cadência e sincronização de desenvolvimento para operar de forma eficaz e gerenciar incertezas", isCorrect: false },
+            { text: "Reorganizar a rede em torno do novo fluxo de valor", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quando novas abordagens devem ser ancoradas na cultura de uma organização?",
+        type: "single",
+        options: [
+            { text: "A cultura não deve ser alterada porque o SAFe respeita a cultura atual", isCorrect: false },
+            { text: "A mudança de cultura precisa acontecer antes que a implementação do SAFe possa começar", isCorrect: false },
+            { text: "A mudança de cultura vem por último como resultado da mudança de hábitos de trabalho", isCorrect: true },
+            { text: "A mudança de cultura ocorre logo após a criação de um senso de urgência na organização", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é uma saída da formulação da estratégia empresarial?",
+        type: "single",
+        options: [
+            { text: "Orçamentos de Portfólio", isCorrect: true },
+            { text: "Governança de Portfólio", isCorrect: false },
+            { text: "Visão de Portfólio", isCorrect: false },
+            { text: "Canvas de Portfólio", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é o maior benefício da tomada de decisão descentralizada?",
+        type: "single",
+        options: [
+            { text: "Garantir que as decisões estratégicas não sejam tomadas no vácuo", isCorrect: false },
+            { text: "Entregar valor no menor lead time sustentável", isCorrect: true },
+            { text: "Criar melhor visualização", isCorrect: false },
+            { text: "Eliminar a responsabilidade dos líderes", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quando uma decisão deve ser descentralizada?",
+        type: "single",
+        options: [
+            { text: "Se for de longa duração", isCorrect: false },
+            { text: "Se exigir informações locais", isCorrect: true },
+            { text: "Se proporcionar grandes economias de escala", isCorrect: false },
+            { text: "Se for pouco frequente", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são os dois tipos de decisões que devem permanecer centralizadas, mesmo em um ambiente descentralizado de tomada de decisão? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Decisões que são tomadas com frequência", isCorrect: false },
+            { text: "Decisões que vêm com um alto custo de atraso", isCorrect: false },
+            { text: "Decisões que exigem informações locais", isCorrect: false },
+            { text: "Decisões que proporcionam grandes e amplos benefícios econômicos", isCorrect: true },
+            { text: "Decisões que provavelmente não mudarão no curto prazo", isCorrect: true }
+        ]
+    },
+    {
+        question: "Como a tomada de decisão descentralizada ajuda?",
+        type: "single",
+        options: [
+            { text: "Limitando o WIP", isCorrect: false },
+            { text: "Reduzindo riscos", isCorrect: false },
+            { text: "Obtendo melhor valor econômico", isCorrect: true },
+            { text: "Reduzindo defeitos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é o bloco de construção básico ao organizar em torno do valor?",
+        type: "single",
+        options: [
+            { text: "Times Ágeis", isCorrect: true },
+            { text: "Hierarquias", isCorrect: false },
+            { text: "Indivíduos", isCorrect: false },
+            { text: "Trens de Liberação Ágil", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais duas práticas de qualidade se aplicam aos times ágeis? (Escolha dois)",
+        type: "multiple",
+        options: [
+            { text: "Fornecendo pista de arquitetura", isCorrect: false },
+            { text: "Revisão e emparelhamento por pares", isCorrect: true },
+            { text: "Tomada de decisão descentralizada", isCorrect: false },
+            { text: "Testando requisitos não funcionais", isCorrect: false },
+            { text: "Estabelecendo fluxo", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as duas maneiras de descrever uma equipe ágil multifuncional? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Eles são otimizados para comunicação e entrega de valor", isCorrect: true },
+            { text: "Eles entregam valor a cada seis semanas", isCorrect: false },
+            { text: "Eles são compostos por membros, cada um dos quais pode definir, desenvolver, testar e implantar o sistema", isCorrect: false },
+            { text: "Eles podem definir, construir e testar um incremento de valor", isCorrect: true },
+            { text: "Eles liberam produtos do cliente para produção continuamente", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem tem autoridade de conteúdo para tomar decisões no nível da história de usuário durante o planejamento do incremento do programa (PI)?",
+        type: "single",
+        options: [
+            { text: "Scrum Masters", isCorrect: false },
+            { text: "Agile Team", isCorrect: false },
+            { text: "Product Owner", isCorrect: true },
+            { text: "Release Train Engineer", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que o Product Owner faz como parte do trabalho de preparação para o planejamento da iteração?",
+        type: "single",
+        options: [
+            { text: "Eles colaboram com sua equipe para detalhar histórias com critérios de aceitação e testes de aceitação", isCorrect: false },
+            { text: "Eles revisam e priorizam o backlog", isCorrect: true },
+            { text: "Eles elaboram backlogs em histórias de usuários para implementação.", isCorrect: false },
+            { text: "Eles constroem, editam e mantêm a lista de pendências da equipe.", isCorrect: false }
+
+             
+        ]
+    },
+    {
+        question: "O que é encontrado em uma placa de programa?",
+        type: "single",
+        options: [
+            { text: "Recursos", isCorrect: true },
+            { text: "Histórias de usuários", isCorrect: false },
+            { text: "Tarefas", isCorrect: false },
+            { text: "Épicos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são os três itens encontrados em um quadro de programas? (Escolha três.)",
+        type: "multiple",
+        options: [
+            { text: "Dependências significativas", isCorrect: true },
+            { text: "Marcos", isCorrect: true },
+            { text: "Itens de backlog", isCorrect: false },
+            { text: "Recursos (features)", isCorrect: true },
+            { text: "Histórias de usuários", isCorrect: false }
+        ]
+    },
+    {
+        question: "A placa do programa mostra quais dois itens? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Épicos", isCorrect: false },
+            { text: "Capacidade e Carga", isCorrect: false },
+            { text: "Características (Features)", isCorrect: true },
+            { text: "Dependências significativas", isCorrect: true },
+            { text: "Riscos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são os dois problemas que podem ser entendidos a partir do Program Board? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Eventos para PI futuro", isCorrect: false },
+            { text: "Muitas dependências levando a um único marco do programa", isCorrect: true },
+            { text: "Muito trabalho em processo em uma iteração", isCorrect: false },
+            { text: "Muitos recursos são colocados na pista de natação de uma equipe sem strings", isCorrect: false },
+            { text: "Uma dependência significativa levando a um recurso", isCorrect: true }
+        ]
+    },
+    {
+        question: "Ao olhar para um Program Board, o que significa quando um recurso é colocado na raia de uma equipe sem cordas?",
+        type: "single",
+        options: [
+            { text: "Que o recurso pode ser concluído independentemente das outras equipes", isCorrect: true },
+            { text: "Que todos os riscos foram ROAMed", isCorrect: false },
+            { text: "Que a equipe tem pouca confiança de que isso acontecerá", isCorrect: false },
+            { text: "Que o recurso deve ser concluído antes de qualquer outro recurso", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que é uma reunião de sincronização do Agile Release Train?",
+        type: "single",
+        options: [
+            { text: "Demonstração da solução", isCorrect: false },
+            { text: "Scrum de scrums", isCorrect: true },
+            { text: "Retrospectiva da iteração", isCorrect: false },
+            { text: "Revisão da iteração", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são as duas reuniões do Agile Release Train Sync? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Sincronização do Dono do Produto (PO Sync)", isCorrect: true },
+            { text: "Demonstração do Sistema", isCorrect: false },
+            { text: "Demonstração da Solução", isCorrect: false },
+            { text: "Scrum de Scrums (Coach Sync)", isCorrect: true },
+            { text: "Inspecionar e Adaptar", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira sobre eventos SAFe?",
+        type: "single",
+        options: [
+            { text: "O stand-up diário é um evento ART que requer o scrum de scrums e envolvimento de sincronização do Proprietário do Programa no sistema de malha fechada", isCorrect: false },
+            { text: "O Inspecionar e Adaptar é o único evento ART necessário para criar um sistema de malha fechada", isCorrect: false },
+            { text: "Eventos de equipe são executados internamente aos eventos ART e os eventos ART criam um sistema de circuito fechado", isCorrect: true },
+            { text: "Os eventos ART são executados dentro dos eventos de equipe e os eventos de equipe criam um sistema de circuito fechado", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem facilita a reunião do PO Sync?",
+        type: "single",
+        options: [
+            { text: "Release Train Engineer", isCorrect: true },
+            { text: "Product Owner", isCorrect: false },
+            { text: "Business Owner", isCorrect: false },
+            { text: "Scrum Master", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem atribui valor comercial (BV) aos Objetivos PI da equipe?",
+        type: "single",
+        options: [
+            { text: "Release Train Engineer", isCorrect: false },
+            { text: "Product Owner", isCorrect: false },
+            { text: "Business Owner", isCorrect: true },
+            { text: "Scrum Master", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem decide a pontuação do Team PI Objective Business Value após a negociação?",
+        type: "single",
+        options: [
+            { text: "Gerente de Produto", isCorrect: false },
+            { text: "A Equipe Scrum", isCorrect: false },
+            { text: "A Equipe Ágil", isCorrect: false },
+            { text: "Proprietário do Negócio", isCorrect: true }
+        ]
+    },
+    {
+        question: "Por que os proprietários de negócios atribuem valor comercial aos objetivos do PI da equipe?",
+        type: "single",
+        options: [
+            { text: "Para determinar o valor mais alto usando o WSJF", isCorrect: false },
+            { text: "Para garantir que as equipes não trabalhem em Enablers arquiteturais", isCorrect: false },
+            { text: "Para fornecer orientação sobre o valor comercial dos objetivos da equipe", isCorrect: true },
+            { text: "Para substituir as decisões tomadas na priorização do WSJF", isCorrect: false }
+        ]
+    },
+    {
+        question: "Que tipo de equipe está organizada para auxiliar outras equipes com recursos especializados e ajudá-las a se tornarem mais proficientes em novas tecnologias?",
+        type: "single",
+        options: [
+            { text: "Equipe alinhada ao fluxo", isCorrect: false },
+            { text: "Equipe de plataforma", isCorrect: false },
+            { text: "Equipe de subsistema complicada", isCorrect: false },
+            { text: "Equipe de habilitação", isCorrect: true }
+        ]
+    },
+    {
+        question: "Por que as equipes têm uma Retrospectiva de Iteração?",
+        type: "single",
+        options: [
+            { text: "Iterar nas histórias", isCorrect: false },
+            { text: "Identificar critérios de aceitação", isCorrect: false },
+            { text: "Ajustar e identificar maneiras de melhorar", isCorrect: true },
+            { text: "Avaliar métricas", isCorrect: false }
+        ]
+    },
+    {
+        question: "O Agile Release Train usa qual tipo de equipe para realizar o trabalho?",
+        type: "single",
+        options: [
+            { text: "Equipes de solução", isCorrect: false },
+            { text: "Equipes de processo de revisão em fases", isCorrect: false },
+            { text: "Equipes de gerenciamento", isCorrect: false },
+            { text: "Equipes multifuncionais", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual função serve como líder servidor para o Agile Release Train?",
+        type: "single",
+        options: [
+            { text: "Business Owner", isCorrect: false },
+            { text: "Release Train Engineer", isCorrect: true },
+            { text: "Agile Coach", isCorrect: false },
+            { text: "Scrum Master", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é o foco da reunião Daily Stand-up?",
+        type: "single",
+        options: [
+            { text: "Objetivos de PI versus resultados", isCorrect: false },
+            { text: "Metas de iteração versus o que foi feito", isCorrect: true },
+            { text: "Metas do Scrum Master versus metas da Equipe de Desenvolvimento", isCorrect: false },
+            { text: "Objetivos do plano versus objetivos do Proprietário do Programa", isCorrect: false }
+        ]
+    },
+    {
+        question: "Você precisa de alguém em sua organização que seja a autoridade no backlog do Programa (ART) e seja a voz interna do Cliente. Qual função no nível do Programa SAFe você deve preencher?",
+        type: "single",
+        options: [
+            { text: "Representante de Suporte ao Cliente", isCorrect: false },
+            { text: "Product Owner", isCorrect: false },
+            { text: "Release Train Engineer", isCorrect: false },
+            { text: "Product Management", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que faz parte do papel do Gerenciamento de Produto?",
+        type: "single",
+        options: [
+            { text: "Priorizar o Backlog do Programa", isCorrect: true },
+            { text: "Priorizar os Enablers", isCorrect: false },
+            { text: "Facilitar as sessões de refinamento do backlog", isCorrect: false },
+            { text: "Atribuir valor de negócios aos Recursos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem é responsável pelo Backlog da Solução?",
+        type: "single",
+        options: [
+            { text: "Product Owners", isCorrect: false },
+            { text: "Solution Train Engineer", isCorrect: false },
+            { text: "Product Management", isCorrect: false },
+            { text: "Solution Management", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual função aceita Capacidades como completas?",
+        type: "single",
+        options: [
+            { text: "Gerenciamento de Soluções", isCorrect: true },
+            { text: "Gerenciamento de Produtos", isCorrect: false },
+            { text: "Arquiteto/Engenheiro de Soluções", isCorrect: false },
+            { text: "Engenheiro de Treinamento de Soluções", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual função no nível do portfólio assume a responsabilidade de coordenar os Épicos do portfólio por meio do sistema Portfolio Kanban?",
+        type: "single",
+        options: [
+            { text: "Epic Owners", isCorrect: true },
+            { text: "Enabler Epic", isCorrect: false },
+            { text: "Lean Portfolio Management", isCorrect: false },
+            { text: "Enterprise Architect", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quem é responsável pela gestão do Portfólio Kanban?",
+        type: "single",
+        options: [
+            { text: "Release Train Engineer", isCorrect: false },
+            { text: "Solution Management", isCorrect: false },
+            { text: "Product Management", isCorrect: false },
+            { text: "Lean Portfolio Management", isCorrect: true }
+        ]
+    },
+    {
+        question: "A etapa de análise do sistema Portfolio Kanban tem um novo Epic com um business case Lean concluído. O que acontece na próxima etapa para o Epic?",
+        type: "single",
+        options: [
+            { text: "Será movido para o Portfolio Backlog se receber uma decisão 'go' do Lean Portfolio Management", isCorrect: true },
+            { text: "Será implementado se tiver a classificação mais alta do trabalho mais curto ponderado primeiro (WSJF)", isCorrect: false },
+            { text: "Permanecerá na etapa de análise até que um ou mais Agile Release Trains tenham a capacidade de implementá-lo", isCorrect: false },
+            { text: "Será implementado assim que o Business Case Lean for aprovado pelo Epic Owner", isCorrect: false }
+        ]
+    },
+    {
+        question: "Você precisa de alguém em sua equipe que trabalhe em fluxos de valor e programas para ajudar a fornecer a direção técnica estratégica que pode otimizar os resultados do portfólio. Qual nível de portfólio você deve preencher?",
+        type: "single",
+        options: [
+            { text: "Scrum Master", isCorrect: false },
+            { text: "Lean Portfolio Management", isCorrect: false },
+            { text: "Epic Owners", isCorrect: false },
+            { text: "Enterprise Architect", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual destaque no nível do Portfólio tem o papel de descrever o propósito do Portfólio Scaled Agile Framework?",
+        type: "single",
+        options: [
+            { text: "Portfolio Retrospective", isCorrect: false },
+            { text: "Portfolio Value Stream", isCorrect: false },
+            { text: "Portfolio Canvas", isCorrect: true },
+            { text: "Portfolio Kanban", isCorrect: false }
+        ]
+    },
+    ////////////////////////////////////////////////////////////////////////////
+    // Início Simulado 2
+    {
+        question: "O que é usado para capturar o estado atual do Portfólio e uma cartilha para o estado futuro?",
+        type: "single",
+        options: [
+            { text: "Portfolio Canvas", isCorrect: true },
+            { text: "Portfolio Backlog", isCorrect: false },
+            { text: "Portfolio Kanban", isCorrect: false },
+            { text: "Portfolio Vision", isCorrect: false }
+        ]
+    },
+    {
+        question: "Como o fluxo do Portfólio Epics é gerenciado?",
+        type: "single",
+        options: [
+            { text: "No Kanban do Programa", isCorrect: false },
+            { text: "No Backlog do Portfólio", isCorrect: false },
+            { text: "No Backlog do Programa", isCorrect: false },
+            { text: "No Kanban do Portfólio", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual opção é um destaque no nível do Portfólio do Scaled Agile Framework?",
+        type: "single",
+        options: [
+            { text: "Orçamentos Enxutos", isCorrect: true },
+            { text: "Incremento do Programa", isCorrect: false },
+            { text: "Estrutura Econômica", isCorrect: false },
+            { text: "Intenção da Solução", isCorrect: false }
+        ]
+    },
+    {
+        question: "Ao usar o Scaled Agile Framework, qual é o benefício de adicionar sincronização à cadência de várias equipes?",
+        type: "single",
+        options: [
+            { text: "A variabilidade de desenvolvimento em todo o sistema é reduzida a zero", isCorrect: false },
+            { text: "Demonstrações em todo o sistema são possíveis, pois todas as demonstrações de equipe acontecem ao mesmo tempo", isCorrect: true },
+            { text: "Cada equipe trabalhará mais rápido, pois todos começam ao mesmo tempo", isCorrect: false },
+            { text: "O trabalho em andamento geral é reduzido", isCorrect: false }
+        ]
+    },
+    {
+        question: "Você está gerenciando uma equipe que incorporou o SAFe. Demora cerca de 5 dias para que cada uma das solicitações de seus clientes internos de um recurso seja respondida pelo líder de desenvolvimento e, em média, leva mais 10 dias para a equipe fazer a correção ou transferência de desenvolvimento para o teste. Qual é a dica SAFe imediata que você implementaria para garantir que o valor seja entregue mais cedo?",
+        type: "single",
+        options: [
+            { text: "Remova, ou minimize, o tempo de implementação", isCorrect: false },
+            { text: "Remova o líder de desenvolvimento e eduque uma equipe auto-organizada", isCorrect: false },
+            { text: "Faça com que os desenvolvedores realizem o teste de seu próprio trabalho e removam completamente a equipe de teste", isCorrect: false },
+            { text: "Remova, ou minimize, o tempo de espera da solicitação e o tempo de entrega de testes", isCorrect: true }
+        ]
+    },
+    {
+        question: "Você deseja armazenar, versionar e indexar artefatos de software binários. Que tipo de ferramenta você usa?",
+        type: "single",
+        options: [
+            { text: "Repositório de Código", isCorrect: false },
+            { text: "Linter", isCorrect: false },
+            { text: "Repositório de Gerenciamento de Artefatos", isCorrect: true },
+            { text: "Gerador de Código", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é uma explicação do pipeline de entrega contínua no nível do Scaled Agile Framework Programme?",
+        type: "single",
+        options: [
+            { text: "Abrange tudo o que é necessário para ir de artefatos de software não testados a artefatos de software testados", isCorrect: false },
+            { text: "Engloba tudo o que é necessário para fornecer um fluxo contínuo de valor aos clientes", isCorrect: true },
+            { text: "Abrange tudo o que é necessário para implantar artefatos de software em funcionamento de um ambiente de teste para um ambiente de produção", isCorrect: false },
+            { text: "Abrange tudo o que é necessário para ir do código-fonte aos artefatos de software em funcionamento", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que o pipeline de entrega contínua permite?",
+        type: "single",
+        options: [
+            { text: "Aprendizado", isCorrect: true },
+            { text: "Refatoração contínua", isCorrect: false },
+            { text: "Aumento da dívida técnica", isCorrect: false },
+            { text: "Entrega de grandes lotes", isCorrect: false }
+        ]
+    },
+    {
+        question: "Por que é importante dissociar a implementação da versão?",
+        type: "single",
+        options: [
+            { text: "Para eliminar a necessidade de responder rapidamente a problemas de produção", isCorrect: false },
+            { text: "Para permitir a inspeção da maturidade do Agile com base em diferentes tempos de ciclo", isCorrect: false },
+            { text: "Para tornar a implantação de ativos uma decisão de negócios", isCorrect: false },
+            { text: "Para permitir a liberação de funcionalidades sob demanda para atender às necessidades de negócios", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que os Serviços Compartilhados representam?",
+        type: "single",
+        options: [
+            { text: "Uma visão futura da solução a ser desenvolvida, refletindo as necessidades dos clientes e stakeholders", isCorrect: false },
+            { text: "Uma comunidade de prática é um grupo informal de membros da equipe e outros especialistas.", isCorrect: false },
+            { text: "Uma equipe que presta assistência na construção e utilização do pipeline de entrega contínua.", isCorrect: false },
+            { text: "As funções, pessoas e serviços especializados necessários para o sucesso de um Agile Release Train ou Solution Train", isCorrect: true }
+        ]
+    },
+    {
+        question: "Você está trabalhando em um projeto de software complexo de vários componentes e gostaria de controlar a variabilidade do processo de desenvolvimento. Que mecanismo SAFe você pode empregar?",
+        type: "single",
+        options: [
+            { text: "Pontos de integração", isCorrect: true },
+            { text: "Reuniões stand-up", isCorrect: false },
+            { text: "Planejamento inicial detalhado", isCorrect: false },
+            { text: "Tomada de decisão descentralizada", isCorrect: false }
+        ]
+    },
+    {
+        question: "Você está tentando coordenar a pista arquitetônica por meio de diferentes camadas, deseja aumentar a velocidade em seu portfólio. O que você poderia fazer para conseguir isso?",
+        type: "single",
+        options: [
+            { text: "Siga as práticas de qualidade incorporadas", isCorrect: false },
+            { text: "Implemente facilitadores", isCorrect: true },
+            { text: "Implemente épicos", isCorrect: false },
+            { text: "Siga as diretrizes do SGQ", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a principal vantagem de usar a avaliação objetiva de sistemas de trabalho como marcos no Scaled Agile Framework?",
+        type: "single",
+        options: [
+            { text: "Decisões centralizadas sobre design e requisitos", isCorrect: false },
+            { text: "Maior desempenho do sistema", isCorrect: false },
+            { text: "Taxa de erros da solução significativamente menor", isCorrect: false },
+            { text: "Mitigação de riscos", isCorrect: true }
+        ]
+    },
+    {
+        question: "Ao trabalhar com o backlog da equipe, qual é a função específica do Product Owner?",
+        type: "single",
+        options: [
+            { text: "Ajudando a superfície de p roblemas com o plano atual.", isCorrect: false },
+            { text: "Investindo todo o seu tempo no desenvolvimento de testes de aceitação específicos.", isCorrect: false },
+            { text: "Manter todos os recursos planejados para serem entregues por um ART.", isCorrect: false },
+            { text: "Proteger a equipe do problema de múltiplas partes interessadas.", isCorrect: true }
+        ]
+    },
+    {
+        question: "Você é um defensor do Scaled Agile Framework em sua organização e está tentando convencer-la de que ela precisa de mudanças. Que tipo de visão você poderia adotar para ajudar a atingir seu objetivo?",
+        type: "single",
+        options: [
+            { text: "Uma visão imediata", isCorrect: false },
+            { text: "Uma visão econômica", isCorrect: true },
+            { text: "Uma visão pragmática", isCorrect: false },
+            { text: "Uma visão de negócios", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um benefício de desbloquear a motivação intrínseca dos trabalhadores do conhecimento?",
+        type: "single",
+        options: [
+            { text: "Centralizar a tomada de decisões", isCorrect: false },
+            { text: "Fornecer autonomia com propósito, missão e restrições mínimas", isCorrect: true },
+            { text: "Reduzir os limites de trabalho em processo (WIP)", isCorrect: false },
+            { text: "Esforçar-se para alcançar um estado de fluxo contínuo", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que mais o princípio SAFe, desbloqueia a motivação intrínseca dos trabalhadores do conhecimento, exige além de propósito e missão?",
+        type: "single",
+        options: [
+            { text: "Inovação", isCorrect: false },
+            { text: "Transparência", isCorrect: false },
+            { text: "Limitações mínimas possíveis", isCorrect: true },
+            { text: "Remuneração baseada em incentivos", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que pode ser usado como modelo para colocar o SAFe em prática dentro de uma organização?",
+        type: "single",
+        options: [
+            { text: "Princípios SAFe", isCorrect: false },
+            { text: "SAFe Core Values", isCorrect: false },
+            { text: "Roteiro de Implementação SAFe", isCorrect: true },
+            { text: "House of Lean", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual caminho um LACE usaria no ciclo de vida de crescimento Agile?",
+        type: "single",
+        options: [
+            { text: "As 7 Competências Essenciais da Agilidade de Negócios", isCorrect: false },
+            { text: "O Roteiro de Implementação do SAFe", isCorrect: true },
+            { text: "Roteiros de Maturidade Ágil", isCorrect: false },
+            { text: "O Scaled Agile Framework", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que esta declaração define: 'Uma série de atividades que provaram ser eficazes na implementação bem-sucedida do SAFe'?",
+        type: "single",
+        options: [
+            { text: "Princípios SAFe", isCorrect: false },
+            { text: "SAFe Core Values", isCorrect: false },
+            { text: "Roteiro de Implementação SAFe", isCorrect: true },
+            { text: "House of Lean", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quando um roteiro se torna uma fila?",
+        type: "single",
+        options: [
+            { text: "Quando é maior que um Incremento de Programa", isCorrect: false },
+            { text: "Quando está totalmente comprometido", isCorrect: true },
+            { text: "Quando não inclui compromissos", isCorrect: false },
+            { text: "Quando contém Recursos e não Épicos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a primeira etapa do roteiro de implementação do SAFe?",
+        type: "single",
+        options: [
+            { text: "Alcance o ponto de inflexão", isCorrect: true },
+            { text: "Crie o Plano de Implementação", isCorrect: false },
+            { text: "Prepare-se para o Lançamento do ART", isCorrect: false },
+            { text: "Treine a Execução do ART", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são as três primeiras etapas do roteiro de implementação do SAFe?",
+        type: "multiple",
+        options: [
+            { text: "Treinar Agentes de Mudança Lean-Agile", isCorrect: true },
+            { text: "Treinar Executivos, Gerentes e Líderes", isCorrect: true },
+            { text: "Prepare-se para o lançamento do ART", isCorrect: false },
+            { text: "Alcançando o ponto de inflexão", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as três últimas etapas do roteiro de implementação do SAFe?",
+        type: "single",
+        options: [
+            { text: "Treinar agentes de mudança Lean-Agile, estender para o portfólio, acelerar", isCorrect: false },
+            { text: "Lançar trens, treinar a execução do Agile Release Train, treinar executivos e gerentes", isCorrect: false },
+            { text: "Treinar agentes de mudança Lean-Agile, identificar fluxos de valor e Agile Release Trains, estender para o portfólio", isCorrect: false },
+            { text: "Lançar mais Agile Release Trains e Value Streams, estender ao portfólio, acelerar", isCorrect: true }
+        ]
+    },
+    {
+        question: "Uma equipe acaba de adotar o roteiro de implementação do SAFe e está em processo de treinamento de executivos, gerentes e líderes. Qual é o próximo passo deles?",
+        type: "single",
+        options: [
+            { text: "Identificar o fluxo de valor e treinar o Agile Release", isCorrect: true },
+            { text: "Criar o Plano de Implementação", isCorrect: false },
+            { text: "Preparar para o lançamento do ART", isCorrect: false },
+            { text: "Treinar a Execução do ART", isCorrect: false }
+        ]
+    },
+    {
+        question: "Uma empresa acaba de adotar o roteiro de implementação do SAFe e está em processo de treinamento de executivos, gerentes e líderes. Qual é o próximo passo deles?",
+        type: "single",
+        options: [
+            { text: "Treinar os líderes em Portfólio e Gerenciamento de Produto para resolver problemas antes de corrigir sintomas", isCorrect: false },
+            { text: "Realizar mapeamento de processos no estado atual", isCorrect: false },
+            { text: "Treinar agentes de mudança Lean-Agile para impulsionar o roteiro e construir consenso", isCorrect: false },
+            { text: "Identificar fluxos de valor e Agile Release Trains para iniciar o alinhamento de a organização", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira sobre um fluxo de valor que usa DevOps com sucesso?",
+        type: "single",
+        options: [
+            { text: "Possui pilha de tecnologia sem código legado", isCorrect: false },
+            { text: "Possui medições objetivas com automação", isCorrect: false },
+            { text: "Possui processo de aprendizado em loop fechado", isCorrect: true },
+            { text: "Possui menor limiar de defeitos aprovados para produção", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é um princípio do Manifesto Ágil?",
+        type: "single",
+        options: [
+            { text: "Meça tudo", isCorrect: false },
+            { text: "Simplicidade - a arte de maximizar a quantidade de trabalho não feito - é essencial", isCorrect: true },
+            { text: "Visualize e limite o WIP, reduza o tamanho dos lotes e gerencie o comprimento das filas", isCorrect: false },
+            { text: "Respeito pelas pessoas e pela cultura", isCorrect: false }
+        ]
+    },
+    {
+        question: "Ao basear as decisões na economia, como são usados o lead time, o custo do produto, o valor e as despesas de desenvolvimento?",
+        type: "single",
+        options: [
+            { text: "Limitar o trabalho em processo (WIP) através do sistema", isCorrect: false },
+            { text: "Identificar diferentes parâmetros da estrutura econômica", isCorrect: true },
+            { text: "Levar em conta os custos irrecuperáveis", isCorrect: false },
+            { text: "Recuperar o dinheiro já gasto", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que é considerado um antipadrão ao atribuir valores de negócios aos objetivos do PI da equipe?",
+        type: "single",
+        options: [
+            { text: "Proprietários de negócios atribuindo o valor do negócio", isCorrect: false },
+            { text: "Atribuindo valores de negócios a objetivos não comprometidos", isCorrect: false },
+            { text: "Todos os PI Objectives recebem um valor de 10", isCorrect: true },
+            { text: "Donos de negócios atribuem valores altos a importantes trabalhos do Enabler", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são as três chaves primárias para implementar o fluxo? (Escolha três.)",
+        type: "multiple",
+        options: [
+            { text: "Gerenciar o comprimento das filas", isCorrect: true },
+            { text: "Troca frequente de contexto", isCorrect: false },
+            { text: "Aumentar a capacidade", isCorrect: false },
+            { text: "Resolver os problemas sistêmicos", isCorrect: false },
+            { text: "Reduzir os tamanhos dos lotes de trabalho", isCorrect: true },
+            { text: "Visualizar e limitar o trabalho em processo (WIP)", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que a equipe deve focar para otimizar o fluxo?",
+        type: "single",
+        options: [
+            { text: "Custo", isCorrect: false },
+            { text: "Solicitações", isCorrect: false },
+            { text: "Atrasos", isCorrect: true },
+            { text: "Resultados", isCorrect: false }
+        ]
+    },
+    {
+        question: "Otimizar o fluxo significa identificar o quê?",
+        type: "single",
+        options: [
+            { text: "Indicadores-chave de desempenho", isCorrect: false },
+            { text: "Atrasos", isCorrect: true },
+            { text: "Problemas de previsibilidade do trem", isCorrect: false },
+            { text: "Atividades que carecem de inovação", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é o último passo na abordagem de Kotter para gerenciamento de mudanças?",
+        type: "single",
+        options: [
+            { text: "Ancorar novas abordagens na cultura", isCorrect: true },
+            { text: "Sustentar e melhorar", isCorrect: false },
+            { text: "Consolidar ganhos e produzir mais vitórias", isCorrect: false },
+            { text: "Gerar vitórias de curto prazo", isCorrect: false }
+        ]
+    },
+    {
+        question: "O Product Management tem autoridade de conteúdo sobre o Program Backlog. Sobre o que os Product Owners têm autoridade de conteúdo?",
+        type: "single",
+        options: [
+            { text: "Fluxos de Valor", isCorrect: false },
+            { text: "Backlog do Portfólio", isCorrect: false },
+            { text: "Visão do Portfólio", isCorrect: false },
+            { text: "Backlog da Equipe", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é o impacto do Customer Centricity?",
+        type: "single",
+        options: [
+            { text: "Interpretar os ritmos do mercado", isCorrect: false },
+            { text: "Entender as necessidades do Cliente", isCorrect: true },
+            { text: "Interpretar os ritmos do mercado", isCorrect: false },
+            { text: "Desenhar soluções customizadas para o cliente", isCorrect: false }
+        ]
+    },
+    {
+        question: "Como o SAFe descreve o foco no cliente?",
+        type: "single",
+        options: [
+            { text: "Como uma mentalidade focada nos comportamentos do Cliente que produzem as melhores inovações", isCorrect: true },
+            { text: "Como um conjunto de práticas empregadas para fazer produtos focados no Cliente", isCorrect: false },
+            { text: "Como estratégia para atender às necessidades de um mercado de Clientes em constante mudança", isCorrect: false },
+            { text: "Como forma de trabalhar para incluir o Cliente nos processos diários de trabalho e planejamento", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um problema ao se organizar em torno de funções hierárquicas?",
+        type: "single",
+        options: [
+            { text: "Move a decisão para onde está a informação", isCorrect: false },
+            { text: "Reduz tensões políticas", isCorrect: false },
+            { text: "Cria times de negócios ágeis", isCorrect: false },
+            { text: "Não é como o valor flui", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que é um produto mínimo viável?",
+        type: "single",
+        options: [
+            { text: "Um produto mínimo que pode ser construído para dominar o mercado", isCorrect: false },
+            { text: "Uma história mínima que uma equipe pode entregar em uma iteração", isCorrect: false },
+            { text: "Um protótipo que pode ser usado para explorar as necessidades do usuário", isCorrect: false },
+            { text: "Uma versão mínima de um novo produto usada para testar uma hipótese", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que é Agilidade Empresarial?",
+        type: "single",
+        options: [
+            { text: "Aplicar princípios e práticas Lean-Agile à especificação, desenvolvimento, implantação, operação e evolução dos maiores e mais sofisticados sistemas do mundo", isCorrect: false },
+            { text: "Como as pessoas com pensamento Lean e as equipes ágeis otimizam seus processos de negócios, evoluem a estratégia com novos compromissos claros e decisivos e adaptam rapidamente a organização conforme necessário para capitalizar novas oportunidades", isCorrect: false },
+            { text: "Uma abordagem centrada no cliente para definir, construir e liberar um fluxo contínuo de produtos e serviços valiosos para clientes e usuários", isCorrect: false },
+            { text: "A capacidade de competir e prosperar na era digital, respondendo rapidamente às mudanças do mercado e oportunidades emergentes com soluções de negócios inovadoras", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual afirmação caracteriza com precisão os Temas Estratégicos?",
+        type: "single",
+        options: [
+            { text: "São objetivos de negócios que conectam o portfólio SAFe à estratégia de negócios da Empresa", isCorrect: true },
+            { text: "São um resumo de alto nível da Visão de cada programa e são atualizados após cada PI", isCorrect: false },
+            { text: "São requisitos que abrangem os Agile Release Trains, mas devem se encaixar em um único Program Increment", isCorrect: false },
+            { text: "São grandes iniciativas generadas no Portfólio Kanban que exigem priorização ponderada do trabalho mais curto e um business case leve", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a base da SAFe House of Lean?",
+        type: "single",
+        options: [
+            { text: "Liderança", isCorrect: true },
+            { text: "Melhoria implacável", isCorrect: false },
+            { text: "Valor", isCorrect: false },
+            { text: "Fluxo", isCorrect: false }
+        ]
+    },
+    {
+        question: "A Casa do Lean é uma metáfora clássica que descreve a mentalidade essencial para o pensamento Lean. Qual dos quatro pilares defende uma mentalidade \"Vá Ver\"?",
+        type: "single",
+        options: [
+            { text: "Melhoria implacável", isCorrect: false },
+            { text: "Inovação", isCorrect: true },
+            { text: "Fluxo", isCorrect: false },
+            { text: "Respeito às pessoas e à cultura", isCorrect: false }
+        ]
+    },
+    {
+        question: "A Casa do Lean é uma metáfora clássica que descreve a mentalidade essencial para o pensamento Lean. Qual dos quatro pilares defende uma mentalidade \"Sala do escritório\"?",
+        type: "single",
+        options: [
+            { text: "Melhoria implacável", isCorrect: false },
+            { text: "Inovação", isCorrect: true },
+            { text: "Fluxo", isCorrect: false },
+            { text: "Respeito às pessoas e à cultura", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual pilar da House of Lean foca no Cliente sendo o consumidor do trabalho?",
+        type: "single",
+        options: [
+            { text: "Inovação", isCorrect: false },
+            { text: "Valor", isCorrect: true },
+            { text: "Fluxo", isCorrect: false },
+            { text: "Respeito às pessoas e à cultura", isCorrect: false }
+        ]
+    },
+    ////////////////////////////////////////////////////////////////////////////
+    // Início Simulado 3
+    {
+        question: "Qual Pilar da Casa do Lean incentiva o Aprendizado e o Crescimento?",
+        type: "single",
+        options: [
+            { text: "Inovação", isCorrect: false },
+            { text: "Fluxo", isCorrect: false },
+            { text: "Melhoria Implacável", isCorrect: true },
+            { text: "Respeito às Pessoas e à Cultura", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é o objetivo da House of Lean?",
+        type: "single",
+        options: [
+            { text: "Liderança Lean-Agile como cultura organizacional", isCorrect: false },
+            { text: "Valor com o menor lead time sustentável", isCorrect: true },
+            { text: "Alinhando princípios e valores a uma causa fixa", isCorrect: false },
+            { text: "Construindo um Grow Lean Mindset em oposição ao Fixed Mindset", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a melhor medida de progresso para o desenvolvimento de sistemas complexos?",
+        type: "single",
+        options: [
+            { text: "Inspecionar e Adaptar", isCorrect: false },
+            { text: "Demonstração do Sistema", isCorrect: true },
+            { text: "Backlog Priorizado", isCorrect: false },
+            { text: "Revisão de Iteração", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a principal razão para a demonstração do sistema?",
+        type: "single",
+        options: [
+            { text: "Para fornecer uma verificação de qualidade opcional", isCorrect: false },
+            { text: "Para permitir um feedback mais rápido pela integração entre as equipes", isCorrect: true },
+            { text: "Para cumprir o requisito de planejamento do SAFe PI", isCorrect: false },
+            { text: "Para dar ao proprietário do produto a oportunidade de fornecer feedback sobre o incremento da equipe", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira sobre a Iteração de Inovação e Planejamento (IP)?",
+        type: "single",
+        options: [
+            { text: "É usado anualmente quando a equipe precisa reorientar os processos de trabalho", isCorrect: false },
+            { text: "É usado como ponto de sincronização semanal entre os Scrum Masters", isCorrect: false },
+            { text: "Sem a Iteração IP, existe o risco de que a 'tirania do urgente' supere todas as atividades de inovação", isCorrect: true },
+            { text: "O Scrum Master pode decidir se a Iteração de IP é necessária", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a base das competências essenciais do SAFe?",
+        type: "single",
+        options: [
+            { text: "Liderança Lean-Agile", isCorrect: true },
+            { text: "Agilidade Organizacional", isCorrect: false },
+            { text: "Cultura de Aprendizagem Contínua", isCorrect: false },
+            { text: "Agilidade de Equipe e Técnica", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quantas dimensões tem a competência Agile Product Delivery?",
+        type: "single",
+        options: [
+            { text: "dois", isCorrect: false },
+            { text: "três", isCorrect: true },
+            { text: "quatro", isCorrect: false },
+            { text: "cinco", isCorrect: false }
+        ]
+    },
+    {
+        question: "Quais são as três dimensões da Liderança Lean-Agile? (Escolha três.)",
+        type: "multiple",
+        options: [
+            { text: "Mindset e princípios", isCorrect: true },
+            { text: "Inteligência emocional", isCorrect: false },
+            { text: "SAFe Core Values", isCorrect: false },
+            { text: "Liderar pelo exemplo", isCorrect: true },
+            { text: "Apoiar a mudança organizacional", isCorrect: false },
+            { text: "Liderar a mudança", isCorrect: true }
+        ]
+    },
+    {
+        question: "O primeiro Princípio Lean-Agile do SAFe inclui \"Entregar cedo e com frequência\" e o que mais?",
+        type: "single",
+        options: [
+            { text: "Descentralizar a tomada de decisões", isCorrect: false },
+            { text: "Aplicar cadência", isCorrect: false },
+            { text: "Aplicar pensamento sistêmico", isCorrect: false },
+            { text: "Entregar valor de forma incremental", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que é um Guardrail no gasto do Orçamento Lean?",
+        type: "single",
+        options: [
+            { text: "Marcos de aprendizado como medidas objetivas", isCorrect: false },
+            { text: "Limites de gastos para cada Agile Release Train", isCorrect: true },
+            { text: "Orçamento participativo", isCorrect: false },
+            { text: "Engajamento contínuo do proprietário do negócio", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um componente de um Guardrail no Lean Portfolio Management?",
+        type: "single",
+        options: [
+            { text: "Alocação de decisões centralizadas versus descentralizadas na Empresa", isCorrect: false },
+            { text: "Alocação de capacidade do Fluxo de Valor em comparação com o mapeamento de processos", isCorrect: true }, // ??????
+            { text: "Fóruns de orçamento participativo que levam a mudanças no orçamento do Fluxo de Valor", isCorrect: false },
+            { text: "Determinar se as necessidades de negócios atendem ao Limite do Portfólio", isCorrect: false }
+        ]
+    },
+    {
+        question: "Como o SAFe recomenda o uso de um segundo sistema operacional para agregar valor?",
+        type: "single",
+        options: [
+            { text: "Alcançando economias de escala", isCorrect: false },
+            { text: "Focando em clientes, produtos, inovação e crescimento", isCorrect: true },
+            { text: "Criando grandes departamentos e organizações matriciais para apoiar o rápido crescimento", isCorrect: false },
+            { text: "Organizar a Empresa em torno do fluxo de valor mantendo as hierarquias", isCorrect: false },
+            { text: "Construir uma pequena rede empresarial focada no Cliente em vez das hierarquias existentes", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que pode ser usado para fazer o script da mudança para o SAFe?",
+        type: "single",
+        options: [
+            { text: "O Roteiro de Implementação", isCorrect: true },
+            { text: "O Programa Kanban", isCorrect: false },
+            { text: "A Carta do Centro de Excelência Lean-Agile (LACE)", isCorrect: false },
+            { text: "O Portfólio Canvas", isCorrect: false }
+        ]
+    },
+    {
+        question: "No Programa Kanban algumas etapas têm limites de trabalho em processo (WIP). Por que isso é necessário?",
+        type: "single",
+        options: [
+            { text: "Para habilitar a multitarefa", isCorrect: false },
+            { text: "Para garantir que grandes filas não estejam sendo criadas", isCorrect: true },
+            { text: "Para ajudar na implementação contínua", isCorrect: false },
+            { text: "Para manter as metas de timebox", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual declaração é um valor do Manifesto Ágil?",
+        type: "single",
+        options: [
+            { text: "Responder às mudanças", isCorrect: true },
+            { text: "Respeito pelas pessoas e cultura", isCorrect: false },
+            { text: "Construir de forma incremental com ciclos de aprendizagem rápidos e integrados", isCorrect: false },
+            { text: "Limitar o trabalho em processo", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual declaração é um valor do Manifesto Ágil?",
+        type: "single",
+        options: [
+            { text: "Responder a um plano mais que responder a colaboração do cliente", isCorrect: false },
+            { text: "Responder a um plano mais que responder a mudanças", isCorrect: false },
+            { text: "Responder a mudanças mais que seguir um sistema", isCorrect: false },
+            { text: "Responder a mudanças mais que seguir um plano", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual declaração é um valor do Manifesto Ágil?",
+        type: "single",
+        options: [
+            { text: "Colaboração do cliente mais que negociação de contrato", isCorrect: true },
+            { text: "Colaboração do cliente mais que conversação interna contínua", isCorrect: false },
+            { text: "Colaboração do cliente em um ritmo constante e indefinido", isCorrect: false },
+            { text: "Colaboração do cliente mais que negociação de recursos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual declaração é um valor do Manifesto Ágil?",
+        type: "single",
+        options: [
+            { text: "Colaboração do cliente em um ritmo constante e indefinido", isCorrect: false },
+            { text: "Indivíduos e interações mais que negociação de contratos", isCorrect: false },
+            { text: "Colaboração do cliente mais que seguir um plano", isCorrect: false },
+            { text: "Indivíduos e interações mais que processos e ferramentas", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as duas afirmações verdadeiras sobre objetivos não comprometidos? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "O trabalho para entregar os objetivos não comprometidos não é planejado nas iterações durante o PI Planning", isCorrect: false },
+            { text: "Objetivos não comprometidos são coisas extras que a equipe pode fazer caso tenha tempo", isCorrect: false },
+            { text: "Objetivos não comprometidos não são incluídos no compromisso da equipe", isCorrect: true },
+            { text: "Objetivos não comprometidos não recebem um pontuação de valor de negócios planejada", isCorrect: false },
+            { text: "Objetivos não comprometidos ajudam a melhorar a previsibilidade", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que a administração deve fazer para uma transformação ágil bem-sucedida?",
+        type: "single",
+        options: [
+            { text: "Envie alguém para representar a gerência e, em seguida, delegue tarefas a esses indivíduos", isCorrect: false },
+            { text: "Troque os Scrum Masters na equipe a cada duas semanas", isCorrect: false },
+            { text: "Esforce-se para pensar na adoção como uma área que eles podem controlar", isCorrect: false },
+            { text: "Comprometa-se com a qualidade e seja o agente de mudança no sistema", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais das principais competências do Lean Enterprise ajudam a alinhar estratégia e execução?",
+        type: "single",
+        options: [
+            { text: "Business Solutions e Lean Systems Engineering", isCorrect: false },
+            { text: "Lean Portfolio Management", isCorrect: true },
+            { text: "DevOps e Release on Demand", isCorrect: false },
+            { text: "Equipe e Agilidade Técnica", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um exemplo de aplicação de sincronização baseada em cadência no SAFe?",
+        type: "single",
+        options: [
+            { text: "As equipes decidem sua própria duração de iteração", isCorrect: false },
+            { text: "As equipes alinham suas iterações ao mesmo cronograma para apoiar a comunicação, coordenação e integração do sistema", isCorrect: true },
+            { text: "As equipes permitem tamanhos de lote em vários intervalos", isCorrect: false },
+            { text: "As equipes se reúnem duas vezes a cada Incremento de Programa (PI) para planejar e agendar a capacidade", isCorrect: false }
+        ]
+    },
+    {
+        question: "O Design Thinking identifica pelo menos quatro novas maneiras de medir o sucesso. Quais são duas dessas maneiras? (Escolha duas.)",
+        type: "multiple",
+        options: [
+            { text: "Confiabilidade", isCorrect: false },
+            { text: "Escalabilidade", isCorrect: false },
+            { text: "Comercialização", isCorrect: false },
+            { text: "Sustentabilidade", isCorrect: true },
+            { text: "Desejabilidade", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é uma das ferramentas associadas ao Design Thinking?",
+        type: "single",
+        options: [
+            { text: "Decomposição de Recursos Divergentes", isCorrect: false },
+            { text: "Mapas de Empatia", isCorrect: true },
+            { text: "Solution Canvas", isCorrect: false },
+            { text: "Desenvolvimento Orientado por Comportamento", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um aspecto do pensamento sistêmico?",
+        type: "single",
+        options: [
+            { text: "O domínio impulsiona a motivação intrínseca", isCorrect: false },
+            { text: "A otimização de um componente não otimiza o sistema", isCorrect: true },
+            { text: "A cadência torna rotina o que é rotina", isCorrect: false },
+            { text: "O comprimento da fila impacta o tempo de espera", isCorrect: false }
+        ]
+    },
+    {
+        question: "Se um programa mostra repetidamente ramificações de recursos separadas em vez de uma verdadeira demonstração do sistema, qual prática deve ser revisada para resolver o p roblema?",
+        type: "single",
+        options: [
+            { text: "Teste primeiro", isCorrect: false },
+            { text: "Criação de roadmap", isCorrect: false },
+            { text: "Integração Contínua", isCorrect: true },
+            { text: "Scrum de scrums", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira sobre DevOps?",
+        type: "single",
+        options: [
+            { text: "DevOps é uma abordagem para preencher a lacuna entre desenvolvimento e operações", isCorrect: true },
+            { text: "A automação de testes de DevOps reduz o custo de manutenção", isCorrect: false },
+            { text: "As medições não são uma prioridade para DevOps", isCorrect: false },
+            { text: "Os princípios Lean-Agile não são necessários para uma implementação bem-sucedida de DevOps", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira ao implementar continuamente usando um modelo DevOps?",
+        type: "single",
+        options: [
+            { text: "Alivia a dependência dos conjuntos de habilidades das equipes ágeis", isCorrect: false },
+            { text: "Aumenta o custo de transação", isCorrect: false },
+            { text: "Diminui a gravidade e a frequência das falhas de lançamento", isCorrect: true },
+            { text: "Garante que as alterações implantadas na produção estejam sempre imediatamente disponíveis para os usuários finais", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um dos principais objetivos do DevOps?",
+        type: "single",
+        options: [
+            { text: "DevOps une desenvolvimento e operações para permitir repetição contínua", isCorrect: false },
+            { text: "DevOps permite liberação contínua criando um pipeline de entrega contínua escalável", isCorrect: true },
+            { text: "DevOps se concentra em um conjunto de práticas aplicadas a grandes sistemas", isCorrect: false },
+            { text: "DevOps se concentra em automatizar o pipeline de entrega para reduzir o custo de transação", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a frequência recomendada para atualizar a distribuição do orçamento Lean?",
+        type: "single",
+        options: [
+            { text: "A cada iteração", isCorrect: false },
+            { text: "Anualmente", isCorrect: false },
+            { text: "Sob demanda", isCorrect: true }, // ????????
+            { text: "Duas vezes por ano", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é a estratégia de lançamento do SAFe?",
+        type: "single",
+        options: [
+            { text: "Libere sob demanda", isCorrect: true },
+            { text: "Libere continuamente", isCorrect: false },
+            { text: "Libere a cada incremento de programa", isCorrect: false },
+            { text: "Libere na cadência", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um componente do pipeline de entrega contínua?",
+        type: "single",
+        options: [
+            { text: "Planejamento Contínuo", isCorrect: false },
+            { text: "Melhoria Contínua", isCorrect: false },
+            { text: "Cadência Contínua", isCorrect: false },
+            { text: "Exploração Contínua", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são os três componentes do pipeline de entrega contínua? (Escolha três.)",
+        type: "multiple",
+        options: [
+            { text: "Planejamento Contínuo", isCorrect: false },
+            { text: "Melhoria Contínua", isCorrect: false },
+            { text: "Integração Contínua", isCorrect: true },
+            { text: "Cadência Contínua", isCorrect: false },
+            { text: "Implantação Contínua", isCorrect: true },
+            { text: "Exploração Contínua", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é o melhor momento para lançar software no SAFe?",
+        type: "single",
+        options: [
+            { text: "Após cada PI", isCorrect: false },
+            { text: "Após cada iteração", isCorrect: false },
+            { text: "Assim que o software atender a Solução Definição de Pronto", isCorrect: false },
+            { text: "Sempre que o Negócio precisar", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é a maneira recomendada de expressar um Recurso?",
+        type: "single",
+        options: [
+            { text: "Frase, hipótese de benefício e critérios de aceitação", isCorrect: true },
+            { text: "Caso de negócios enxuto", isCorrect: false },
+            { text: "Requisito funcional", isCorrect: false },
+            { text: "Declaração de hipótese épica", isCorrect: false }
+        ]
+    },
+    {
+        question: "Durante Inspecionar e Adaptar, as equipes identificaram um grande número de itens de ação destinados a resolver seu maior problema com um trem. Como a equipe deve proceder?",
+        type: "single",
+        options: [
+            { text: "Carregue todos os itens de melhoria no Program Backlog para garantir que o problema seja documentado e resolvido", isCorrect: false },
+            { text: "Selecione um item de melhoria usando o WSJF", isCorrect: false },
+            { text: "Identifique dois ou três itens de melhoria e carregue-os no Program Backlog", isCorrect: true },
+            { text: "Mantenha todos os itens e se houver capacidade extra o Pl, carregue quantos couberem no Program Backlog", isCorrect: false }
+        ]
+    },
+    {
+        question: "O Agile Release Train passa por quatro etapas para entregar soluções que incluem: definição de novas funcionalidades, implementação, testes de aceitação e o que mais?",
+        type: "single",
+        options: [
+            { text: "Concluindo as etapas do phase-gate", isCorrect: false },
+            { text: "Implantando", isCorrect: true },
+            { text: "Conformidade regulatória", isCorrect: false },
+            { text: "Teste de DevOps", isCorrect: false }
+        ]
+    },
+    {
+        question: "Se pequenos lotes passam pelo sistema mais rapidamente com menor variabilidade, quais são as duas afirmações verdadeiras sobre o tamanho do lote? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Boa infraestrutura permite grandes lotes", isCorrect: false },
+            { text: "Proximidade (co-location) permite tamanhos de lote pequenos", isCorrect: true },
+            { text: "O tamanho dos lotes não pode influenciar nosso comportamento", isCorrect: false },
+            { text: "A derrapagem severa do projeto é o resultado mais provável de grandes lotes", isCorrect: true },
+            { text: "A baixa utilização aumenta a variabilidade", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação é verdadeira sobre o tamanho do lote?",
+        type: "single",
+        options: [
+            { text: "Tamanhos de lote grandes limitam a capacidade de preservar opções", isCorrect: true },
+            { text: "Quando as histórias são divididas em tarefas, significa que há tamanhos de lote pequenos", isCorrect: false },
+            { text: "Tamanhos de lote grandes garantem tempo para qualidade incorporada", isCorrect: false },
+            { text: "Quando há fluxo, significa que há tamanhos de lote pequenos", isCorrect: false }
+        ]
+    },
+    {
+        question: "Weighted Shortest Job First dá preferência a trabalhos com quais duas características? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Maior custo de atraso", isCorrect: true },
+            { text: "Menor custo de atraso", isCorrect: false },
+            { text: "Data fixa", isCorrect: false },
+            { text: "Menor duração", isCorrect: true },
+            { text: "Impacto na receita", isCorrect: false }
+        ]
+    },
+    {
+        question: "Durante a revisão final do plano, os riscos do programa são abordados usando o ROAM. O que as letras em ROAM representam?",
+        type: "single",
+        options: [
+            { text: "Resolvido, Possuído, Aceito, Mitigado", isCorrect: true },
+            { text: "Relegado, Possuído, Aprovado, Gerenciado", isCorrect: false },
+            { text: "Aceito, Reprojetado, Ordenado, Mitigado", isCorrect: false },
+            { text: "Gerenciado, Resolvido, Ordenado, Aceito", isCorrect: false }
+        ]
+    },
+    {
+        question: "A implementação do SAFe requer adesão de todos os níveis da organização. Que nível de liderança é mais importante para efetuar a mudança cultural?",
+        type: "single",
+        options: [
+            { text: "Release Train Engineers", isCorrect: false },
+            { text: "Gestão de Soluções", isCorrect: false },
+            { text: "Product Owners", isCorrect: false },
+            { text: "Gestão Executiva", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as duas afirmações que descrevem uma Capacidade? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "É mantido no Portfolio Backlog", isCorrect: false },
+            { text: "Deve ser estruturado para caber dentro de um único PI", isCorrect: true },
+            { text: "É escrito usando uma frase, hipótese de benefício e critérios de aceitação", isCorrect: true },
+            { text: "Permanece completo e se torna um recurso para implementação", isCorrect: false },
+            { text: "É desenvolvido e aprovado sem uma dependência da Solução Kanban", isCorrect: false }
+        ]
+    },
+    {
+        question: "A aprendizagem ao longo da vida é um requisito para os Líderes Lean-Agile, e os ajuda a fazer o quê?",
+        type: "single",
+        options: [
+            { text: "Fornecer pessoal, recursos, direção e suporte para a Empresa", isCorrect: false },
+            { text: "Atuar como um facilitador eficaz para as equipes", isCorrect: false },
+            { text: "Demonstrar os valores que eles desejam que as equipes incorporem", isCorrect: true },
+            { text: "Comprometer-se com a qualidade e a produtividade", isCorrect: false }
+        ]
+    },
+    {
+        question: "Com que frequência as demonstrações do sistema devem ocorrer na cadência padrão do SAFe?",
+        type: "single",
+        options: [
+            { text: "A cada 4 semanas", isCorrect: false },
+            { text: "Quando solicitado", isCorrect: false },
+            { text: "Semanalmente", isCorrect: false },
+            { text: "A cada 2 semanas", isCorrect: true }
+        ]
+    },
+    ////////////////////////////////////////////////////////////////////////////
+    // Início Simulado 4
+    {
+        question: "Com que frequência deve ocorrer uma demonstração do sistema?",
+        type: "single",
+        options: [
+            { text: "Toda versão", isCorrect: false },
+            { text: "Toda semana", isCorrect: false },
+            { text: "Todo PI", isCorrect: false },
+            { text: "Toda Iteração", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que o roteiro do programa faz no Scaled Agile Framework?",
+        type: "single",
+        options: [
+            { text: "Fornece visibilidade dos Épicos do Portfólio que serão implementados no próximo ano", isCorrect: false },
+            { text: "Descreve as dependências técnicas entre os Recursos", isCorrect: false },
+            { text: "Comunica a entrega dos Recursos em um cronograma de curto prazo", isCorrect: false },
+            { text: "Descreve o compromisso do programa para o atual e os próximos dois Incrementos do Programa", isCorrect: true }
+        ]
+    },
+    {
+        question: "Peter Drucker define trabalhadores do conhecimento como indivíduos que sabem mais sobre o trabalho que realizam do que quem?",
+        type: "single",
+        options: [
+            { text: "Seus colegas de trabalho", isCorrect: false },
+            { text: "Sua equipe", isCorrect: false },
+            { text: "Sua organização", isCorrect: false },
+            { text: "Seus chefes", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual declaração descreve a conexão entre recursos e capacidades em uma grande solução?",
+        type: "single",
+        options: [
+            { text: "Alguns recursos podem não ter recursos pai", isCorrect: false },
+            { text: "Não pode haver mais de 5 recursos para cada", isCorrect: false },
+            { text: "Alguns recursos podem não ter recursos filhos", isCorrect: false },
+            { text: "Cada recurso tem um recurso pai", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual é um exemplo de aplicação de cadência e sincronização no SAFe?",
+        type: "single",
+        options: [
+            { text: "Criando equipes multifuncionais", isCorrect: false },
+            { text: "Usando um sistema Portfolio Kanban", isCorrect: false },
+            { text: "Alocando orçamentos para Agile Release Trains", isCorrect: false },
+            { text: "Conduzindo uma reunião de PI Planning", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quando um evento de planejamento pré-PI é necessário?",
+        type: "single",
+        options: [
+            { text: "Quando há apenas um dia para executar o PI Planning, então é necessário mais tempo para se preparar para executá-lo efetivamente", isCorrect: false },
+            { text: "Quando Product Owners e Scrum Masters precisam coordenar dependências dentro do Agile Release Train", isCorrect: false },
+            { text: "Quando vários Agile Release Trains trabalhando na mesma solução precisam de alinhar e coordenar", isCorrect: true },
+            { text: "Quando as equipes não conseguem identificar e estimar histórias no PI Planning e precisam de mais tempo para se preparar", isCorrect: false }
+        ]
+    },
+    {
+        question: "Durante o PI Planning, quem é o proprietário das prioridades de recursos?",
+        type: "single",
+        options: [
+            { text: "Proprietário do Negócio", isCorrect: false },
+            { text: "Gerenciamento de Produtos", isCorrect: true },
+            { text: "Engenheiro de Treinamento de Liberação", isCorrect: false },
+            { text: "Arquiteto/Engenheiro de Soluções", isCorrect: false }
+        ]
+    },
+    {
+        question: "Durante o PI Planning, quais são as duas tarefas que fazem parte do papel do Scrum Master no primeiro breakout da equipe? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Revise e priorize o backlog da equipe como parte do trabalho preparatório para a segunda divisão da equipe", isCorrect: false },
+            { text: "Facilite a coordenação com outras equipes para dependências", isCorrect: true },
+            { text: "Forneça os esclarecimentos necessários para auxiliar a equipe com sua estimativa e sequenciamento de histórias", isCorrect: false },
+            { text: "Identifique o maior número possível de riscos e dependências para a revisão da gestão", isCorrect: true },
+            { text: "Estar envolvido no refinamento e preparação do backlog do programa", isCorrect: false }
+        ]
+    },
+    {
+        question: "Durante o evento PI Planning, quando os ajustes de planejamento são acordados?",
+        type: "single",
+        options: [
+            { text: "Durante a revisão do rascunho do plano", isCorrect: false },
+            { text: "Durante as sessões de discussão", isCorrect: false },
+            { text: "Durante a revisão gerencial e resolução de problemas", isCorrect: true },
+            { text: "Durante o Scrum de scrums", isCorrect: false }
+        ]
+    },
+    {
+        question: "Por que um voto de confiança é realizado no final do PI Planning?",
+        type: "single",
+        options: [
+            { text: "Para remover os riscos para o PI", isCorrect: false },
+            { text: "Para construir um compromisso compartilhado com o plano do Programa", isCorrect: true },
+            { text: "Para garantir que os Empresários aceitem o plano", isCorrect: false },
+            { text: "Para responsabilizar a equipe se o Agile Release Train não cumprir seu compromisso", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual afirmação descreve corretamente um aspecto do comprometimento da equipe no final do PI Planning?",
+        type: "single",
+        options: [
+            { text: "Uma equipe se compromete apenas com os Objetivos de PI com o maior valor comercial", isCorrect: false },
+            { text: "Uma equipe não se compromete com objetivos não comprometidos", isCorrect: true },
+            { text: "Uma equipe se compromete com todos os Recursos que colocam no quadro do programa", isCorrect: false },
+            { text: "Uma equipe se compromete com todas as Histórias que colocam em seu Pl plano", isCorrect: false }
+        ]
+    },
+    {
+        question: "No final do PI Planning, depois que as dependências são resolvidas e os riscos são abordados, é feito um voto de confiança. Qual é o método padrão usado para votar?",
+        type: "single",
+        options: [
+            { text: "Um voto por equipe e depois um voto de cada pessoa para o trem", isCorrect: false },
+            { text: "Um voto de cada pessoa normalizado para o trem", isCorrect: false },
+            { text: "Um voto por equipe normalizado para o trem", isCorrect: false },
+            { text: "Um único voto de cada pessoa para o trem", isCorrect: true }
+        ]
+    },
+    {
+        question: "No segundo dia do PI Planning, a gerência apresenta ajustes com base na revisão da gerência do dia anterior e na reunião de solução de problemas. Qual é um tipo possível de ajuste que eles poderiam fazer?",
+        type: "single",
+        options: [
+            { text: "Alterar o plano de uma equipe", isCorrect: false },
+            { text: "Criar novas histórias de usuário", isCorrect: false },
+            { text: "Ajustar as prioridades de negócios", isCorrect: true },
+            { text: "Ajustar o comprimento do PI", isCorrect: false }
+        ]
+    },
+    {
+        question: "No segundo dia do PI Planning, os ajustes são feitos pelo grupo com base na revisão da gestão do dia anterior e na reunião de solução de problemas. Quais são os três tipos possíveis de mudanças? (Escolha três.)",
+        type: "multiple",
+        options: [
+            { text: "Ajuste aos objetivos do PI", isCorrect: true },
+            { text: "Prioridades de negócios", isCorrect: true },
+            { text: "Histórias de usuários", isCorrect: false },
+            { text: "Redefinições de requisitos de planejamento", isCorrect: false },
+            { text: "Movimento de pessoas", isCorrect: false },
+            { text: "Mudanças no escopo", isCorrect: true }
+        ]
+    },
+    {
+        question: "O que faz parte do papel do Scrum Master?",
+        type: "single",
+        options: [
+            { text: "Para priorizar e identificar o que está pronto para o Planejamento de Iteração", isCorrect: false },
+            { text: "Para escalar os impedimentos de ART", isCorrect: false },
+            { text: "Para treinar as interações com o Scrum Framework", isCorrect: false },
+            { text: "Para facilitar todos os eventos da equipe", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são os dois comportamentos que um scrum master SAFe deve representar como Coach? (Escolha dois.)",
+        type: "multiple",
+        options: [
+            { text: "Seja um facilitador", isCorrect: true },
+            { text: "Focar em prazos e opções técnicas", isCorrect: false },
+            { text: "Conduza a resultados específicos", isCorrect: false },
+            { text: "Forneça conhecimento no assunto", isCorrect: false },
+            { text: "Ajude a equipe a encontrar seu próprio caminho", isCorrect: true }
+        ]
+    },
+    {
+        question: "O Scrum Master é o que acima de tudo?",
+        type: "single",
+        options: [
+            { text: "Um Líder Servidor", isCorrect: true },
+            { text: "Um treinador de equipe", isCorrect: false },
+            { text: "Um Agilista SEGURO", isCorrect: false },
+            { text: "Um líder empático", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que está fora da responsabilidade do Scrum Master?",
+        type: "single",
+        options: [
+            { text: "Facilitando o evento de Inovação e Planejamento", isCorrect: false },
+            { text: "Facilitando os eventos do time", isCorrect: false },
+            { text: "Participando do Scrum de scrums", isCorrect: false },
+            { text: "Estimando histórias para o time", isCorrect: true }
+        ]
+    },
+    {
+        question: "Quais são as características de um Scrum Master eficaz?",
+        type: "single",
+        options: [
+            { text: "Apoia a autonomia da equipe", isCorrect: true },
+            { text: "Articula soluções arquitetônicas", isCorrect: false },
+            { text: "É especialista técnico", isCorrect: false },
+            { text: "Entende as necessidades do cliente", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual atividade é responsabilidade de um Scrum Master?",
+        type: "single",
+        options: [
+            { text: "Treinar o(s) Engenheiro(s) do Release Train", isCorrect: false },
+            { text: "Ser dono do Daily stand-up", isCorrect: false },
+            { text: "Treinar o time Ágil", isCorrect: true },
+            { text: "Priorizar o Backlog do time", isCorrect: false }
+        ]
+    },
+    {
+        question: "O que se aplica à abordagem CALM da SAFe?",
+        type: "single",
+        options: [
+            { text: "PI Planning", isCorrect: false },
+            { text: "DevOps", isCorrect: true },
+            { text: "Economic Framework", isCorrect: false },
+            { text: "Continuous Deployment", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é uma maneira pela qual os líderes Lean-Agile lideram pelo exemplo?",
+        type: "single",
+        options: [
+            { text: "Aplicando um design empático e focando no Customer Centricity", isCorrect: false },
+            { text: "Ao modelar a mentalidade, valores, princípios e práticas Lean-Agile do SAFe", isCorrect: true },
+            { text: "Dominando as Sete Competências Centrais da Empresa Lean", isCorrect: false },
+            { text: "Usando o roteiro de implementação do SAFe para traçar o caminho para a mudança", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual é um exemplo de diferenciação de objetivos de negócios?",
+        type: "single",
+        options: [
+            { text: "Visão do Portfólio", isCorrect: false },
+            { text: "Intenção da Solução", isCorrect: false },
+            { text: "Objetivos da Empresa", isCorrect: false },
+            { text: "Temas Estratégicos", isCorrect: true }
+        ]
+    },
+    {
+        question: "Como a confiança pode ser conquistada entre o negócio e o desenvolvimento?",
+        type: "single",
+        options: [
+            { text: "Liberar novo valor para produção todos os dias", isCorrect: false },
+            { text: "Entregar previsibilidade", isCorrect: true },
+            { text: "Manter Iterações como uma zona segura para a equipe", isCorrect: false },
+            { text: "Automatizar o pipeline de entrega", isCorrect: false }
+        ]
+    },
+    {
+        question: "Qual dos seguintes adjetivos você acha que melhor descreve o desenvolvimento Ágil?",
+        type: "single",
+        options: [
+            { text: "Adaptativo (responde bem à mudança)", isCorrect: false },
+            { text: "Colaborativo (responde a muitos mãos e mentes)", isCorrect: false },
+            { text: "Iterativo (repete o processo)", isCorrect: false },
+            { text: "Incremental (adiciona pequenos pedaços de valor)", isCorrect: false },
+            { text: "Todas as opções acima", isCorrect: true }
+        ]
+    },
+    {
+        question: "Qual competência central do Lean Enterprise ajuda a impulsionar as práticas de Qualidade integrada?",
+        type: "single",
+        options: [
+            { text: "Agilidade de Equipe e Técnica", isCorrect: true },
+            { text: "DevOps e Release on Demand", isCorrect: false },
+            { text: "Gestão de Portfólio Lean", isCorrect: false },
+            { text: "Soluções de Negócios e Engenharia de Sistemas Lean", isCorrect: false }
+        ]
+    }];
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Free Leading SAFe Practice Exam
+    const freeLeadingSAFePracticeExamData = 
+    [
+  {
+    question: 'Which of the following is a Lean Budget Guardrail?',
+    type: 'single',
+    options: [
+      { text: 'Investment horizons.', isCorrect: true },
+      { text: 'Centralized decision-making.', isCorrect: false },
+      { text: 'Participatory budgeting.', isCorrect: false },
+      { text: 'Lean startup cycle.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'What does Solution Intent describe?',
+    type: 'single',
+    options: [
+      { text: 'The behavior of the solution.', isCorrect: true },
+      { text: 'The platform architecture.', isCorrect: false },
+      { text: 'Where the solution operates.', isCorrect: false },
+      { text: 'The customer or consumer of the solution.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Which two actions can slow the delivery of value?',
+    type: 'multiple',
+    options: [
+      { text: 'System delays.', isCorrect: true },
+      { text: 'Loopbacks.', isCorrect: true },
+      { text: 'Team swarming.', isCorrect: false },
+      { text: 'Shortened Architectural Runway.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'What is the foundation of Lean?',
+    type: 'single',
+    options: [
+      { text: 'Leadership.', isCorrect: true },
+      { text: 'Lean-Agile development.', isCorrect: false },
+      { text: 'Innovation.', isCorrect: false },
+      { text: 'Lean-thinking.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'What is the ultimate goal of DevOps in SAFe?',
+    type: 'single',
+    options: [
+      { text: 'To automate the integration, testing, and deployment of features.', isCorrect: false },
+      { text: 'To combine Development and Operations groups into one team.', isCorrect: false },
+      { text: 'To clarify program and team roles.', isCorrect: false },
+      { text: 'To enable Agile Release Trains to deliver value more frequently.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'What is one fundamental difference between Agile Software Engineering and Waterfall?',
+    type: 'single',
+    options: [
+      { text: 'Agile supports test-first development.', isCorrect: true },
+      { text: 'Agile delivers every single requested requirement.', isCorrect: false },
+      { text: 'Waterfall concentrates on code quality.', isCorrect: false },
+      { text: 'Waterfall has no fixed schedule.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Which statement is most accurate about the Solution Vision?',
+    type: 'single',
+    options: [
+      { text: 'It summarizes the team PI Objectives for the current Program Increment.', isCorrect: false },
+      { text: 'It provides an outline of the Features for the next three Program Increments.', isCorrect: false },
+      { text: 'It drives the allocation of budget for the Agile Release Train.', isCorrect: false },
+      { text: 'It expresses the strategic intent of the Program.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'What is the primary purpose of Strategic Themes?',
+    type: 'single',
+    options: [
+      { text: 'Connect the portfolio to the enterprise business strategy.', isCorrect: true },
+      { text: 'Determine the order in which Epics should be executed.', isCorrect: false },
+      { text: 'Drive incremental implementation across the enterprise.', isCorrect: false },
+      { text: 'Define the sequence of steps used to deliver value to the customer.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Which two statements best describe a cross-functional Agile Team?',
+    type: 'multiple',
+    options: [
+      { text: 'They release customer products to production continuously.', isCorrect: false },
+      { text: 'They are optimized for communication and delivery of value.', isCorrect: true },
+      { text: 'They deliver value every six weeks.', isCorrect: false },
+      { text: 'They can define, build, and test a Feature or component.', isCorrect: true },
+      { text: 'They are made up of members, each of whom can define, develop, test, and deploy the system.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'The role of the Product Manager is most similar to what other role in SAFe?',
+    type: 'single',
+    options: [
+      { text: 'Solution Manager.', isCorrect: true },
+      { text: 'Business Manager.', isCorrect: false },
+      { text: 'Development Manager.', isCorrect: false },
+      { text: 'Release Train Engineer.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'What are three practices for building large Solutions?',
+    type: 'multiple',
+    options: [
+      { text: 'Capture and refine system specifications as fixed/variable Solution Intent.', isCorrect: true },
+      { text: 'Build and integrate the Solution with a Solution Train.', isCorrect: true },
+      { text: 'Employ multiple Solution Teams.', isCorrect: false },
+      { text: 'Employ and improve the Continuous Development Pipeline.', isCorrect: false },
+      { text: 'Ensure value stream consistency.', isCorrect: false },
+      { text: 'Build Solution components and capabilities with ARTs.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Which of the following is responsible for managing the Portfolio Kanban?',
+    type: 'single',
+    options: [
+      { text: 'Product Management.', isCorrect: false },
+      { text: 'Release Train Engineer.', isCorrect: false },
+      { text: 'Solution Management.', isCorrect: false },
+      { text: 'Lean Portfolio Management.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'What is a benefit of continuously deploying using a DevOps model?',
+    type: 'single',
+    options: [
+      { text: 'It ensures that changes deployed to production are always immediately available to end-users.', isCorrect: false },
+      { text: 'It alleviates the reliance on the skill sets of Agile Teams.', isCorrect: false },
+      { text: 'It increases the transaction cost.', isCorrect: false },
+      { text: 'It lessons the severity and frequency of release failures.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Which of the following is a key purpose of DevOps?',
+    type: 'single',
+    options: [
+      { text: 'DevOps enables continuous release by building a scalable Continuous Delivery Pipeline.', isCorrect: false },
+      { text: 'DevOps focuses on automating the delivery pipeline to reduce transaction cost.', isCorrect: false },
+      { text: 'DevOps joins development and operations to enable continuous delivery.', isCorrect: true },
+      { text: 'DevOps focuses on a set of practices applied to large systems.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'What is the purpose of dynamic models?',
+    type: 'single',
+    options: [
+      { text: 'They are used when there are a set of parallel interactions related to a scenario.', isCorrect: false },
+      { text: 'They are used when there are a specific number of interactions that are less complex.', isCorrect: false },
+      { text: 'They are used to sequence a set of interactions related to a scenario.', isCorrect: false },
+      { text: 'They are used when there are numerous and complex interactions.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'What is BDD?',
+    type: 'single',
+    options: [
+      { text: 'Backlog-Driven Development.', isCorrect: false },
+      { text: 'Business-Driven Development.', isCorrect: false },
+      { text: 'Benchmark-Driven Development.', isCorrect: false },
+      { text: 'Behavior-Driven Development.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'In which event are the PI Objectives created?',
+    type: 'single',
+    options: [
+      { text: 'PI System Demo.', isCorrect: false },
+      { text: 'Post PI-Planning.', isCorrect: false },
+      { text: 'Iteration Planning.', isCorrect: false },
+      { text: 'PI Planning.', isCorrect: true }
+    ]
+  },
+  {
+    question: 'What is the purpose of having deployment decoupled from release?',
+    type: 'single',
+    options: [
+      { text: 'To make deploying a business decision.', isCorrect: false },
+      { text: 'To remove the need to respond quickly to product issues.', isCorrect: false },
+      { text: 'To enable releasing upon demand.', isCorrect: true },
+      { text: 'To enable deploying upon demand.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'At what level of the SAFe Big Picture do Strategic Themes reside?',
+    type: 'single',
+    options: [
+      { text: 'Large Solution Level.', isCorrect: false },
+      { text: 'Team Level.', isCorrect: false },
+      { text: 'Portfolio Level.', isCorrect: true },
+      { text: 'Essential Level.', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Which of the following is the primary focus of Lean Portfolio Management?',
+    type: 'single',
+    options: [
+      { text: 'Define the enterprise strategy', isCorrect: false },
+      { text: 'Establish lean budgets', isCorrect: false },
+      { text: 'Align strategy and execution', isCorrect: true },
+      { text: 'Ensure program and portfolio execution.', isCorrect: false }
+    ]
+  }
+];
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Practice Test: (Teste simulado) Português do Brasil - SAFe 6 Agilist Exam (6.0)
+    const practiceTestData = 
+[
+  {
+    question: 'O que faz parte do papel de Product Management? (What is part of the role of Product Management?)',
+    type: 'single',
+    options: [
+      { text: 'Definir os Habilitadores (To define Enablers)', isCorrect: false },
+      { text: 'Priorizar o Backlog do ART (To prioritize the ART Backlog)', isCorrect: true },
+      { text: 'Facilitar o refinamento do backlog (To facilitate backlog refinement)', isCorrect: false },
+      { text: 'Atribuir valor de negócio às Features (To assign business value to Features)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual afirmação é verdadeira em relação aos objetivos não comprometidos? (Which statement is true about uncommitted objectives?)',
+    type: 'single',
+    options: [
+      { text: 'Eles são atividades extras que o time pode fazer se tiver tempo (They are extra things the team can do if they have time)', isCorrect: false },
+      { text: 'Eles não recebem uma atribuição de valor de negócio (They do not get assigned a business value score)', isCorrect: false },
+      { text: 'O trabalho para entregar os objetivos não comprometidos não é planejado nas Iterações durante o PI Planning (The work to deliver uncommitted objectives is not planned into the Iterations during PI planning)', isCorrect: false },
+      { text: 'Eles ajudam a melhorar a previsibilidade (They help improve predictability)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual é um dos cinco princípios do pensamento Lean? (What is one of the five Lean Thinking principles?)',
+    type: 'single',
+    options: [
+      { text: 'Aplicar o pensamento sistêmico (Apply systems thinking)', isCorrect: false },
+      { text: 'Software em funcionamento mais que documentação abrangente (Working software over comprehensive documentation)', isCorrect: false },
+      { text: 'Deixar o valor fluir sem interrupções (Make value flow without interruptions)', isCorrect: true },
+      { text: 'Responder a mudanças mais que seguir um plano (Responding to change over following a plan)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é um dos elementos de entrada para o canvas de portfólio? (What is one of the inputs to the Portfolio canvas?)',
+    type: 'single',
+    options: [
+      { text: 'Estratégia da Organização (Enterprise strategy)', isCorrect: false },
+      { text: 'Temas Estratégicos (Strategic Themes)', isCorrect: true },
+      { text: 'Épicos de portfólio (Portfolio Epics)', isCorrect: false },
+      { text: 'Orçamentos de cadeias de valor (Value Stream budgets)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual das competências essenciais da Lean Enterprise ajuda a alinhar estratégia e execução? (Which of the core competencies of the Lean Enterprise helps align strategy and execution?)',
+    type: 'single',
+    options: [
+      { text: 'Agile Product Delivery (Agile Product Delivery)', isCorrect: false },
+      { text: 'Agilidade Organizacional (Organizational Agility)', isCorrect: false },
+      { text: 'Team and Technical Agility (Team and Technical Agility)', isCorrect: false },
+      { text: 'Lean Portfolio Management (Lean Portfolio Management)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Como é gerenciado o fluxo de Épicos de Portfólio? (How is the flow of Portfolio Epics managed?)',
+    type: 'single',
+    options: [
+      { text: 'No portfólio Kanban (In the Portfolio Kanban)', isCorrect: true },
+      { text: 'No Kanban do ART (In the ART Kanban)', isCorrect: false },
+      { text: 'No Backlog do ART (In the ART Backlog)', isCorrect: false },
+      { text: 'No Backlog do Portfólio (In the Portfolio Backlog)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual competência essencial da Lean Enterprise ajuda a promover práticas de qualidade ágil? (Which core competency of the Lean Enterprise helps drive Agile Quality practices?)',
+    type: 'single',
+    options: [
+      { text: 'Lean Systems Engineering (Lean Systems Engineering)', isCorrect: false },
+      { text: 'DevOps e Liberação Sob Demanda (DevOps and Release on Demand)', isCorrect: false },
+      { text: 'Team and Technical Agility (Team and Technical Agility)', isCorrect: true },
+      { text: 'Lean Portfolio Management (Lean Portfolio Management)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual dos itens abaixo é um aspecto do pensamento sistêmico? (Which is an aspect of systems thinking?)',
+    type: 'single',
+    options: [
+      { text: 'O domínio gera motivação intrínseca (Mastery drives intrinsic motivation)', isCorrect: false },
+      { text: 'Otimizar um componente não otimiza o sistema (Optimizing a component does not optimize the system)', isCorrect: true },
+      { text: 'A cadência transforma em rotina tudo o que pode ser rotineiro (Cadence makes routine everything that can be routine)', isCorrect: false },
+      { text: 'O tamanho da fila impacta o tempo de espera (The length of the queue impacts the wait time)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual afirmação descreve corretamente um aspecto do comprometimento do time ao final do PI Planning? (Which statement correctly describes one aspect of the team\'s commitment at the end of PI Planning?)',
+    type: 'single',
+    options: [
+      { text: 'Um time se compromete com todas as Histórias adicionadas ao Plano de PI (A team commits to all the Stories they put on their PI plan)', isCorrect: false },
+      { text: 'Um time não se compromete com os objetivos não comprometidos (A team does not commit to uncommitted objectives)', isCorrect: true },
+      { text: 'Um time se compromete somente com os Objetivos do PI com maior valor de negócio (A team commits only to the PI Objectives with the highest business value)', isCorrect: false },
+      { text: 'Um time se compromete com todas as Features adicionadas ao quadro de planejamento do ART (A team commits to all the Features they put on the ART planning board)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é um fator crítico na melhoria do fluxo? (What is critical to improving flow?)',
+    type: 'single',
+    options: [
+      { text: 'Lidar com os problemas locais (Address the local problems)', isCorrect: false },
+      { text: 'Aumentar os limites do trabalho em processo, WIP (Increase work in process [WIP] limits)', isCorrect: false },
+      { text: 'Reduzir o tamanho dos lotes de trabalho (Reduce the batch sizes of work)', isCorrect: true },
+      { text: 'Trocar constantemente de contexto (Frequent context switching)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é a primeira das oito etapas do processo de Kotter para liderar a mudança? (What is the first step in Kotter\'s 8-step process for leading change?)',
+    type: 'single',
+    options: [
+      { text: 'Criar um senso de urgência (Create a sense of urgency)', isCorrect: true },
+      { text: 'Criar uma coalizão orientadora (Build a guiding coalition)', isCorrect: false },
+      { text: 'Gerar vitórias de curto prazo (Generate short-term wins)', isCorrect: false },
+      { text: 'Recrutar um grupo de voluntários (Enlist a volunteer army)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Por que é importante desassociar a implantação da entrega? (Why is it important to decouple deployment from release?)',
+    type: 'single',
+    options: [
+      { text: 'Para tornar a implantação de ativos uma decisão de negócios (To make deploying of assets a business decision)', isCorrect: false },
+      { text: 'Para eliminar a necessidade de responder rapidamente a questões de produção (To remove the need to respond quickly to production issues)', isCorrect: false },
+      { text: 'Para permitir o acesso antecipado a grupos específicos de Clientes (To allow early access to specific groups of customers)', isCorrect: false },
+      { text: 'Para habilitar o lançamento de funcionalidades sob demanda a fim de atender às necessidades de negócios (To enable releasing functionality on demand to meet business needs)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'O que os Temas Estratégicos influenciam diretamente? (What do Strategic Themes influence directly?)',
+    type: 'single',
+    options: [
+      { text: 'Lean Budget Guardrails (Lean budget Guardrails)', isCorrect: true },
+      { text: 'Estratégia da Organização (Enterprise strategy)', isCorrect: false },
+      { text: 'Organização do ART (Organization of the ART)', isCorrect: false },
+      { text: 'Cadência do PI (PI cadence)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Em que o time deve focar para otimizar o fluxo? (What should the team focus on in order to optimize flow?)',
+    type: 'single',
+    options: [
+      { text: 'Custos (Costs)', isCorrect: false },
+      { text: 'Atrasos (Delays)', isCorrect: true },
+      { text: 'Solicitações (Requests)', isCorrect: false },
+      { text: 'Custos irrecuperáveis (Sunk costs)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é uma das cinco práticas básicas de qualidade ágil aplicáveis a todos os Times Ágeis? (What is one of the five basic Agile quality practices applicable to all Agile Teams?)',
+    type: 'single',
+    options: [
+      { text: 'Antecipar a aprendizagem (Shift learning left)', isCorrect: true },
+      { text: 'Tomada de decisão descentralizada (Decentralized decision-making)', isCorrect: false },
+      { text: 'Usar Requisitos Não Funcionais (Using non-functional requirements)', isCorrect: false },
+      { text: 'Criar a Architectural Runway (Creating the Architectural Runway)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que o quadro de planejamento do ART mostra? (What does the ART planning board show?)',
+    type: 'single',
+    options: [
+      { text: 'Riscos (Risks)', isCorrect: false },
+      { text: 'Capacidade e carga (Capacity and load)', isCorrect: false },
+      { text: 'Épicos (Epics)', isCorrect: false },
+      { text: 'Dependências significativas (Significant dependencies)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'No segundo dia do PI Planning, a liderança apresenta ajustes baseados na revisão da gerência e na reunião de resolução de problemas do dia anterior. Qual é um possível tipo de ajuste que poderia ser feito? (On day two of PI Planning, management presents adjustments based on the previous day\'s management review and problem-solving meeting. What is one possible type of adjustment they could make?)',
+    type: 'single',
+    options: [
+      { text: 'Ajustar as prioridades de negócios (Adjust business priorities)', isCorrect: true },
+      { text: 'Redefinir a duração do PI (Redefine the length of the PI)', isCorrect: false },
+      { text: 'Criar novas Histórias de Usuários (Create new User Stories)', isCorrect: false },
+      { text: 'Mudar o plano de um time (Change a team\'s plan)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que é usado para capturar o estado atual do portfólio e contribuir para definir o estado futuro? (What is used to capture the current state of the Portfolio and provide input for defining the future state?)',
+    type: 'single',
+    options: [
+      { text: 'Portfólio Kanban (Portfolio Kanban)', isCorrect: false },
+      { text: 'Visão do Portfólio (Portfolio Vision)', isCorrect: false },
+      { text: 'Canvas de portfólio (Portfolio Canvas)', isCorrect: true },
+      { text: 'Backlog do Portfólio (Portfolio Backlog)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Volume, complexidade, conhecimento e incerteza são qualidades do quê? (Volume, complexity, knowledge, and uncertainty are all qualities of what?)',
+    type: 'single',
+    options: [
+      { text: 'Story Points (Story points)', isCorrect: true },
+      { text: 'Weighted Shortest Job First, WSJF (Weighted shortest job first, WSJF)', isCorrect: false },
+      { text: 'Riscos (Risks)', isCorrect: false },
+      { text: 'Custo da não entrega ou atraso (Cost of Delay)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é a próxima etapa do SAFe Implementation Roadmap após “organizar com base no valor”? (What is the next step in the SAFe Implementation Roadmap after organizing around value?)',
+    type: 'single',
+    options: [
+      { text: 'Melhorar o portfólio (Enhance the Portfolio)', isCorrect: false },
+      { text: 'Preparar o lançamento do ART (Prepare for ART launch)', isCorrect: false },
+      { text: 'Criar o plano de implementação (Create the implementation plan)', isCorrect: true },
+      { text: 'Treinar times e lançar ARTs (Train teams and launch ARTs)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que permite às Organizações responder rapidamente às mudanças no mercado? (What enables enterprises to respond quickly to shifts in the market?)',
+    type: 'single',
+    options: [
+      { text: 'Cadeia de valor de governança Lean (Lean Governance Value Stream)', isCorrect: false },
+      { text: 'Cadeia de valor de Business Agility (Business Agility Value Stream)', isCorrect: true },
+      { text: 'Cadeia de valor do segmento de Cliente (Customer Segment Value Stream)', isCorrect: false },
+      { text: 'Cadeia de valor do Solution Train (Solution Train Value Stream)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O princípio do pensamento Lean “Deixar o valor fluir sem interrupções” significa identificar o quê? (The Lean Thinking principle, "make value flow without interruptions" means identifying what?)',
+    type: 'single',
+    options: [
+      { text: 'Atividades que carecem de inovação (Activities that lack innovation)', isCorrect: false },
+      { text: 'Indicadores-chave de desempenho (Key performance indicators)', isCorrect: false },
+      { text: 'Problemas de previsibilidade do trem (Predictability issues of the train)', isCorrect: false },
+      { text: 'Atrasos (Delays)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual é o maior benefício da tomada de decisão descentralizada? (What is the biggest benefit of decentralized decision-making?)',
+    type: 'single',
+    options: [
+      { text: 'Assegura que decisões estratégicas sejam tomadas de forma colaborativa (Ensures strategic decisions are made collaboratively)', isCorrect: false },
+      { text: 'Aumenta a transparência (Improves transparency)', isCorrect: false },
+      { text: 'Reduz os atrasos (Reduces delays)', isCorrect: true },
+      { text: 'Remove a responsabilidade dos líderes (Removes accountability from leaders)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é um dos Lean Budget Guardrails? (What is one of the Lean budget Guardrails?)',
+    type: 'single',
+    options: [
+      { text: 'Limites de gastos para cada ART (Spending caps for each ART)', isCorrect: false },
+      { text: 'Orçamento Participativo (Participatory budgeting)', isCorrect: false },
+      { text: 'Engajamento contínuo do Business Owner (Continuous Business Owner engagement)', isCorrect: true },
+      { text: 'Medições objetivas (Objective measurements)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual conjunto de conhecimentos informa o Mindset, Valores, Princípios e Práticas do SAFe? (What is one body of knowledge that informs the SAFe values, principles, mindset, and practices?)',
+    type: 'single',
+    options: [
+      { text: 'Design Thinking (Design thinking)', isCorrect: false },
+      { text: 'Pensamento Lean (Lean thinking)', isCorrect: true },
+      { text: 'Centralização no Cliente (Customer-centric)', isCorrect: false },
+      { text: 'Pensamento sistêmico (Systems thinking)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual afirmação melhor descreve a Business Agility? (Which statement best describes Business Agility?)',
+    type: 'single',
+    options: [
+      { text: 'Aplicar práticas e Princípios Lean-Agile à especificação, desenvolvimento, implantação, operação e evolução dos maiores e mais sofisticados sistemas do mundo. (Applying Lean-Agile principles and practices to the specification, development, deployment, operation, and evolution of the world\'s largest and most sophisticated systems.)', isCorrect: false },
+      { text: 'Uma abordagem centrada no Cliente para definir, criar e entregar um fluxo contínuo de produtos e serviços valiosos para Clientes e usuários. (A customer-centric approach to defining, building, and releasing a continuous flow of valuable products and services to customers and users.)', isCorrect: false },
+      { text: 'Como as pessoas e Times Ágeis com pensamento Lean otimizam seus processos de negócios, evoluem estratégias com novos compromissos claros e decisivos e adaptam rapidamente a organização conforme necessário para aproveitar novas oportunidades. (How Lean-thinking people and Agile Teams optimize their business processes, evolve strategy with clear and decisive new commitments, and quickly adapt the organization as needed to capitalize on new opportunities.)', isCorrect: false },
+      { text: 'A capacidade de competir e prosperar na era digital, respondendo rapidamente às mudanças do mercado e oportunidades emergentes com Soluções de negócios inovadoras. (The ability to compete and thrive in the digital age by quickly responding to market changes and emerging opportunities with innovative business Solutions.)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual é uma medida do Design Thinking para o sucesso da Solução? (What is one Design Thinking measure of solution success?)',
+    type: 'single',
+    options: [
+      { text: 'Escalabilidade (Scalability)', isCorrect: false },
+      { text: 'Confiabilidade (Reliability)', isCorrect: false },
+      { text: 'Sustentabilidade (Sustainability)', isCorrect: true },
+      { text: 'Viabilidade comercial (Marketability)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual dos itens a seguir é um exemplo de aplicação da sincronização baseada em cadência no SAFe? (What is an example of applying cadence-based synchronization in SAFe?)',
+    type: 'single',
+    options: [
+      { text: 'Os times se reúnem duas vezes a cada PI para planejar e programar a capacidade (Teams meet twice every PI to plan and schedule capacity)', isCorrect: false },
+      { text: 'Os times alinham as datas de início e término de suas Iterações (Teams align the start and end dates of their Iterations)', isCorrect: true },
+      { text: 'Os times decidem a duração de suas Iterações (Teams decide their own Iteration length)', isCorrect: false },
+      { text: 'Os times só podem lançar novos softwares no mesmo dia (Teams can only release new software on the same day)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que é considerado um antipadrão quando valores de negócio são atribuídos aos Objetivos de PI do time? (What is considered an anti-pattern when assigning business values to team PI Objectives?)',
+    type: 'single',
+    options: [
+      { text: 'Os Business Owners atribuem o valor de negócio a todos os times do ART (Business Owners assign the business value for all teams on the ART)', isCorrect: false },
+      { text: 'Os valores de negócio são atribuídos aos objetivos não comprometidos (Business values are assigned to uncommitted objectives)', isCorrect: false },
+      { text: 'Um alto valor de negócio é atribuído a um importante trabalho de Habilitação (High business value is assigned to important Enabler work)', isCorrect: false },
+      { text: 'Todos os Objetivos do PI recebem um valor de negócio igual a 10 (All PI Objectives are given a business value of 10)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual destas afirmações é um dos valores do Manifesto Ágil? (Which statement is a value from the Agile Manifesto?)',
+    type: 'single',
+    options: [
+      { text: 'Criar incrementalmente com ciclos de aprendizagem rápidos e integrados (Build incrementally with fast, integrated learning cycles)', isCorrect: false },
+      { text: 'Software funcionando é a medida primária de progresso (Working software is the primary measure of progress)', isCorrect: false },
+      { text: 'Responder a mudanças mais que seguir um plano (Responding to change over following a plan)', isCorrect: true },
+      { text: 'Respeito por pessoas e cultura (Respect for people and culture)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Quem tem autoridade de conteúdo para tomar decisões no nível da História do Usuário durante o PI Planning? (Who has content authority to make decisions at the User Story level during PI Planning?)',
+    type: 'single',
+    options: [
+      { text: 'Scrum Master/Team Coach (Scrum Master/Team Coach)', isCorrect: false },
+      { text: 'Release Train Engineer (Release Train Engineer)', isCorrect: false },
+      { text: 'Product Owner (Product Owner)', isCorrect: true },
+      { text: 'Time Ágil (Agile Team)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é a finalidade da Centralização no Cliente? (What is the purpose of Customer Centricity?)',
+    type: 'single',
+    options: [
+      { text: 'Entender as necessidades do Cliente (To understand the Customer\'s needs)', isCorrect: true },
+      { text: 'Interpretar ritmos de mercado (To interpret market rhythms)', isCorrect: false },
+      { text: 'Construir sistemas parciais e pequenos no momento certo (To build small, partial systems just in time)', isCorrect: false },
+      { text: 'Projetar Soluções customizadas para o Cliente (To design custom-built Customer Solutions)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Transformar erros em momentos de aprendizagem, criar um ambiente de trabalho baseado em confiança e visualizar o trabalho são exemplos de qual Valor Fundamental do SAFe? (Turn mistakes into learning moments, create a trust-based environment, and visualize work are examples of which SAFe Core Value?)',
+    type: 'single',
+    options: [
+      { text: 'Respeito pelas pessoas (Respect for People)', isCorrect: false },
+      { text: 'Alinhamento (Alignment)', isCorrect: false },
+      { text: 'Transparência (Transparency)', isCorrect: true },
+      { text: 'Melhoria implacável (Relentless Improvement)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é um componente do Continuous Delivery Pipeline? (What is one component of the Continuous Delivery Pipeline?)',
+    type: 'single',
+    options: [
+      { text: 'Continuous Exploration (Continuous Exploration)', isCorrect: true },
+      { text: 'Continuous Planning (Continuous Planning)', isCorrect: false },
+      { text: 'Continuous Cadence (Continuous Cadence)', isCorrect: false },
+      { text: 'Continuous Improvement (Continuous Improvement)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual dos itens a seguir é uma qualidade de um Time Ágil? (What is a quality of an Agile team?)',
+    type: 'single',
+    options: [
+      { text: 'Os gerentes direcionam o trabalho (Managers direct their work)', isCorrect: false },
+      { text: 'Multifuncional (Cross-functional)', isCorrect: true },
+      { text: 'Composto de 10 a 20 membros (Composed of 10 to 20 members)', isCorrect: false },
+      { text: 'Cada time tem um Scrum Master/Team Coach e um Gerente de produto (Each team has a Scrum Master/Team Coach and a Product Manager)', isCorrect: false }
+    ]
+  },
+  {
+    question: '“Construir uma cultura de solução de problemas” é um exemplo de qual Valor Fundamental do SAFe? ("Building a problem-sollving culture" is an example of which SAFe Core Value?)',
+    type: 'single',
+    options: [
+      { text: 'Melhoria implacável (Relentless Improvement)', isCorrect: true },
+      { text: 'Alinhamento (Alignment)', isCorrect: false },
+      { text: 'Transparência (Transparency)', isCorrect: false },
+      { text: 'Respeito pelas pessoas (Respect for People)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Que tipo de mapa captura os fluxos de trabalho do usuário? (What type of map captures user workflows?)',
+    type: 'single',
+    options: [
+      { text: 'Jornada (Journey)', isCorrect: false },
+      { text: 'Cadeia de valor (Value Stream)', isCorrect: false },
+      { text: 'História (Story)', isCorrect: true },
+      { text: 'Cliente (Customer)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Revisar a Visão da arquitetura da organização durante o primeiro dia do PI Planning é um exemplo de qual Valor Fundamental do SAFe? (Reviewing the organization\'s architecture vision during the first day of PI Planning is an example of what SAFe Core Value?)',
+    type: 'single',
+    options: [
+      { text: 'Alinhamento (Alignment)', isCorrect: true },
+      { text: 'Respeito pelas pessoas (Respect for People)', isCorrect: false },
+      { text: 'Transparência (Transparency)', isCorrect: false },
+      { text: 'Melhoria implacável (Relentless Improvement)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual aspecto de “liderar pelo exemplo” inclui modelar os comportamentos profissionais desejados? (Which aspect of leading by example includes modeling desired professional behaviors?)',
+    type: 'single',
+    options: [
+      { text: 'Competência emocional (Emotional competence)', isCorrect: false },
+      { text: 'Coragem (Courage)', isCorrect: false },
+      { text: 'Crescimento dos outros (Growing others)', isCorrect: false },
+      { text: 'Autenticidade (Authenticity)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'O que dá estrutura à análise e à tomada de decisão em relação a Épicos? (What brings structure to analysis and decision making around Epics?)',
+    type: 'single',
+    options: [
+      { text: 'Portfólio Kanban (Portfolio Kanban)', isCorrect: true },
+      { text: 'Visão do Portfólio (Portfolio Vision)', isCorrect: false },
+      { text: 'Backlog do Portfólio (Portfolio Backlog)', isCorrect: false },
+      { text: 'Canvas de portfólio (Portfolio Canvas)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'De que maneira o SAFe provê um segundo sistema operacional que habilita a Business Agility? (How does SAFe provide a second operating system that enables Business Agility?)',
+    type: 'single',
+    options: [
+      { text: 'Ao promover economias de escala (By achieving economies of scale)', isCorrect: false },
+      { text: 'Ao se organizar em torno de áreas funcionais para se concentrar no desenvolvimento de habilidades (By organizing around functional areas to focus on skills development)', isCorrect: false },
+      { text: 'Ao criar uma hierarquia para garantir estabilidade (By creating a hierarchy to provide stability)', isCorrect: false },
+      { text: 'Ao manter o foco em Clientes, produtos, inovação e crescimento (By focusing on customers, products, innovation, and growth)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual dos princípios do pensamento Lean inclui atividades que vão do reconhecimento de uma oportunidade até o lançamento e a validação? (Which of the Lean Thinking principles includes the activities from recognizing an opportunity through release and validation?)',
+    type: 'single',
+    options: [
+      { text: 'Especificar precisamente o valor por produto (Precisely specify value by product)', isCorrect: false },
+      { text: 'Identificar a cadeia de valor de cada produto (Identify the Value Stream for each product)', isCorrect: true },
+      { text: 'Buscar a perfeição (Pursue perfection)', isCorrect: false },
+      { text: 'Deixar o valor fluir sem interrupções (Make value flow without interruptions)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'No Kanban do ART, algumas etapas têm limites para o trabalho em processo, ou WIP. Por que isso é necessário? (In the ART Kanban some steps have work in process [WIP] limits. Why is this necessary?)',
+    type: 'single',
+    options: [
+      { text: 'Para reduzir as transferências de responsabilidades e dependências (To reduce handoffs and dependencies)', isCorrect: false },
+      { text: 'Para habilitar o Continuous Deployment (To enable Continuous Deployment)', isCorrect: false },
+      { text: 'Para evitar a formação de longas filas (To ensure large queues are not forming)', isCorrect: true },
+      { text: 'Para dar suporte a multitarefas (To support multitasking)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que é usado para descrever os Requisitos Funcionais e Não Funcionais? (What is used to describe functional and non-functional requirements?)',
+    type: 'single',
+    options: [
+      { text: 'Architectural Runway (Architectural Runway)', isCorrect: false },
+      { text: 'Habilitadores (Enablers)', isCorrect: false },
+      { text: 'Features (Features)', isCorrect: true },
+      { text: 'Marcos (Milestones)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual abordagem permite liberar a motivação intrínseca dos trabalhadores do conhecimento? (What is one approach to unlock the intrinsic motivation of knowledge workers?)',
+    type: 'single',
+    options: [
+      { text: 'Esforçar-se para alcançar um fluxo contínuo (Strive to achieve a state of continuous flow)', isCorrect: false },
+      { text: 'Fornecer autonomia (Provide autonomy)', isCorrect: true },
+      { text: 'Centralizar a tomada de decisão (Centralize decision-making)', isCorrect: false },
+      { text: 'Reduzir os limites do trabalho em processo, WIP (Reduce work in process [WIP] limits)', isCorrect: false }
+    ]
+  }
+];
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Exame de certificação em português do Brasil - SAFe 6 Agilist Exam (6.0) (Score 87%)
+    const questionsSAFe6AgilistData = 
+[
+  {
+    question: 'O que é usado para pensar nos possíveis estados futuros do portfólio? (What is used to brainstorm potential Portfolio future states?)',
+    type: 'single',
+    options: [
+      { text: 'Direcionadores de negócio da Organização (Enterprise business drivers)', isCorrect: true },
+      { text: 'Épicos e Habilitadores (Epics and Enablers)', isCorrect: false },
+      { text: 'SWOT e TOWS (SWOT and TOWS)', isCorrect: false },
+      { text: 'KPIs e Lean Budget Guardrails (KPIs and Lean Budget Guardrails)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que representa o fluxo de trabalho, as atividades e a automação necessários para entregar novas funcionalidades com mais frequência? (What represents the workflow, activities, and automation needed to deliver new functionality more frequently?)',
+    type: 'single',
+    options: [
+      { text: 'O Portfolio Kanban (The Portfolio Kanban)', isCorrect: false },
+      { text: 'Os Lean Budget Guardrails (The Lean budget Guardrails)', isCorrect: false },
+      { text: 'O Continuous Delivery Pipeline (The Continuous Delivery Pipeline)', isCorrect: true },
+      { text: 'O processo de PI Planning (The PI Planning process)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Valor para o usuário/os negócios e a criticidade de tempo são componentes de quê? (User business value and time criticality are components of what?)',
+    type: 'single',
+    options: [
+      { text: 'Estimativa do Story Point (Story point estimation)', isCorrect: false },
+      { text: 'Custo da não entrega ou atraso (Cost of Delay)', isCorrect: true },
+      { text: 'Visão do produto (Product Vision)', isCorrect: false },
+      { text: 'Critérios de aceitação da Feature (Feature Acceptance Criteria)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Que tipo de pensamento permite ao Cliente obter valor do produtor? (What type of thinking allows the Customer to pull value from the producer?)',
+    type: 'single',
+    options: [
+      { text: 'Design (Design)', isCorrect: false },
+      { text: 'Centralização no Cliente (Customer-centric)', isCorrect: true },
+      { text: 'Sistemas (Systems)', isCorrect: false },
+      { text: 'Lean (Lean)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é uma das dimensões da Liderança Lean-Agile? (What is one of the dimensions of Lean-Agile Leadership?)',
+    type: 'single',
+    options: [
+      { text: 'Melhoria implacável (Relentless improvement)', isCorrect: false },
+      { text: 'Suporte à mudança organizacional (Support organizational change)', isCorrect: false },
+      { text: 'Mindset e princípios (Mindset and principles)', isCorrect: true },
+      { text: 'Inteligência emocional (Emotional intelligence)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Além de propósito e mínimas restrições possíveis, o que mais requer o Princípio SAFe de "Liberar a motivação intrínseca dos trabalhadores do conhecimento"? (What else does the SAFe principle, unlock the intrinsic motivation of knowledge workers, require besides purpose and minimum possible constraints?)',
+    type: 'single',
+    options: [
+      { text: 'Inovação (Innovation)', isCorrect: false },
+      { text: 'Compensação baseada em incentivos (Incentive-based compensation)', isCorrect: false },
+      { text: 'Transparência (Transparency)', isCorrect: false },
+      { text: 'Autonomia (Autonomy)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'O que aciona a necessidade de uma cadeia de valor? (What triggers the need for a Value Stream?)',
+    type: 'single',
+    options: [
+      { text: 'Solicitação de Feature (Feature request)', isCorrect: false },
+      { text: 'Solicitação de História do Usuário (User Story request)', isCorrect: false },
+      { text: 'Solicitação de Épico (Epic request)', isCorrect: true },
+      { text: 'Solicitação de spike (Spike request)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Restaurar a velocidade e a inovação da rede empresarial e, ao mesmo tempo, promover a estabilidade do sistema hierárquico são benefícios do quê? (Restoring the speed and innovation of the entrepreneurial network while leveraging the stability of the hierarchical system is a benefit of what?)',
+    type: 'single',
+    options: [
+      { text: 'Centralização no Cliente (Customer centricity)', isCorrect: false },
+      { text: 'Silos funcionais (Functional silos)', isCorrect: false },
+      { text: 'Sistema operacional dual (Dual operating system)', isCorrect: true },
+      { text: 'Continuous Learning Culture (Continuous learning culture)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Por que os Business Owners atribuem valor de negócio aos Objetivos do PI do time? (Why do Business Owners assign business value to team PI Objectives?)',
+    type: 'single',
+    options: [
+      { text: 'Para capacitar os times a tomar decisões sobre o trabalho (To empower teams to make decisions around work)', isCorrect: false },
+      { text: 'Para sobrepor as decisões tomadas na priorização com WSJF (To override the decisions made in WSJF prioritization)', isCorrect: false },
+      { text: 'Para garantir que os times não trabalhem em Habilitadores de arquitetura (To ensure the teams do not work on architectural Enablers)', isCorrect: false },
+      { text: 'Para determinar no que os times devem se concentrar primeiro (To determine what the teams should work on first)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'A ação de "especificar precisamente o valor por produto" é fundamental para quê? (What is "precisely specify value by product" central to?)',
+    type: 'single',
+    options: [
+      { text: 'Valores Fundamentais do SAFe (SAFe Core Values)', isCorrect: false },
+      { text: 'Pensamento Lean (Lean Thinking)', isCorrect: true },
+      { text: 'Manifesto Ágil (Agile Manifesto)', isCorrect: false },
+      { text: 'Princípios SAFe (SAFe Principles)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Quem decide sobre a atribuição de valor de negócio dos Objetivos do PI dos times após a negociação? (Who decides the Team PI Objective Business Value scoring after negotiation?)',
+    type: 'single',
+    options: [
+      { text: 'Business Owner (Business Owner)', isCorrect: true },
+      { text: 'O Time Ágil (The Agile Team)', isCorrect: false },
+      { text: 'O Release Train Engineer (The RTE)', isCorrect: false },
+      { text: 'Product Management (Product Management)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é uma das ferramentas associadas ao Design Thinking? (What is one of the tools associated with Design Thinking?)',
+    type: 'single',
+    options: [
+      { text: 'Desenvolvimento orientado a o comportamento (Behavior-driven development)', isCorrect: false },
+      { text: 'Design Baseado no Conjunto (Set-based design)', isCorrect: false },
+      { text: 'Mapas de empatia (Empathy maps)', isCorrect: true },
+      { text: 'Canvas de Portfólio (Portfolio canvas)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'A etapa de análise do sistema do portfólio Kanban tem um novo Épico com um caso de negócio Lean concluído. O que melhor descreve a próxima etapa do Épico? (The analyzing step of the Portfolio Kanban system has a new Epic with a completed Lean business case. What best describes the next step for the Epic?)',
+    type: 'single',
+    options: [
+      { text: 'Ele será implementado quando o Proprietário do Épico aprovar o caso de negócio Lean (It will be implemented once the Epic Owner approves the Lean business case)', isCorrect: false },
+      { text: 'Ele será implementado se tiver a classificação mais alta do Weighted Shortest Job First, ou WSJF (It will be implemented if it has the highest weighted shortest job first [WSJF] ranking)', isCorrect: false },
+      { text: 'Ele será movido para o estado de preparado no portfólio Kanban se receber o Lean Portfolio Management a decisão para prosseguir (It will be moved to the ready state in the Portfolio Kanban if it receives a \'go\' decision from Lean Portfolio Management)', isCorrect: true },
+      { text: 'Ele permanecerá na etapa de análise até que um ou mais Agile Release Trains tenham capacidade para implementá-lo (It will remain in the analyzing step until one or more Agile Release Trains have the capacity to implement it)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual dos eventos a seguir faz parte do Agile Release Train? (What is one of the Agile Release Train events?)',
+    type: 'single',
+    options: [
+      { text: 'Retrospectiva da Iteração (Iteration Retrospective)', isCorrect: false },
+      { text: 'PO sync (Product Owner sync)', isCorrect: true },
+      { text: 'Solution Demo (Solution Demo)', isCorrect: false },
+      { text: 'Refinamento do backlog (Backlog refinement)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual destas afirmações é um dos valores do Manifesto Ágil? (Which statement is a value from the Agile Manifesto?)',
+    type: 'single',
+    options: [
+      { text: 'Colaboração com o Cliente mais que negociação de contratos (Customer collaboration over contract negotiation)', isCorrect: true },
+      { text: 'Colaboração com o Cliente mais que conversas internas constantes (Customer collaboration over ongoing internal conversation)', isCorrect: false },
+      { text: 'Colaboração com o Cliente mais que um ritmo constate indefinido (Customer collaboration over a constant indefinite pace)', isCorrect: false },
+      { text: 'Colaboração com o Cliente mais que negociação de Features (Customer collaboration over Feature negotiation)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual afirmação se aplica aos objetivos não comprometidos? (Which statement applies to uncommitted objectives?)',
+    type: 'single',
+    options: [
+      { text: 'Eles estão incluídos no compromisso (They are included in the commitment)', isCorrect: false },
+      { text: 'Eles são itens nos quais o time tem alta confiança (They are items the team has high confidence in)', isCorrect: false },
+      { text: 'Eles são atividades extras que os times podem fazer se tiverem tempo (They are extra things teams can do if they have time)', isCorrect: false },
+      { text: 'Eles são levados em consideração ao se calcular a carga (They are counted when calculating load)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Durante a revisão do plano final, os riscos do PI do ART são abordados usando ROAM. O que representa a sigla ROAM? (During the final plan review, ART PI risks are ROAMed. What do the letters in ROAM represent?)',
+    type: 'single',
+    options: [
+      { text: 'Resolvido, Assumido, Aceito, Mitigado (Resolved, Owned, Accepted, Mitigated)', isCorrect: true },
+      { text: 'Resolvido, Assumido, Ativo, Mitigado (Resolved, Owned, Active, Mitigated)', isCorrect: false },
+      { text: 'Resolvido, Assumido, Atribuído, Mitigado (Resolved, Owned, Assigned, Mitigated)', isCorrect: false },
+      { text: 'Resolvido, Assumido, Aprovado, Mitigado (Resolved, Owned, Approved, Mitigated)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual método fornece uma compreensão contínua do mercado-alvo? (What method provides a continuous understanding of the target market?)',
+    type: 'single',
+    options: [
+      { text: 'Lean Systems Engineering (Lean Systems Engineering)', isCorrect: false },
+      { text: 'Orçamento Participativo (Participatory budgeting)', isCorrect: false },
+      { text: 'Design Thinking (Design thinking)', isCorrect: true },
+      { text: 'Lean Portfolio Management (Lean Portfolio Management)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Que tipo de time está organizado para auxiliar outros times com Capabilities especializadas e ajudá-los a se tornarem mais proficientes em novas tecnologias? (Which team type is organized to assist other teams with specialized capabilities and help them become more proficient in new technologies?)',
+    type: 'single',
+    options: [
+      { text: 'Time de subsistema complicado (Complicated subsystem team)', isCorrect: false },
+      { text: 'Time de plataforma (Platform team)', isCorrect: false },
+      { text: 'Time alinhado ao fluxo (Stream-aligned team)', isCorrect: false },
+      { text: 'Time de capacitação (Enabling team)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual destes é um exemplo de aplicar cadência e sincronização no SAFe? (What is an example of applying cadence and synchronization in SAFe?)',
+    type: 'single',
+    options: [
+      { text: 'Criar ARTs e Times Ágeis multifuncionais (Creating cross-functional ARTs and Agile teams)', isCorrect: false },
+      { text: 'Organizar um evento de PI Planning (Conducting a PI Planning event)', isCorrect: true },
+      { text: 'Usar um sistema de portfolio Kanban (Using a Portfolio Kanban system)', isCorrect: false },
+      { text: 'Alocar orçamentos para cadeias de valor (Allocating budgets to Value Streams)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Implantar, verificar, monitorar e responder são atividades de quê? (Deploy, verify, monitor, and respond are all activities of what?)',
+    type: 'single',
+    options: [
+      { text: 'Liberação Sob Demanda (Release on Demand)', isCorrect: false },
+      { text: 'Continuous Exploration (Continuous Exploration)', isCorrect: false },
+      { text: 'Continuous Deployment (Continuous Deployment)', isCorrect: true },
+      { text: 'Continuous Integration (Continuous Integration)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Durante o evento de PI Planning, quando se chega a um acordo sobre os ajustes de planejamento? (During the PI Planning event, when are planning adjustments agreed upon?)',
+    type: 'single',
+    options: [
+      { text: 'Durante a revisão do esboço do plano (During the draft plan review)', isCorrect: false },
+      { text: 'Durante o Coach Sync (During the Coach Sync)', isCorrect: false },
+      { text: 'Durante a reunião da gerência para revisão e resolução de problemas (During the management review and problem-solving meeting)', isCorrect: true },
+      { text: 'Durante as reuniões dos times (During breakout sessions)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O objetivo principal do SAFe é alcançar o quê? (The primary goal of SAFe is to achieve what?)',
+    type: 'single',
+    options: [
+      { text: 'Lean Portfolio Management (Lean Portfolio Management)', isCorrect: false },
+      { text: 'Organizar com base no valor (Organizing around value)', isCorrect: false },
+      { text: 'Centralização no Cliente (Customer centricity)', isCorrect: false },
+      { text: 'Business Agility (Business Agility)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'O que podemos encontrar em um quadro de planejamento do ART? (What is found on an ART planning board?)',
+    type: 'single',
+    options: [
+      { text: 'Épicos (Epics)', isCorrect: false },
+      { text: 'Features (Features)', isCorrect: true },
+      { text: 'Histórias de Usuários (User Stories)', isCorrect: false },
+      { text: 'Tarefas (Tasks)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que é fundamental para liderar uma mudança bem-sucedida? (What is one key to leading a successful change?)',
+    type: 'single',
+    options: [
+      { text: 'Instituir tradições (Instituting traditions)', isCorrect: false },
+      { text: 'Formar uma Visão estratégica (Forming a strategic vision)', isCorrect: true },
+      { text: 'Gerar vitórias de longo prazo (Generating long-term wins)', isCorrect: false },
+      { text: 'Apoiar a desaceleração (Sustaining deceleration)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'O que são Lean Portfolio Management, Agile Product Delivery e Liderança Lean-Agile? (What are Lean Portfolio Management, Agile Product Delivery, and Lean-Agile Leadership?)',
+    type: 'single',
+    options: [
+      { text: 'Etapas da Cadeia de Valor de Business Agility (Steps in the Business Agility Value Stream)', isCorrect: false },
+      { text: 'Valores ágeis (Agile values)', isCorrect: false },
+      { text: 'Princípios Lean-Agile do SAFe (SAFe Lean-Agile Principles)', isCorrect: false },
+      { text: 'Competências essenciais do SAFe (SAFe Core Competencies)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual Princípio Lean-Agile do SAFe inclui a ênfase em "entregar resultados com antecedência e frequência"? (Which SAFe Lean-Agile Principle includes an emphasis on "deliver early and often"?)',
+    type: 'single',
+    options: [
+      { text: 'Criar incrementalmente com ciclos de aprendizagem rápidos e integrados (Build incrementally with fast, integrated learning cycles)', isCorrect: true },
+      { text: 'Adotar uma visão econômica (Take an economic view)', isCorrect: false },
+      { text: 'Organizar com base no valor (Organize around value)', isCorrect: false },
+      { text: 'Deixar o valor fluir sem interrupções (Make value flow without interruptions)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual seria uma forma de descrever um Time Ágil multifuncional? (What is one way to describe a cross-functional Agile Team?)',
+    type: 'single',
+    options: [
+      { text: 'Ele é formado por indivíduos que podem definir, desenvolver, testar e implantar o sistema (They are made up of individuals, each of whom can define, develop, test, and deploy the system)', isCorrect: false },
+      { text: 'Ele entrega valor a cada seis semanas (They deliver value every 6 weeks)', isCorrect: false },
+      { text: 'Ele é otimizado para comunicação e entrega de valor (They are optimized for communication and delivery of value)', isCorrect: true },
+      { text: 'Ele lança continuamente produtos de Clientes no ambiente de produção (They release customer products to production continuously)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é o foco do pensamento Lean? (What is the focus of Lean Thinking?)',
+    type: 'single',
+    options: [
+      { text: 'Mudar para um processo de desenvolvimento iterativo (Moving to an iterative development process)', isCorrect: false },
+      { text: 'Garantir o respeito por pessoas e cultura (Ensuring respect for people and culture)', isCorrect: false },
+      { text: 'Reduzir atrasos (Reducing delays)', isCorrect: true },
+      { text: 'Implementar medidas objetivas de progresso (Implementing objective measures of progress)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Um Portfólio SAFe é uma coleção de quê? (A SAFe Portfolio is a collection of what?)',
+    type: 'single',
+    options: [
+      { text: 'Cadeias de Valor de Desenvolvimento (Development Value Streams)', isCorrect: true },
+      { text: 'Soluções (Solutions)', isCorrect: false },
+      { text: 'Unidades de negócios (Business units)', isCorrect: false },
+      { text: 'Times funcionais (Functional teams)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual Valor Fundamental do SAFe inclui o uso de "linguagem comum" e "compreender seu Cliente"? (Which SAFe Core Value includes use "common language" and "understand your customer"?)',
+    type: 'single',
+    options: [
+      { text: 'Transparência (Transparency)', isCorrect: false },
+      { text: 'Alinhamento (Alignment)', isCorrect: true },
+      { text: 'Melhoria implacável (Relentless Improvement)', isCorrect: false },
+      { text: 'Respeito pelas pessoas (Respect for People)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Quem é responsável por gerenciar o portfólio Kanban? (Who is responsible for managing the Portfolio Kanban?)',
+    type: 'single',
+    options: [
+      { text: 'Solution Management (Solution Management)', isCorrect: false },
+      { text: 'Release Train Engineer (Release Train Engineer)', isCorrect: false },
+      { text: 'Product Management (Product Management)', isCorrect: false },
+      { text: 'Lean Portfolio Management (Lean Portfolio Management)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Quando as decisões são tomadas com base na economia, como são usados o lead time, custo do produto, valor e despesas de desenvolvimento? (When basing decisions on economics, how are lead time, product cost, value, and development expense used?)',
+    type: 'single',
+    options: [
+      { text: 'Para recuperar o dinheiro já gasto (To recover money already spent)', isCorrect: false },
+      { text: 'Para levar em consideração os custos irrecuperáveis (To take into account sunk costs)', isCorrect: false },
+      { text: 'Para limitar o trabalho em processo, WIP (To limit work in process [WIP])', isCorrect: false },
+      { text: 'Para compreender as negociações da Solução (To understand solution tradeoffs)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual afirmação é verdadeira em relação ao tamanho do lote? (Which statement is true about batch size?)',
+    type: 'single',
+    options: [
+      { text: 'Lotes grandes aumentam a variabilidade (Large batches increase variability)', isCorrect: true },
+      { text: 'Quando as Histórias são quebradas em tarefas, significa que há pequenos lotes. (When Stories are broken into tasks, it means there are small batch sizes)', isCorrect: false },
+      { text: 'Lotes grandes garantem tempo para a Qualidade Embutida (Large batch sizes ensure time for built-in quality)', isCorrect: false },
+      { text: 'O lote de transferência de responsabilidades deve ser o maior possível. (The handoff batch should be made as large as possible)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Como o SAFe descreve a Centralização no Cliente? (How does SAFe describe Customer Centricity?)',
+    type: 'single',
+    options: [
+      { text: 'Como uma forma de incluir o Cliente no dia a dia dos processos de trabalho e do planejamento (As a way of working to include the Customer in daily work processes and planning)', isCorrect: false },
+      { text: 'Como um conjunto de práticas usadas para desenvolver produtos focados no Cliente (As a set of practices employed to make products focused on the Customer)', isCorrect: false },
+      { text: 'Como um mindset focado no comportamento do Cliente, que produz as melhores inovações (As a mindset focused on Customer behaviors that produce the best innovations)', isCorrect: true },
+      { text: 'Como uma estratégia para atender às necessidades de um mercado de Clientes em constante mudança (As a strategy to meet the needs of an ever-changing Customer market)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual prática básica de qualidade ágil reduz os gargalos e garante a consistência? (Which basic Agile quality practice reduces bottlenecks and ensures consistency?)',
+    type: 'single',
+    options: [
+      { text: 'Responsabilidade compartilhada e padrões (Collective ownership and standards)', isCorrect: true },
+      { text: 'Definição de pronto (Definition of done)', isCorrect: false },
+      { text: 'Estabelecer o fluxo (Establish flow)', isCorrect: false },
+      { text: 'Avaliação entre colegas e formação de pares (Peer-review and pairing)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Como o SAFe recomenda que se use um segundo sistema operacional para entregar valor? (How does SAFe recommend using a second operating system to deliver value?)',
+    type: 'single',
+    options: [
+      { text: 'Decidindo se um modelo organizacional hierárquico ou de cadeias de valor deve ser aplicado em toda a Organização (Decide whether to apply a hierarchical or Value Stream organizational model across the Enterprise)', isCorrect: false },
+      { text: 'Organizando o desenvolvimento em torno do fluxo de valor, mantendo as hierarquias (Organize development around the flow of value while maintaining the hierarchies)', isCorrect: true },
+      { text: 'Reorganizando as hierarquias em torno do fluxo de valor (Reorganize the hierarchies around the flow of value)', isCorrect: false },
+      { text: 'Montando uma pequena rede empresarial centrada no Cliente no lugar das hierarquias existentes (Build a small entrepreneurial network focused on the Customer in place of the existing hierarchies)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Depois que as dependências são resolvidas e os riscos tratados, no final do PI Planning é feito um voto de confiança. O que melhor descreve o processo do voto de confiança? (A confidence vote is taken at the end of PI Planning after dependencies are resolved and risks are addressed. What best describes the process of the confidence vote?)',
+    type: 'single',
+    options: [
+      { text: 'Os times e os ARTs votam (The teams and the ARTs vote)', isCorrect: false },
+      { text: 'Os Business Owners votam (The Business Owners vote)', isCorrect: false },
+      { text: 'Todas as pessoas votam (Each person votes)', isCorrect: true },
+      { text: 'Os gerentes votam (The managers vote)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual Princípio Lean-Agile do SAFe inclui a parte crítica de "adiar as decisões até o último momento possível"? (Which SAFe Lean-Agile Principle includes the critical part of "delaying decisions to the last responsible moment"?)',
+    type: 'single',
+    options: [
+      { text: 'Criar incrementalmente com ciclos de aprendizagem rápidos e integrados (Build incrementally with fast, integrated learning cycles)', isCorrect: false },
+      { text: 'Basear os marcos na avaliação objetiva dos sistemas em funcionamento (Base milestones on objective evaluation of working systems)', isCorrect: false },
+      { text: 'Presumir variabilidade; preservar as opções (Assume variability; preserve options)', isCorrect: true },
+      { text: 'Deixar o valor fluir sem interrupções (Make value flow without interruptions)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é um exemplo de diferenciação de objetivos de negócios? (What is one example of differentiating business objectives?)',
+    type: 'single',
+    options: [
+      { text: 'Solution Intent (Solution Intent)', isCorrect: false },
+      { text: 'Visão do Portfólio (Portfolio Vision)', isCorrect: false },
+      { text: 'Objetivos Organizacionais (Enterprise Goals)', isCorrect: false },
+      { text: 'Temas Estratégicos (Strategic Themes)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual é um dos Valores Fundamentais do SAFe? (What is one of the SAFe Core Values?)',
+    type: 'single',
+    options: [
+      { text: 'Cultura (Culture)', isCorrect: false },
+      { text: 'Transparência (Transparency)', isCorrect: true },
+      { text: 'Qualidade Embutida (Built-in quality)', isCorrect: false },
+      { text: 'Fluxo (Flow)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual é uma das formas pelas quais os líderes Lean-Agile lideram pelo exemplo? (What is one way Lean-Agile leaders lead by example?)',
+    type: 'single',
+    options: [
+      { text: 'Ao usar o SAFe Implementation Roadmap para traçar o caminho da mudança (By using the SAFe Implementation Roadmap to script the path for change)', isCorrect: false },
+      { text: 'Ao aplicar o design empático e manter o foco na Centralização no Cliente (By applying empathic design and focusing on Customer Centricity)', isCorrect: false },
+      { text: 'Ao praticar o Mindset, Valores, Princípios e Práticas Lean-Agile do SAFe (By modeling SAFe\'s Lean-Agile Mindset, values, principles, and practices)', isCorrect: true },
+      { text: 'Ao dominar as sete competências essenciais da Lean Enterprise (By mastering the Seven Core Competencies of the Lean Enterprise)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Qual etapa de implementação vem depois de orientar a execução do ART no SAFe Implementation Roadmap? (Which implementation step follows Coach ART Execution on the SAFe Implementation Roadmap?)',
+    type: 'single',
+    options: [
+      { text: 'Organizar com base no valor (Organize Around Value)', isCorrect: false },
+      { text: 'Acelerar (Accelerate)', isCorrect: false },
+      { text: 'Treinar executivos, líderes e gerentes (Train Executives, Leaders, and Managers)', isCorrect: false },
+      { text: 'Lançar mais ARTs e cadeias de valor (Launch more ARTs and Value Streams)', isCorrect: true }
+    ]
+  },
+  {
+    question: 'Qual Lean Budget Guardrail ajuda a assegurar a alocação adequada de orçamentos para balancear as oportunidades de curto prazo com a estratégia e o crescimento de longo prazo? (Which Lean Budget Guardrail helps ensure the appropriate allocation of budgets to balance near-term opportunities with long-term strategy and growth?)',
+    type: 'single',
+    options: [
+      { text: 'Aplicação de alocação de capacidade (Applying capacity allocation)', isCorrect: false },
+      { text: 'Orientação dos investimentos por horizonte (Guiding investments by horizon)', isCorrect: true },
+      { text: 'Engajamento contínuo do Business Owner (Continuous Business Owner engagement)', isCorrect: false },
+      { text: 'Aprovação de iniciativas significativas (Approving significant initiatives)', isCorrect: false }
+    ]
+  },
+  {
+    question: 'Que tipo de decisão deve permanecer centralizada, mesmo em um ambiente de tomada de decisão descentralizada? (Which type of decision should remain centralized even in a decentralized decision-making environment?)',
+    type: 'single',
+    options: [
+      { text: 'Decisões que necessitam de informações locais (Decisions that require local information)', isCorrect: false },
+      { text: 'Decisões que são tomadas com frequência (Decisions that are made frequently)', isCorrect: false },
+      { text: 'Decisões que proporcionam grandes e amplos benefícios econômicos (Decisions that deliver large and broad economic benefits)', isCorrect: true },
+      { text: 'Decisões que envolvem um alto custo de não entrega ou atraso (Decisions that come with a high cost of delay)', isCorrect: false }
+    ]
+  }
+];
+
+    let currentQuestions = [];
+    const quizForm = document.getElementById('quiz-form');
+    const resultsDiv = document.getElementById('results');
+    const selectionDiv = document.getElementById('selection-buttons');
+    const quizArea = document.getElementById('quiz-area');
+    const mainTitle = document.getElementById('main-title');
+    const backBtn = document.getElementById('back-btn');
+    const submitBtn = document.getElementById('submit-btn');
+
+    // Função auxiliar para embaralhar um array (Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função principal para iniciar o simulado
+    function startQuiz(simuladoNumber) {
+        
+        switch (simuladoNumber) {
+            case 1:
+                // Simulado 1: Questões 1 a 45 (índices 0 a 44)
+                currentQuestions = allQuestionsData.slice(0, 45);
+                mainTitle.textContent = "Simulado 1 (45 questões | 1 a 45)";
+                break;
+            case 2:
+                // Simulado 2: Questões 46 a 90 (índices 45 a 89)
+                currentQuestions = allQuestionsData.slice(45, 90);
+                mainTitle.textContent = "Simulado 2 (45 questões | 46 a 90)";
+                break;
+            case 3:
+                // Simulado 3: Questões 91 a 135 (índices 90 a 134)
+                currentQuestions = allQuestionsData.slice(90, 135);
+                mainTitle.textContent = "Simulado 3 (45 questões | 91 a 135)";
+                break;
+            case 4:
+                // Simulado 4: Questões 136 a 159 (índices 135 a 160)
+                currentQuestions = allQuestionsData.slice(135, 161);
+                mainTitle.textContent = "Simulado 4 (26 questões | 136 a 161)";
+                break;
+            case 5:
+                // Simulado Aleatório: 45 questões aleatórias de todas as 92
+                const allShuffled = shuffleArray([...allQuestionsData]);
+                currentQuestions = allShuffled.slice(0, 45);
+                mainTitle.textContent = "Simulado 4 (45 questões aleatórias)";
+                break;
+            case 6:
+                // Free Leading SAFe Practice Exam
+                currentQuestions = freeLeadingSAFePracticeExamData;
+                mainTitle.textContent = "Free Leading SAFe Practice Exam (20 questions)";
+                break;
+            case 7:
+                // Practice Test: (Teste simulado) Português do Brasil - SAFe 6 Agilist Exam (6.0)
+                currentQuestions = practiceTestData;
+                mainTitle.textContent = "Practice Test: (Teste simulado) Português do Brasil - SAFe 6 Agilist Exam (6.0)";
+                break;
+            case 8:
+                // Exame SAFe 6 Agilist (Score 87%)
+                currentQuestions = questionsSAFe6AgilistData;
+                mainTitle.textContent = "Exame SAFe 6 Agilist (Score 87%)";
+                break;
+            default:
+                return;
+        }
+
+        // Prepara e exibe a interface do simulado
+        selectionDiv.classList.add('hidden');
+        quizArea.classList.remove('hidden');
+        submitBtn.classList.remove('hidden');
+        backBtn.classList.add('hidden');
+        resultsDiv.classList.add('hidden');
+        quizForm.innerHTML = '';
+        
+        renderQuiz();
+    }
+
+    // Função para renderizar as perguntas no HTML
+    function renderQuiz() {
+        currentQuestions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.classList.add('question-block');
+            
+            // Título da Pergunta
+            const title = document.createElement('div');
+            title.classList.add('question-title');
+            title.innerHTML = `${qIndex + 1}. ${q.question}`;
+            block.appendChild(title);
+
+            // Alternativas
+            q.options.forEach((opt, oIndex) => {
+                const altDiv = document.createElement('label');
+                altDiv.classList.add('alternative');
+                
+                const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                const inputName = `q${qIndex}`;
+                const inputValue = oIndex;
+
+                altDiv.innerHTML = `
+                    <input type="${inputType}" name="${inputName}" value="${inputValue}" data-correct="${opt.isCorrect}">
+                    <span>${opt.text}</span>
+                `;
+                block.appendChild(altDiv);
+            });
+
+            quizForm.appendChild(block);
+        });
+    }
+
+    // Função para verificar as respostas e mostrar o resultado
+    function checkAnswers() {
+        let totalCorrect = 0;
+        const questionsBlocks = document.querySelectorAll('#quiz-form .question-block');
+        const totalQuestions = currentQuestions.length;
+
+        questionsBlocks.forEach((block, qIndex) => {
+            const questionData = currentQuestions[qIndex];
+            const alternatives = block.querySelectorAll('.alternative');
+            let isQuestionCorrect = true;
+
+            alternatives.forEach((alt, oIndex) => {
+                const input = alt.querySelector('input');
+                const isCorrect = input.dataset.correct === 'true';
+                const isChecked = input.checked;
+
+                // 1. Marca visualmente a alternativa correta e remove correções anteriores
+                alt.classList.remove('correct', 'incorrect-selected');
+                if (isCorrect) {
+                    alt.classList.add('correct');
+                }
+
+                // 2. Avalia a resposta do usuário e marca erros
+                if (questionData.type === 'single') {
+                    // Resposta Única: Se marcou errado OU deixou de marcar a correta
+                    if (isChecked && !isCorrect) {
+                        alt.classList.add('incorrect-selected');
+                        isQuestionCorrect = false;
+                    }
+                    if (isCorrect && !isChecked) {
+                        isQuestionCorrect = false; 
+                    }
+                } else {
+                    // Múltipla Escolha: Se marcou/desmarcou de forma diferente da correta
+                    if (isChecked !== isCorrect) {
+                        isQuestionCorrect = false;
+                        if (isChecked && !isCorrect) {
+                            alt.classList.add('incorrect-selected');
+                        }
+                    }
+                }
+                
+                // Desabilita as opções
+                input.disabled = true;
+            });
+
+            // Marca o bloco da questão como correta ou incorreta
+            if (isQuestionCorrect) {
+                totalCorrect++;
+                block.style.border = '2px solid #28a745';
+            } else {
+                block.style.border = '2px solid #cc0000';
+            }
+        });
+
+        // Exibe os resultados
+        resultsDiv.innerHTML = `
+            Você acertou **${totalCorrect}** de **${totalQuestions}** questões.<br>
+            Sua pontuação: **${((totalCorrect / totalQuestions) * 100).toFixed(2)}%**
+        `;
+        resultsDiv.classList.remove('hidden');
+        submitBtn.classList.add('hidden');
+        backBtn.classList.remove('hidden');
+    }
+
+    // Função para voltar à tela de seleção
+    function resetQuiz() {
+        selectionDiv.classList.remove('hidden');
+        quizArea.classList.add('hidden');
+        mainTitle.textContent = "Simulado SAFe 6 Agilist";
+        quizForm.innerHTML = ''; // Limpa o formulário
+        resultsDiv.classList.add('hidden');
+        backBtn.classList.add('hidden');
+    }
+
+    // Inicializa a tela de seleção
+    document.addEventListener('DOMContentLoaded', resetQuiz);
+
+    // ** Lembrete: COLE o array 'allQuestionsData' completo no espaço reservado acima. **
+    // O array atual é apenas um placeholder com algumas questões.
+</script>
+
+</body>
+</html>
