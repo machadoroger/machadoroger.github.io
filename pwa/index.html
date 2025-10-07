@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Olá Mundo</title>
+    <!-- Inclui o Tailwind CSS para um layout moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Define a fonte Inter como padrão e garante que a altura seja total */
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6; /* Cinza claro de fundo */
+        }
+    </style>
+
+    <!-- 
+        PASSO 1: MANIFESTO DA WEB APP
+        
+        Para ser instalável como um PWA, você precisa de um arquivo manifest.json.
+        Este arquivo define o nome, ícones, cor do tema e modo de exibição (standalone).
+        
+        Em um ambiente real, você serviria este arquivo no mesmo diretório:
+    -->
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+
+    <div id="app-card" class="bg-white p-8 sm:p-10 rounded-xl shadow-2xl max-w-sm w-full text-center transform hover:scale-[1.02] transition duration-300">
+        <!-- Ícone simples de foguete usando SVG inline -->
+        <svg class="w-16 h-16 mx-auto text-indigo-600 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-5.25 5.25M21 3l-3.75 3.75"></path>
+        </svg>
+
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">
+            Olá, Mundo PWA!
+        </h1>
+        <p class="text-lg text-gray-600 mb-6">
+            Seu primeiro App Web Instalável.
+        </p>
+
+        <button id="install-button" class="hidden w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-150 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+            Instalar Aplicativo
+        </button>
+        <p id="install-message" class="text-sm text-green-700 mt-4 font-semibold hidden">
+            Você pode instalar este app através do menu do seu navegador!
+        </p>
+    </div>
+
+    <script>
+        // Variáveis globais para o PWA
+        let deferredPrompt;
+        
+        // =================================================================================
+        // PASSO 2: REGISTRO DO SERVICE WORKER (SW)
+        // O SW é o que permite cache e funcionalidade offline.
+        // =================================================================================
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registrado com sucesso:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Falha no registro do Service Worker:', error);
+                });
+            });
+        }
+        
+        // =================================================================================
+        // PASSO 3: GERENCIAMENTO DE INSTALAÇÃO (A2HS - Add to Home Screen)
+        // O Chrome dispara um evento 'beforeinstallprompt' quando o PWA é elegível para instalação.
+        // =================================================================================
+
+        const installButton = document.getElementById('install-button');
+        const installMessage = document.getElementById('install-message');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Previne que o mini-infobar apareça automaticamente
+            e.preventDefault();
+            // Guarda o evento para disparar a instalação mais tarde
+            deferredPrompt = e;
+            
+            // Mostra o botão de instalação para o usuário
+            installButton.classList.remove('hidden');
+            installMessage.classList.add('hidden');
+
+            installButton.addEventListener('click', () => {
+                // Esconde o botão e dispara o prompt
+                installButton.classList.add('hidden');
+                deferredPrompt.prompt();
+                
+                // Espera pela resposta do usuário ao prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuário aceitou o prompt de instalação');
+                    } else {
+                        console.log('Usuário recusou o prompt de instalação');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+        
+        window.addEventListener('appinstalled', (e) => {
+            console.log('PWA instalado com sucesso!');
+            installButton.classList.add('hidden');
+            installMessage.textContent = 'Aplicativo instalado com sucesso!';
+            installMessage.classList.remove('hidden');
+        });
+
+        // Se o botão não foi exibido (porque o 'beforeinstallprompt' não disparou),
+        // mostramos uma mensagem alternativa.
+        window.addEventListener('load', () => {
+            if (installButton.classList.contains('hidden')) {
+                installMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
