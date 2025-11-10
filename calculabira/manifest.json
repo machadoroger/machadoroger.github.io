@@ -6,8 +6,8 @@
 	"scope": "/calculabira/",
 	"display": "standalone",
 	"orientation": "portrait",
-	"background_color": "#e91e63",
-	"theme_color": "#4caf50",
+	"background_color": "#FFC107",
+	"theme_color": "#FFA000",
 	"icons": [
 		{
 		  "src": "images/icons/icon-72x72.png",
