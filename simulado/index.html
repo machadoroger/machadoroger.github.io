@@ -1,101 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulado SAFe 6 Agilist</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="./questions/leadingQuestions.js"></script>
-  <script src="./questions/freeLeadingPracticeExam.js"></script>
-  <script src="./questions/agilistExamPracticeTest.js"></script>
-  <script src="./questions/agilistExam.js"></script>
-  <script src="./questions/freeScrumMasterPracticeExam.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SAFe Practice Exams</title>
+	<!-- Carregamento do Tailwind CSS para estilos rápidos e responsivos -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="style.css">
+	<!-- Incluindo Icones (Phosphor Icons - opcional, mas útil) -->
+	<script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/umd/index.min.js"></script>
+	<!-- Questões -->
+	<script src="./questions/leadingQuestions.js"></script>
+	<script src="./questions/freeLeadingPracticeExam.js"></script>
+	<script src="./questions/agilistExamPracticeTest.js"></script>
+	<script src="./questions/agilistExam.js"></script>
+	<script src="./questions/freeScrumMasterPracticeExam.js"></script>
 </head>
-<body>
+<body class="bg-primary text-default">
+	<!-- Botão de Modo Noturno Fixo (Top-Right) -->
+	<button id="dark-mode-toggle"
+			class="fixed top-4 right-4 p-2 rounded-full shadow-lg transition-colors duration-300 z-50 
+				   bg-gray-200 text-gray-800 dark-mode:bg-slate-700 dark-mode:text-slate-200"
+			aria-label="Alternar Modo Noturno">
+		<!-- Ícone do Sol (Light Mode) -->
+		<i id="sun-icon" class="ph-fill ph-sun text-xl"></i>
+		<!-- Ícone da Lua (Dark Mode) -->
+		<i id="moon-icon" class="ph-fill ph-moon text-xl hidden"></i>
+	</button>
+	<div class="container max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+		<h1 id="main-title" class="text-3xl sm:text-4xl font-extrabold text-center mb-10 mt-12 text-default">SAFe Practice Exams</h1>
+		<!-- SELEÇÃO DE SIMULADOS -->
+		<div id="selection-buttons" class="hidden card-bg p-6 sm:p-8 rounded-xl shadow-lg border border-default">
+			<h2 class="text-2xl font-bold mb-6 mt-0">SAFe Agilist</h2>
+			<ul class="simulado-list">
+				<!-- Os itens da lista foram agrupados para melhor aplicação de estilos -->
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(0,45))">Simulado 1 (45 questões | 1 a 45)</a>
+					<a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(45,90))">Simulado 2 (45 questões | 46 a 90)</a>
+					<a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(90,135))">Simulado 3 (45 questões | 91 a 135)</a>
+					<a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(135,161))">Simulado 4 (26 questões | 136 a 161)</a>
+					<a href="#" class="option-link" onclick="startQuiz(this, shuffleArray([...leadingQuestions]).slice(0, 45))">Simulado aleatório (45 questões aleatórias)</a>
+					<div class="obs">
+						Disponível em 
+						<a href="https://pt.scribd.com/document/666118932/Notas-sobre-a-prova-SAFE" target="_blank" class="hover:text-blue-500">
+							Notas Sobre A Prova SAFE
+						</a>
+					</div>
+					<div class="obs">
+						Leading SAFe Agilist SA 6.0 Exam Notes disponível em 
+						<a href="https://codingnconcepts.com/agile/leading-safe/" target="_blank" class="hover:text-blue-500">
+							codingnconcepts.com
+						</a>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, freeLeadingPracticeExam)">Free Leading SAFe Practice Exam (20 questions)</a>
+					<div class="obs">
+						Disponível em 
+						<a href="https://www.thescrummaster.co.uk/quizzes/free-leading-safe-practice-exam/" target="_blank" class="hover:text-blue-500">
+							thescrummaster.co.uk
+						</a>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, agilistExamPracticeTest)">Practice Test: Português do Brasil - SAFe 6 Agilist Exam (6.0)</a>
+					<div class="obs">
+						Disponível em 
+						<a href="https://community.scaledagile.com/s/learning" target="_blank" class="hover:text-blue-500">
+							community.scaledagile.com
+						</a>
+					</div>
+				</li>
+				
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, agilistExam)">
+						Exame de certificação em português do Brasil - SAFe 6 Agilist Exam (6.0) (Score 87%)
+					</a>
+				</li>
+			</ul>
 
-    <div class="container">
-        <h1 id="main-title"></h1>
-        <div id="selection-buttons">
-            <h2>SAFe Agilist</h2>
-            <ul class="simulado-list">
-                <li>
-                  <a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(0,45))">Simulado 1 (45 questões | 1 a 45)</a>
-                  <a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(45,90))">Simulado 2 (45 questões | 46 a 90)</a>
-                  <a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(90,135))">Simulado 3 (45 questões | 91 a 135)</a>
-                  <a href="#" class="option-link" onclick="startQuiz(this, leadingQuestions.slice(135,161))">Simulado 4 (26 questões | 136 a 161)</a>
-                  <a href="#" class="option-link" onclick="startQuiz(this, shuffleArray([...leadingQuestions]).slice(0, 45))">Simulado aleatório (45 questões aleatórias)</a>
-                    <div class="obs">
-                        Disponível em 
-                        <a href="https://pt.scribd.com/document/666118932/Notas-sobre-a-prova-SAFE" target="_blank">
-                            Notas Sobre A Prova SAFE
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="option-link" onclick="startQuiz(this, freeLeadingPracticeExam)">Free Leading SAFe Practice Exam (20 questions)</a>
-                    <div class="obs">
-                        Disponível em 
-                        <a href="https://www.thescrummaster.co.uk/quizzes/free-leading-safe-practice-exam/" target="_blank">
-                            thescrummaster.co.uk
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="option-link" onclick="startQuiz(this, agilistExamPracticeTest)">Practice Test: Português do Brasil - SAFe 6 Agilist Exam (6.0)</a>
-                    <div class="obs">
-                        Disponível em 
-                        <a href="https://community.scaledagile.com/s/learning" target="_blank">
-                            community.scaledagile.com
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="option-link" onclick="startQuiz(this, agilistExam)">
-                        Exame de certificação em português do Brasil - SAFe 6 Agilist Exam (6.0) (Score 87%)
-                    </a>
-                </li>
-                <li>
-                    <div class="obs">
-                        Leading SAFe Agilist SA 6.0 Exam Notes disponível em 
-                        <a href="https://codingnconcepts.com/agile/leading-safe/" target="_blank">
-                            codingnconcepts.com
-                        </a>
-                    </div>
-                </li>
-            </ul>
+			<h2 class="text-2xl font-bold mt-8 mb-6">SAFe Scrum Master</h2>
+			<ul class="simulado-list">
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, freeScrumMasterPracticeExam)">Free SAFe Scrum Master Practice Exam (20 questions)</a>
+					<div class="obs">
+						Disponível em 
+						<a href="https://www.thescrummaster.co.uk/quizzes/free-safe-scrum-master-practice-exam/" target="_blank" class="hover:text-blue-500">
+							thescrummaster.co.uk
+						</a>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="option-link" onclick="startQuiz(this, null)">Teste simulado em português do Brasil - SAFe 6 Scrum Master Exam (6.0)</a>
+					<div class="obs">
+						Disponível em 
+						<a href="https://community.scaledagile.com/s/learning" target="_blank" class="hover:text-blue-500">
+							community.scaledagile.com
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
 
-            <h2>SAFe Scrum Master</h2>
-            <ul class="simulado-list">
-              <li>
-                <a href="#" class="option-link" onclick="startQuiz(this, freeScrumMasterPracticeExam)">Free SAFe Scrum Master Practice Exam (20 questions)</a>
-                  <div class="obs">
-                      Disponível em 
-                      <a href="https://www.thescrummaster.co.uk/quizzes/free-safe-scrum-master-practice-exam/" target="_blank">
-                          thescrummaster.co.uk
-                      </a>
-                  </div>
-              </li>
-              <li>
-                    <a href="#" class="option-link" onclick="startQuiz(this, null)">Teste simulado em português do Brasil - SAFe 6 Scrum Master Exam (6.0)</a>
-                    <div class="obs">
-                        Disponível em 
-                        <a href="https://community.scaledagile.com/s/learning" target="_blank">
-                            community.scaledagile.com
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    
-        <div id="quiz-area" class="hidden">
-            <form id="quiz-form"></form>
-            <button id="submit-btn" onclick="checkAnswers()">Finalizar Simulado</button>
-            <div id="results" class="results hidden"></div>
-            <button id="back-btn" onclick="resetQuiz()">Voltar à Seleção</button>
-        </div>
-    </div>
+		<!-- ÁREA DO SIMULADO (QUESTÕES) -->
+		<div id="quiz-area" class="">
+			<!-- O conteúdo do formulário será renderizado dinamicamente pelo JavaScript -->
+			<form id="quiz-form">
+				<!-- Conteúdo do quiz removido daqui -->
+			</form>
+			
+			<!-- Botões de Ação -->
+			<button id="submit-btn" 
+					onclick="checkAnswers()" 
+					class="button-primary w-full py-3 mt-4 rounded-lg font-bold text-lg shadow-md transition-all">
+				Finalizar Simulado
+			</button>
 
-<script src="app.js"></script>
+			<div id="results" class="results hidden p-4 mt-6 text-center font-bold text-xl rounded-lg border-2">
+				<!-- Os resultados serão injetados aqui -->
+			</div>
+
+			<button id="back-btn" 
+					onclick="resetQuiz()" 
+					class="hidden button-primary bg-gray-500 hover:bg-gray-600 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 w-full py-3 mt-4 rounded-lg font-bold text-lg shadow-md transition-all">
+				Voltar à Seleção
+			</button>
+		</div>
+	</div>
+
+	<script src="app.js"></script>
 
 </body>
 </html>
