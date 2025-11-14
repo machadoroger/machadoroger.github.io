@@ -25,17 +25,25 @@ function renderQuiz(questions) {
 			return `
 				<label class="alternative" data-correct="${option.isCorrect}">
 					<input type="${inputType}" 
-							name="q${qIndex}" 
-							value="${oIndex}">
+						   name="q${qIndex}" 
+						   value="${oIndex}">
 					<span>${option.text}</span>
 				</label>
 			`;
 		}).join('');
 
+		const explanationBlock = `
+			<div class="obs hidden">
+				<p class="font-bold">Explicação:</p>
+				<p>${q.explanation}</p>
+			</div>
+		`;
+
 		const questionBlock = `
 			<div class="question-block">
-				<div class="question-title text-xl font-semibold mb-3">${qIndex + 1}. ${q.question}</div>
+				<div class="question-title text-xl font-bold mb-4">${qIndex + 1}. ${q.question}</div>
 				${alternativesHtml}
+				${explanationBlock}
 			</div>
 		`;
 		quizForm.innerHTML += questionBlock;
@@ -90,7 +98,7 @@ function resetQuiz() {
 }
 
 /**
- * Verifica as respostas e exibe o resultado.
+ * Verifica as respostas e exibe o resultado, além de mostrar as explicações.
  */
 function checkAnswers() {
 	let correctCount = 0;
@@ -103,32 +111,40 @@ function checkAnswers() {
 		let isQuestionCorrect = true;
 		let hasSelection = false;
 
+		// Novo código: Localiza o bloco de observação (explicação) e o torna visível
+		const explanationDiv = block.querySelector('.obs');
+		if (explanationDiv) {
+			explanationDiv.classList.remove('hidden');
+		}
+		
 		alternatives.forEach(alt => {
 			const isCorrectOption = alt.getAttribute('data-correct') === 'true';
 			const radio = alt.querySelector('input');
 			const isSelected = radio && radio.checked;
 			
 			if (radio) radio.disabled = true; // Desabilita após verificação
-			alt.classList.remove('hover:bg-f1f5f9', 'dark-mode:hover:bg-334155'); // Remove hover
-
+			alt.classList.remove('hover:bg-indigo-50'); // Remove o efeito hover
+			
 			if (isCorrectOption) {
+				// Marca a resposta correta
 				alt.classList.add('correct-answer');
 			}
 			
 			if (isSelected) {
 				hasSelection = true;
 				if (!isCorrectOption) {
+					// Marca a resposta selecionada incorretamente
 					alt.classList.add('incorrect-answer');
 					isQuestionCorrect = false;
 				}
 			} else if (isCorrectOption) {
-					// Se a resposta correta não foi selecionada, a questão está incorreta
-					isQuestionCorrect = false;
+				// Se a resposta correta não foi selecionada, a questão está incorreta
+				isQuestionCorrect = false;
 			}
 		});
 
 		if (isQuestionCorrect) {
-				correctCount++;
+			correctCount++;
 		}
 
 		if (!hasSelection) {
@@ -147,14 +163,21 @@ function checkAnswers() {
 
 	// Define o limite de aprovação (geralmente 73% para o SAFe)
 	if (score >= 73) {
-		feedbackMessage = `🎉 Parabéns! Você acertou ${correctCount} de ${totalQuestions} questões (${score.toFixed(0)}%). Resultado: APROVADO!`;
+		feedbackMessage = `🎉 Reprovado (${score.toFixed(0)}% de acertos | ${correctCount}/${totalQuestions})`;
 		resultsDiv.classList.add('pass-result');
 	} else {
-		feedbackMessage = `⚠️ Você acertou ${correctCount} de ${totalQuestions} questões (${score.toFixed(0)}%). Resultado: REPROVADO.`;
+		feedbackMessage = `⚠️ Reprovado (${score.toFixed(0)}% de acertos | ${correctCount}/${totalQuestions})`;
 		resultsDiv.classList.add('fail-result');
 	}
 
-	resultsDiv.innerHTML = feedbackMessage;
+	const obsMessage = `
+		<div class="text-sm">
+			É necessário ter uma pontuação de 73% para ser aprovado.
+		</div>
+	`;
+
+	resultsDiv.innerHTML = feedbackMessage + obsMessage;
+;
 	resultsDiv.classList.remove('hidden');
 
 	document.getElementById('submit-btn').classList.add('hidden');

@@ -108,7 +108,7 @@ body {
 .dark-mode .alternative:hover {
 	background-color: #334155; /* Slate-700 */
 }
-.alternative input[type="radio"] {
+.alternative input[type="radio"], .alternative input[type="checkbox"] {
 	margin-right: 1rem;
 	accent-color: #3b82f6;
 }
