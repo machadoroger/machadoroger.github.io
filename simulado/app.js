@@ -32,12 +32,13 @@ function renderQuiz(questions) {
 			`;
 		}).join('');
 
-		const explanationBlock = `
+		const explanationBlock = q.explanation !== undefined ?
+		 `
 			<div class="obs hidden">
 				<p class="font-bold">Explicação:</p>
 				<p>${q.explanation}</p>
 			</div>
-		`;
+		` : '';
 
 		const questionBlock = `
 			<div class="question-block">
@@ -163,15 +164,18 @@ function checkAnswers() {
 
 	// Define o limite de aprovação (geralmente 73% para o SAFe)
 	if (score >= 73) {
-		feedbackMessage = `🎉 Reprovado (${score.toFixed(0)}% de acertos | ${correctCount}/${totalQuestions})`;
+		feedbackMessage = `🎉 Aprovado`;
 		resultsDiv.classList.add('pass-result');
 	} else {
-		feedbackMessage = `⚠️ Reprovado (${score.toFixed(0)}% de acertos | ${correctCount}/${totalQuestions})`;
+		feedbackMessage = `⚠️ Reprovado`;
 		resultsDiv.classList.add('fail-result');
 	}
 
 	const obsMessage = `
-		<div class="text-sm">
+		<div class="text-lg font-medium">
+			${score.toFixed(0)}% de acertos (${correctCount}/${totalQuestions})
+		</div>
+		<div class="text-sm font-normal">
 			É necessário ter uma pontuação de 73% para ser aprovado.
 		</div>
 	`;
